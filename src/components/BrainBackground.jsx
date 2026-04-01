@@ -13,8 +13,7 @@ export default function BrainBackground() {
         let nodes = [],
             streams = [],
             circuits = []
-        let scanY = 0,
-            tick = 0
+        let scanY = 0
 
         const NODE_COLOR = "#f5b800"
         const ACCENT_COLOR = "#00e5ff"
@@ -148,7 +147,6 @@ export default function BrainBackground() {
 
         function draw() {
             animId = requestAnimationFrame(draw)
-            tick += 0.012
 
             // Pure black background
             ctx.fillStyle = "#000000"
