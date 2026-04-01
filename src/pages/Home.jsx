@@ -336,8 +336,8 @@ function TestimonialsCarousel() {
           </div>
 
           {/* Right Box: Stacked Animated Carousel */}
-          <div className="w-full lg:w-[50%] relative h-[420px] mt-12 lg:mt-0 flex justify-end items-center">
-            <div className="relative w-full max-w-[480px] h-full">
+          <div className="w-full lg:w-[50%] relative min-h-[360px] mt-12 lg:mt-0 flex justify-end items-center">
+            <div className="relative w-full max-w-[480px]">
               <AnimatePresence>
                 {TESTIMONIALS.map((t, i) => {
                   const offset = (i - curr + TESTIMONIALS.length) % TESTIMONIALS.length;
@@ -456,8 +456,8 @@ export default function Home() {
               top:          "44%",
               left:         "50%",
               transform:    "translate(-50%, -50%)",
-              width:        "clamp(500px, 50vw, 700px)",
-              height:       "750px",
+              width:        "clamp(420px, 50vw, 700px)",
+              height:       "clamp(420px, 70vh, 750px)",
               opacity:      0.52,
               objectFit:    "contain",
               mixBlendMode: "screen",
@@ -600,9 +600,9 @@ export default function Home() {
             style={{
               display:        "flex",
               flexWrap:       "wrap",
-              justifyContent: "space-between",  /* evenly spread full width like Image 1 */
+              justifyContent: "space-between",
               alignItems:     "center",
-              gap:            120,
+              gap:            "clamp(24px, 6vw, 120px)",
               marginTop:      60,
               width:          "100%",
               maxWidth:       860,
@@ -759,7 +759,7 @@ export default function Home() {
           {/* 2×2 grid — wider cards, less gap */}
           <div style={{
             display:             "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap:                 16,
             maxWidth:            1300,
             margin:              "0 auto",
@@ -970,7 +970,6 @@ export default function Home() {
             color:         "#ffffff",
             textAlign:     "center",
             marginBottom:  72,
-            whiteSpace:    "nowrap",
             marginTop:     -14,
           }}>
             <span style={{ color: "#f5b800" }}>Real-World AI.</span>{" "}
@@ -983,9 +982,9 @@ export default function Home() {
             {/* Robot */}
             <div style={{
               position:      "absolute",
-              top:           -260,
-              left:          -80,
-              width:         280,
+              top:           -240,
+              left:          -60,
+              width:         "clamp(220px, 25vw, 280px)",
               zIndex:        20,
               pointerEvents: "none",
             }}>
@@ -1004,7 +1003,7 @@ export default function Home() {
             {/* 2×2 card grid */}
             <div style={{
               display:             "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
               gap:                 16,
             }}>
               {[
@@ -1335,7 +1334,7 @@ boxShadow: "inset 0 0 55px rgb(207, 157, 9), inset 0 0 1px rgba(245,184,0,0.22)"
                 <span key={s} className="hover:text-[#f5b800] transition-colors duration-200">{s}{index < 2 ? ' ·' : ''}</span>
               ))}
             </div>
-            <div className="text-[#aaaaaa]">© 2025 TechBee AI. All rights reserved.</div>
+            <div className="text-[#aaaaaa]">© 2026 TechBee AI. All rights reserved.</div>
           </div>
         </div>
       </footer>
