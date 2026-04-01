@@ -1,13 +1,152 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+
+/* RESET */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ================= GLOBAL UTILITIES ================= */
+
+/* Container */
+.container {
+  @apply max-w-7xl mx-auto px-6;
+}
+
+/* Gradient Text (Framer style) */
+.gradient-text {
+  background: linear-gradient(90deg, #f5b800, #ffdf5d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glow Border Card */
+.glow-card {
+  @apply bg-black rounded-2xl border border-yellow-500/20 transition;
+  box-shadow: 0 0 40px rgba(245, 184, 0, 0.12);
+}
+
+.glow-card:hover {
+  box-shadow: 0 0 80px rgba(245, 184, 0, 0.4);
+  border-color: rgba(245, 184, 0, 0.6);
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ================= BUTTONS ================= */
+
+.btn-primary {
+  @apply bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl transition;
+}
+
+.btn-primary:hover {
+  background: #ffd43b;
+  box-shadow: 0 0 25px rgba(245, 184, 0, 0.6);
+}
+
+/* ================= INPUTS ================= */
+
+.input {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 16px;
+  border-radius: 10px;
+  width: 100%;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #f5b800;
+  box-shadow: 0 0 10px rgba(245, 184, 0, 0.3);
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f5b800;
+  border-radius: 10px;
+}
+
+/* ================= ANIMATIONS ================= */
+
+/* Fade Up */
+.fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+/* Radial Gradient Support */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glow Pulse */
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 20px rgba(245,184,0,0.2); }
+  50% { box-shadow: 0 0 40px rgba(245,184,0,0.5); }
+  100% { box-shadow: 0 0 20px rgba(245,184,0,0.2); }
+}
+
+.glow-animate {
+  animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+/* ================= TEXT STYLES ================= */
+
+.section-title {
+  @apply text-4xl md:text-6xl font-bold leading-tight;
+}
+
+.section-subtitle {
+  @apply text-yellow-400 text-sm mb-4 tracking-wide;
+}
+
+.section-desc {
+  @apply text-gray-400 text-lg max-w-2xl mx-auto;
 }
