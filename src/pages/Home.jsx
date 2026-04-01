@@ -438,7 +438,7 @@ export default function Home() {
       <section
         id="home"
         className="relative flex items-center justify-center text-center overflow-hidden"
-        style={{ minHeight: "100vh", paddingTop: 70 }}
+        style={{ minHeight: "100vh", paddingTop: 110, scrollMarginTop: 110 }}
       >
         {/* Layer 1 — animated canvas */}
         <BrainBackground />
