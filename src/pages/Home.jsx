@@ -1293,7 +1293,7 @@ boxShadow: "inset 0 0 55px rgb(207, 157, 9), inset 0 0 1px rgba(245,184,0,0.22)"
             <div className="space-y-4">
               <div>
                 <div className="text-[28px] font-black tracking-[0.22em] text-white" style={{ letterSpacing: "0.24em" }}>
-                  TECH<span className="text-[#f5b800]">BE</span>
+                  TECH<span className="text-[#f5b800]">BEE</span>
                 </div>
                 <p className="text-[#d1d1d1] text-[11px] uppercase tracking-[0.32em] mt-2">IT &amp; Designs</p>
               </div>
