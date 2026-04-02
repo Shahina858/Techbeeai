@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const LOGO_IMG = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
+const LOGO_IMG = "./logo_llc_v3.png"
 
 export default function Navbar() {
   const [active,   setActive]   = useState("home")
@@ -51,7 +51,7 @@ export default function Navbar() {
           <img
             src={LOGO_IMG}
             alt="TechBee IT & Designs"
-            style={{ height: 38, width: "auto", objectFit: "contain" }}
+            style={{ height: 45, width: "150px", objectFit: "contain" }}
           />
         </a>
 

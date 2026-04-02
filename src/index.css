@@ -28,19 +28,27 @@ body {
 
 /* Container */
 .container {
-  @apply max-w-7xl mx-auto px-6;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 /* Gradient Text (Framer style) */
 .gradient-text {
   background: linear-gradient(90deg, #f5b800, #ffdf5d);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Glow Border Card */
 .glow-card {
-  @apply bg-black rounded-2xl border border-yellow-500/20 transition;
+  background-color: #000;
+  border-radius: 1rem;
+  border: 1px solid rgba(245, 184, 0, 0.2);
+  transition: all 0.2s ease;
   box-shadow: 0 0 40px rgba(245, 184, 0, 0.12);
 }
 
@@ -59,7 +67,12 @@ body {
 /* ================= BUTTONS ================= */
 
 .btn-primary {
-  @apply bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl transition;
+  background-color: #f5b800;
+  color: #000;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
@@ -140,13 +153,88 @@ body {
 /* ================= TEXT STYLES ================= */
 
 .section-title {
-  @apply text-4xl md:text-6xl font-bold leading-tight;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3.75rem;
+  }
 }
 
 .section-subtitle {
-  @apply text-yellow-400 text-sm mb-4 tracking-wide;
+  color: #f5b800;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
 }
 
 .section-desc {
-  @apply text-gray-400 text-lg max-w-2xl mx-auto;
+  color: #9ca3af;
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================= RESPONSIVE SECTIONS ================= */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
+  gap: 32px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.solutions-robot {
+  position: absolute;
+  top: -290px;
+  left: -80px;
+  width: clamp(250px, 20vw, 320px);
+  z-index: 20;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .solution-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    gap: 22px;
+  }
+
+  .solutions-robot {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 72%;
+    margin: 0 auto 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-grid {
+    gap: 18px;
+  }
+
+  .solutions-robot {
+    width: 100%;
+    max-width: 320px;
+  }
 }
