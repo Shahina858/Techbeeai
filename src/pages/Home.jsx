@@ -534,7 +534,7 @@ export default function Home() {
               {[...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS].map((p, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 160, height: 56, borderRadius: 12, background: "#111", border: "1px solid rgba(245,184,0,0.12)", padding: "0 24px", flexShrink: 0 }}>
                   <span style={{ color: "#f5b800", fontSize: 14, fontWeight: 700 }}>{p.logo}</span>
-                  <span style={{ color: "#9c9c9c", fontSize: 13, marginLeft: 8 }}>{p.name}</span>
+                  <span style={{ color: "#a3a1a1", fontSize: 13, marginLeft: 8 }}>{p.name}</span>
                 </div>
               ))}
             </motion.div>
