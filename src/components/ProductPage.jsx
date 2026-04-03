@@ -1,7 +1,18 @@
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 
 const LOGO_IMG = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
+
+// ── Navigate to home contact section ─────────────────────────────────────────
+const goToContact = (navigate) => {
+  navigate("/")
+  // Small delay so the home page loads before scrolling
+  setTimeout(() => {
+    const el = document.getElementById("contact")
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }, 300)
+}
 
 // ── Shared section label ──────────────────────────────────────────────────────
 export const PLabel = ({ children }) => (
@@ -45,19 +56,35 @@ export const UseCaseCard = ({ icon, title, role, desc }) => (
 
 // ── Stat pill ─────────────────────────────────────────────────────────────────
 export const StatPill = ({ value, label }) => (
-  <div style={{ textAlign: "center", background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.2)", borderRadius: 16, padding: "28px 36px" }}>
-    <div style={{ color: "#f5b800", fontSize: 42, fontWeight: 800, lineHeight: 1, marginBottom: 8 }}>{value}</div>
-    <div style={{ color: "#888", fontSize: 13 }}>{label}</div>
+  <div style={{
+    textAlign: "center",
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(245,184,0,0.22)",
+    borderRadius: 22,
+    padding: "20px 28px",
+    backdropFilter: "blur(18px)",
+    WebkitBackdropFilter: "blur(18px)",
+    boxShadow: "0 18px 50px rgba(0,0,0,0.22)",
+    position: "relative",
+    overflow: "hidden",
+  }}>
+    <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at top left, rgba(245,184,0,0.12), transparent 32%)", pointerEvents: "none" }} />
+    <div style={{ position: "relative", zIndex: 1 }}>
+      <div style={{ color: "#f5b800", fontSize: 42, fontWeight: 800, lineHeight: 1, marginBottom: 8 }}>{value}</div>
+      <div style={{ color: "#ddd", fontSize: 13 }}>{label}</div>
+    </div>
   </div>
 )
 
 // ── Main ProductPage wrapper ──────────────────────────────────────────────────
-export default function ProductPage({ badge, headline, sub, cta, bgImage, accentColor = "#f5b800", children }) {
+export default function ProductPage({ badge, headline, sub, cta, bgImage, children }) {
+  const navigate = useNavigate()
+
   return (
     <div className="bg-black text-white overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
       <Navbar logoSrc={LOGO_IMG} />
 
-      {/* HERO */}
+      {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
       <section className="relative flex flex-col items-center justify-center text-center overflow-hidden"
         style={{ minHeight: "80vh", paddingTop: 120, paddingBottom: 80, paddingLeft: 24, paddingRight: 24 }}>
 
@@ -70,6 +97,7 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, accent
         )}
 
         <div className="relative" style={{ zIndex: 10, maxWidth: 780 }}>
+
           {/* Badge */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid #f5b800", borderRadius: 8, padding: "7px 18px", color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
@@ -91,42 +119,90 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, accent
           {/* CTAs */}
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
             style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <button style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "13px 36px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.4)", transition: "background 0.2s" }}
-              onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
-              {cta || "Start Free Trial"}
-            </button>
-            <button style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 36px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", transition: "all 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
-              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
+
+            {/* Primary CTA → contact */}
+            <motion.button
+              whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.6)" }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => goToContact(navigate)}
+              style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "13px 36px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.4)", transition: "background 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+              onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+              {cta || "Book a Demo →"}
+            </motion.button>
+
+            {/* Watch Demo — no link, just visual */}
+            <button
+              style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 36px", border: "1px solid rgba(245,184,0,0.4)", cursor: "default", opacity: 0.7, display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>
+              </svg>
               Watch Demo
             </button>
+
           </motion.div>
         </div>
       </section>
 
-      {/* Page content */}
+      {/* Page-specific content (sections passed as children) */}
       {children}
 
-      {/* CTA Banner */}
-      <section className="py-[80px] px-6" style={{ background: "#0a0a0a" }}>
-        <div style={{ maxWidth: 680, margin: "0 auto", textAlign: "center" }}>
-          <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16 }}>
-            Ready to Get <span style={{ color: "#f5b800" }}>Started?</span>
-          </h2>
-          <p style={{ color: "#888", fontSize: 15, lineHeight: 1.7, marginBottom: 36 }}>
-            Book a personalized demo and see how TechBee AI transforms your workflow.
-          </p>
-          <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <button style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "13px 36px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.35)" }}
-              onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
-              Book a Demo →
-            </button>
-            <a href="/" style={{ display: "inline-flex", alignItems: "center", color: "#f5b800", fontSize: 14, fontWeight: 600, textDecoration: "none", gap: 6 }}>
-              ← Back to Home
-            </a>
+      {/* ══ CTA BANNER ════════════════════════════════════════════════════════ */}
+      <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.22)", borderRadius: 28, padding: "64px 56px", textAlign: "center", position: "relative", overflow: "hidden", boxShadow: "0 0 80px rgba(245,184,0,0.06)" }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(245,184,0,0.07) 0%, transparent 70%)", pointerEvents: "none" }}/>
+
+            <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
+              GET STARTED TODAY
+            </p>
+            <h2 style={{ color: "#ffffff", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, lineHeight: 1.15, marginBottom: 16, letterSpacing: "-0.01em" }}>
+              Ready to Get <span style={{ color: "#f5b800" }}>Started?</span>
+            </h2>
+            <p style={{ color: "#888", fontSize: 15, lineHeight: 1.7, maxWidth: 480, margin: "0 auto 40px" }}>
+              Book a personalized demo and see how TechBee AI transforms your workflow.
+            </p>
+
+            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+
+              {/* Book a Demo → home contact */}
+              <motion.button
+                whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.55)" }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => goToContact(navigate)}
+                style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "14px 40px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.35)", transition: "background 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+                onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+                Book a Demo →
+              </motion.button>
+
+              {/* Get Started → home contact */}
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => goToContact(navigate)}
+                style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", transition: "all 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
+                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
+                Get Started
+              </motion.button>
+
+              {/* Back to Home */}
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => navigate("/")}
+                style={{ background: "transparent", color: "#888", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 0", border: "none", cursor: "pointer", transition: "color 0.2s", display: "inline-flex", alignItems: "center", gap: 6 }}
+                onMouseEnter={e => e.currentTarget.style.color = "#f5b800"}
+                onMouseLeave={e => e.currentTarget.style.color = "#888"}>
+                ← Back to Home
+              </motion.button>
+
+            </div>
           </div>
         </div>
       </section>
+
     </div>
   )
 }

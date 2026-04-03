@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const LOGO_IMG = "./logo_llc_v3.png"
 
 export default function Navbar() {
+  const location = useLocation()
+  const isHome = location.pathname === "/"
+  const basePath = isHome ? "" : "/"
   const [active,   setActive]   = useState("home")
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -47,7 +51,7 @@ export default function Navbar() {
         style={{ padding: "0 40px", height: 90 }}
       >
         {/* ── LEFT: Logo ── */}
-        <a href="#home" className="shrink-0">
+        <a href={`${basePath}#home`} className="shrink-0">
           <img
             src={LOGO_IMG}
             alt="TechBee IT & Designs"
@@ -64,7 +68,7 @@ export default function Navbar() {
             return (
               <a
                 key={id}
-                href={`#${id}`}
+                href={`${basePath}#${id}`}
                 className="relative flex flex-col items-center"
                 style={{
                   color:          isActive ? "#f5b800" : "#cccccc",
@@ -96,7 +100,7 @@ export default function Navbar() {
 
           {/* Request a Demo button */}
           <a
-            href="#contact"
+            href={`${basePath}#contact`}
             style={{
               background:     "#f5b800",
               color:          "#000000",
@@ -156,7 +160,7 @@ export default function Navbar() {
       }}>
         <div style={{ display: "flex", flexDirection: "column", padding: "16px 24px", gap: 20 }}>
           {NAV_LINKS.map(({ id, label }) => (
-            <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}
+            <a key={id} href={`${basePath}#${id}`} onClick={() => setMenuOpen(false)}
               style={{
                 color:          active === id ? "#f5b800" : "#aaaaaa",
                 fontSize:       14,
@@ -167,7 +171,7 @@ export default function Navbar() {
               {label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setMenuOpen(false)}
+          <a href={`${basePath}#contact`} onClick={() => setMenuOpen(false)}
             style={{
               background:     "#f5b800",
               color:          "#000",

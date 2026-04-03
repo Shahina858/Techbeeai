@@ -367,14 +367,42 @@ export default function Home() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.54 }}
-            style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "clamp(24px, 6vw, 120px)", marginTop: 60, width: "100%", maxWidth: 860 }}>
-            {[{ ref: aiProdRef, val: aiProd, suffix: "", label: "AI Product" }, { ref: clientsRef, val: clients, suffix: "+", label: "Clients" }, { ref: uptimeRef, val: uptime, suffix: "%", label: "Uptime" }].map((s, i) => (
-              <div key={i} ref={s.ref} style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 180, maxWidth: 230, padding: "7px 0", borderRadius: 50, background: "rgba(15,15,15,0.85)", border: "1px solid rgba(245,184,0,0.20)", backdropFilter: "blur(16px)", boxShadow: "inset 0 0 0 1px rgba(245,184,0,0.06), 0 4px 24px rgba(0,0,0,0.4)" }}>
-                <span style={{ color: "#f5b800", fontSize: 26, fontWeight: 700, lineHeight: 1 }}>{s.val}{s.suffix}</span>
-                <span style={{ color: "#f6f3f3", fontSize: 12, marginTop: 6, fontWeight: 350, letterSpacing: "0.03em" }}>{s.label}</span>
-              </div>
-            ))}
-          </motion.div>
+  style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "clamp(16px, 4vw, 80px)", marginTop: 60, width: "100%", maxWidth: 860 }}>
+
+  {[{ ref: aiProdRef, val: aiProd, suffix: "", label: "AI Product" }, { ref: clientsRef, val: clients, suffix: "+", label: "Clients" }, { ref: uptimeRef, val: uptime, suffix: "%", label: "Uptime" }].map((s, i) => (
+    <div key={i} ref={s.ref} style={{ position: "relative", flex: 1, minWidth: 160, maxWidth: 220 }}>
+
+      {/* Subtle pulsing glow behind */}
+      <motion.div
+        animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.28, 0.15] }}
+        transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.8 }}
+        style={{ position: "absolute", inset: -8, borderRadius: 999, background: "radial-gradient(ellipse, rgba(245,184,0,0.2) 0%, transparent 70%)", filter: "blur(6px)", zIndex: 0, pointerEvents: "none" }}
+      />
+
+      {/* Pill */}
+      <div style={{
+        position: "relative", zIndex: 1,
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        padding: "8px 28px",          /* shorter */
+        borderRadius: 999,
+        background: "rgba(6, 5, 2, 0.60)",   /* lighter opacity */
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(245,184,0,0.25)",   /* thinner border */
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
+      }}>
+        <span style={{ color: "#f5b800", fontSize: 24, fontWeight: 700, lineHeight: 1.2 }}>
+          {s.val}{s.suffix}
+        </span>
+        <span style={{ color: "rgba(255,255,255,0.75)", fontSize: 12, marginTop: 3, fontWeight: 400 }}>
+          {s.label}
+        </span>
+      </div>
+
+    </div>
+  ))}
+
+</motion.div>
         </div>
       </section>
 
@@ -506,7 +534,7 @@ export default function Home() {
               {[...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS].map((p, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 160, height: 56, borderRadius: 12, background: "#111", border: "1px solid rgba(245,184,0,0.12)", padding: "0 24px", flexShrink: 0 }}>
                   <span style={{ color: "#f5b800", fontSize: 14, fontWeight: 700 }}>{p.logo}</span>
-                  <span style={{ color: "#555", fontSize: 13, marginLeft: 8 }}>{p.name}</span>
+                  <span style={{ color: "#9c9c9c", fontSize: 13, marginLeft: 8 }}>{p.name}</span>
                 </div>
               ))}
             </motion.div>
@@ -690,13 +718,30 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[#cccccc] text-[12px]">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="font-semibold text-white">Social:</span>
-              {['LinkedIn','Twitter/X','YouTube','FaceBook'].map((s, index) => <span key={s} className="hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{s}{index < 3 ? ' ·' : ''}</span>)}
-            </div>
-            <div className="text-[#aaaaaa]">© 2026 TechBee AI. All rights reserved.</div>
-          </div>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-[#cccccc] text-[12px]">
+  <div className="flex flex-wrap items-center gap-3">
+    <span className="font-semibold text-white">Social:</span>
+    {[
+      { label: "LinkedIn",  url: "https://www.linkedin.com/company/techbeeuae/" },
+      { label: "Instagram", url: "https://www.instagram.com/techbeeuae?igsh=dnF5ZnppNzNnZzRu" },
+      { label: "Facebook",  url: "https://www.facebook.com/techbeeuae/" },
+      { label: "Twitter/X", url: "https://x.com/techbeeuae" },
+      { label: "Medium",    url: "https://medium.com/@techbeeuae" },
+    ].map((s, index, arr) => (
+      <a
+        key={s.label}
+        href={s.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-[#f5b800] transition-colors duration-200"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        {s.label}{index < arr.length - 1 ? " ·" : ""}
+      </a>
+    ))}
+  </div>
+  <div className="text-[#aaaaaa]">© 2026 TechBee AI. All rights reserved.</div>
+</div>
         </div>
       </footer>
 
