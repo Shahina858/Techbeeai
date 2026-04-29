@@ -189,13 +189,16 @@ const TESTIMONIALS = [
 ]
 
 const COUNTRY_OPTIONS = ["UAE", "India", "Saudi Arabia", "Qatar", "Kuwait", "Oman"]
-const PRODUCT_OPTIONS = ["CAMCARD AI", "Intelligence Document Processing IDP", "Tegsoft AI Agent", "Lyrebird AI", "All"]
+const PRODUCT_OPTIONS = ["AI Powered Contact Management", "AI Contact Center Solutions", "AI-Powered Medical Intelligence", "Intelligent Document Processing", "On-Premise LLM Deployment", "AI Security", "AI-Powered Quote Generation", "All"]
 
 const PRODUCTS = [
-  { route: "/camcard", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>, title: "CamCard AI", subtitle: "AI-Powered Contact Management", desc: "Digitize and manage business cards effortlessly using intelligent OCR and data extraction. CamCard AI helps you organize contacts, eliminate manual entry, and streamline networking." },
-  { route: "/tegsoft", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>, title: "Tegsoft AI Agent", subtitle: "AI Customer Support Automation", desc: "Enhance your customer service with AI-driven call handling, chat automation, and smart response systems. Reduce workload and improve customer satisfaction." },
-  { route: "/lyrebird", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="#f5b800"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03C7.69 5.37 4.07 3.58 1.64.9a4.52 4.52 0 0 0-.61 2.27c0 1.57.8 2.95 2.01 3.76a4.5 4.5 0 0 1-2.05-.56v.06c0 2.19 1.56 4.02 3.63 4.43a4.55 4.55 0 0 1-2.04.08 4.53 4.53 0 0 0 4.22 3.14A9.07 9.07 0 0 1 0 19.54a12.8 12.8 0 0 0 6.92 2.03c8.3 0 12.85-6.88 12.85-12.85 0-.2 0-.39-.01-.58A9.17 9.17 0 0 0 23 3z"/></svg>, title: "Lyrebird AI", subtitle: "AI-Powered Medical Intelligence", desc: "Lyrebird AI leverages advanced artificial intelligence to support healthcare professionals with data-driven insights, medical analysis, and intelligent decision support systems." },
-  { route: "/idp", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>, title: "Intelligence Document Processing-(IDP)", subtitle: "Intelligent Document Automation", desc: "Automate document processing using AI-powered data extraction, classification, and validation. Save time and eliminate errors in handling business documents." },
+  { route: "/camcard", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>, title: "AI Powered Contact Management", subtitle: "Smart Contact Solutions", desc: "Digitize and manage business cards effortlessly using intelligent OCR and data extraction. CamCard AI helps you organize contacts, eliminate manual entry, and streamline networking." },
+  { route: "/tegsoft", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>, title: "AI Contact Center Solutions", subtitle: "Cloud Contact Center", desc: "Cloud-based contact center with VoiceChannel, OmniChannel, and AIChannel. Features IVR, predictive dialers, multi-channel support, and AI-powered agents." },
+  { route: "/lyrebird", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="#f5b800"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03C7.69 5.37 4.07 3.58 1.64.9a4.52 4.52 0 0 0-.61 2.27c0 1.57.8 2.95 2.01 3.76a4.5 4.5 0 0 1-2.05-.56v.06c0 2.19 1.56 4.02 3.63 4.43a4.55 4.55 0 0 1-2.04.08 4.53 4.53 0 0 0 4.22 3.14A9.07 9.07 0 0 1 0 19.54a12.8 12.8 0 0 0 6.92 2.03c8.3 0 12.85-6.88 12.85-12.85 0-.2 0-.39-.01-.58A9.17 9.17 0 0 0 23 3z"/></svg>, title: "AI-Powered Medical Intelligence", subtitle: "Healthcare AI Solutions", desc: "Lyrebird AI leverages advanced artificial intelligence to support healthcare professionals with data-driven insights, medical analysis, and intelligent decision support systems." },
+  { route: "/idp", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>, title: "Intelligent Document Processing (IDP)", subtitle: "Document Automation", desc: "Automate document processing using AI-powered data extraction, classification, and validation. Save time and eliminate errors in handling business documents." },
+  { route: "/on-premise", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>, title: "On-Premise LLM Deployment", subtitle: "Private AI Infrastructure", desc: "Deploy large language models on your own infrastructure for complete data privacy, compliance control, and customized AI solutions tailored to your enterprise needs." },
+  { route: "/security", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>, title: "AI Security", subtitle: "Intelligent Protection", desc: "Protect your business with AI-powered security solutions that detect threats, prevent breaches, and ensure comprehensive data protection across your digital infrastructure." },
+  { route: "/quote", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>, title: "AI-Powered Quote Generation", subtitle: "Webishopi - B2B IT Procurement", desc: "UAE's leading B2B platform for IT product quotations. Features AI Product Search (upload BOQ for instant matches), quick quotes, verified suppliers, and expert support. Learn more at webishopi.com" },
 ]
 
 const PARTNER_BENEFITS = [
@@ -211,13 +214,13 @@ const PARTNER_LOGOS = [
 ]
 
 const PLANS = [
-  { name: "Starter", price: "49", period: "/mo", desc: "Perfect for small teams getting started with AI automation.", features: ["Up to 5 users", "CamCard AI — 500 scans/mo", "Basic support automation", "Email support", "API access"], cta: "Get Started", featured: false },
-  { name: "Professional", price: "199", period: "/mo", desc: "For growing businesses that need full AI power across teams.", features: ["Up to 50 users", "All 4 AI products included", "Lyrebird AI medical docs", "IDP — 5,000 docs/mo", "Priority support + CSM", "Custom integrations", "Analytics dashboard"], cta: "Start Free Trial", featured: true },
+  { name: "Starter", price: "49", period: "/mo", desc: "Perfect for small teams getting started with AI automation.", features: ["Up to 5 users", "AI Powered Contact Management — 500 scans/mo", "Basic support automation", "Email support", "API access"], cta: "Get Started", featured: false },
+  { name: "Professional", price: "199", period: "/mo", desc: "For growing businesses that need full AI power across teams.", features: ["Up to 50 users", "All 7 AI products included", "AI-Powered Medical Intelligence", "IDP — 5,000 docs/mo", "Priority support + CSM", "Custom integrations", "Analytics dashboard"], cta: "Start Free Trial", featured: true },
   { name: "Enterprise", price: "Custom", period: "", desc: "Tailored solutions for large organizations with compliance needs.", features: ["Unlimited users", "All products + white-label", "SOC2 / HIPAA compliance", "Dedicated infrastructure", "SLA-backed support", "On-premise option", "Custom AI training"], cta: "Contact Sales", featured: false },
 ]
 
 const FAQS = [
-  { q: "What AI products does TechBee offer?", a: "TechBee AI offers four core products: CamCard AI for contact management, Tegsoft AI Agent for customer support automation, Lyrebird AI for medical documentation, and IDP for intelligent document processing." },
+  { q: "What AI products does TechBee offer?", a: "TechBee AI offers seven core products: AI Powered Contact Management, AI Contact Center Solutions, AI-Powered Medical Intelligence, Intelligent Document Processing (IDP), On-Premise LLM Deployment, AI Security, and AI-Powered Quote Generation." },
   { q: "Is there a free trial available?", a: "Yes! Our Professional plan includes a 14-day free trial with full access to all features. No credit card required to get started." },
   { q: "How does Lyrebird AI handle patient data privacy?", a: "Lyrebird AI is fully HIPAA compliant. All medical data is encrypted with AES-256, stored in region-specific servers, and never used for model training without explicit consent." },
   { q: "Can I integrate TechBee AI with my existing CRM?", a: "Absolutely. TechBee AI integrates with Salesforce, HubSpot, SAP, Zendesk, and 100+ other platforms via our REST API and pre-built connectors." },
@@ -313,7 +316,7 @@ export default function Home() {
 
   const [form, setForm] = useState({ name: "", email: "", company: "", address: "", jobTitle: "", country: "", phone: "", product: "", message: "", privacy: false })
   const handleForm = (e) => { const { name, value, type, checked } = e.target; setForm(p => ({ ...p, [name]: type === "checkbox" ? checked : value })) }
-  const [aiProd,  aiProdRef]  = useCountUp(4, 0)
+  const [aiProd,  aiProdRef]  = useCountUp(7, 0)
   const [clients, clientsRef] = useCountUp(20, 0)
   const [uptime,  uptimeRef]  = useCountUp(99.9, 1)
   const [openFaq,  setOpenFaq]  = useState(null)
@@ -503,7 +506,7 @@ export default function Home() {
       {/* ══ WHY TECHBEE ══ */}
       <WhySection />
 
-      {/* ══ PARTNERSHIP ══ */}
+      {/* ══ PARTNERSHIP ══
       <section id="partner" className="py-[112px] px-6" style={{ background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", textAlign: "center", marginBottom: 16 }}>PARTNERSHIP</p>
@@ -540,7 +543,7 @@ export default function Home() {
             </motion.div>
           </div>
           {/* Become a Partner → contact */}
-          <div style={{ textAlign: "center", marginTop: 64, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          {/* <div style={{ textAlign: "center", marginTop: 64, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
             <motion.button whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.55)" }} whileTap={{ scale: 0.97 }}
               onClick={goToContact}
               style={{ ...btnPrimary }}>
@@ -553,7 +556,7 @@ export default function Home() {
             </motion.button>
           </div>
         </div>
-      </section>
+      </section> */} 
 
       {/* ══ PRICING ══ */}
       <section id="pricing" className="py-[112px] px-6" style={{ background: "#000" }}>
