@@ -5,11 +5,12 @@ import Tegsoft from "./pages/TegSoft"
 import Lyrebird from "./pages/LyreBird"
 import IDP     from "./pages/IDP"
 import Quote   from "./pages/Quote"
+import AISecurity from "./pages/AISecurity"
 import ProductPage from "./components/ProductPage"
 
 // Placeholder components for new products
 const OnPremiseLLM = () => <ProductPage badge="NEW" headline="On-Premise LLM Deployment" sub="Deploy large language models on your own infrastructure for complete data privacy, compliance control, and customized AI solutions tailored to your enterprise needs." cta="Book a Demo →" bgImage={null} />
-const AISecurity = () => <ProductPage badge="NEW" headline="AI Security" sub="Protect your business with AI-powered security solutions that detect threats, prevent breaches, and ensure comprehensive data protection across your digital infrastructure." cta="Book a Demo →" bgImage={null} />
+// const AISecurity = () => <ProductPage badge="NEW" headline="AI Security" sub="Protect your business with AI-powered security solutions that detect threats, prevent breaches, and ensure comprehensive data protection across your digital infrastructure." cta="Book a Demo →" bgImage={null} />
 
 
 // Contact Center Solutions Page with more content
