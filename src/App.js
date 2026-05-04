@@ -1,10 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 import Home    from "./pages/Home"
 import CamCard from "./pages/CamCard"
 import Tegsoft from "./pages/TegSoft"
 import Lyrebird from "./pages/LyreBird"
 import IDP     from "./pages/IDP"
 import Quote   from "./pages/Quote"
+import Pricing from "./pages/Pricing"
 import AISecurity from "./pages/AISecurity"
 import ProductPage from "./components/ProductPage"
 
@@ -61,6 +63,7 @@ const OnPremiseLLM = () => <ProductPage badge="NEW" headline="On-Premise LLM Dep
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/"         element={<Home />} />
         <Route path="/camcard"  element={<CamCard />} />
@@ -70,7 +73,16 @@ export default function App() {
         <Route path="/on-premise" element={<OnPremiseLLM />} />
         <Route path="/security"   element={<AISecurity />} />
         <Route path="/quote"      element={<Quote />} />
+        <Route path="/pricing"    element={<Pricing />} />
       </Routes>
     </BrowserRouter>
   )
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
 }

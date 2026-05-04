@@ -98,6 +98,24 @@ export default function Navbar() {
             )
           })}
 
+          {/* Pricing link */}
+          <a
+            href="/pricing"
+            className="relative flex flex-col items-center"
+            style={{
+              color:          "#cccccc",
+              fontSize:       15,
+              fontWeight:     400,
+              textDecoration: "none",
+              paddingBottom:  6,
+              transition:     "color 0.2s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = "#ffffff" }}
+            onMouseLeave={e => { e.currentTarget.style.color = "#cccccc" }}
+          >
+            Pricing
+          </a>
+
           {/* Request a Demo button */}
           <a
             href={`${basePath}#contact`}
@@ -171,6 +189,18 @@ export default function Navbar() {
               {label}
             </a>
           ))}
+          <a href="/pricing" onClick={() => setMenuOpen(false)}
+            style={{
+              color:          "#aaaaaa",
+              fontSize:       14,
+              fontWeight:     400,
+              textDecoration: "none",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = "#f5b800" }}
+            onMouseLeave={e => { e.currentTarget.style.color = "#aaaaaa" }}
+          >
+            Pricing
+          </a>
           <a href={`${basePath}#contact`} onClick={() => setMenuOpen(false)}
             style={{
               background:     "#f5b800",

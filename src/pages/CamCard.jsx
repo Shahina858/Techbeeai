@@ -154,10 +154,94 @@ const DIGITAL_CARD = [
 // ── Security certifications ───────────────────────────────────────────────────
 const CERTS = ["DJCP", "ISO/IEC 27001", "ISO/IEC 9001", "ISO/IEC 20000", "CMMI V2.0 3", "ISO/IEC 27701"]
 
+// ── CRM Integrations ──────────────────────────────────────────────────────────
+const CRM_INTEGRATIONS = [
+  { name: "Salesforce", color: "#00A1E0", desc: "Push every scanned contact directly into Salesforce with full field mapping and lead source tagging." },
+  { name: "HubSpot", color: "#FF7A59", desc: "Contacts flow into HubSpot deals and pipelines in real time — no CSV, no copy-paste." },
+  { name: "Zoho CRM", color: "#E42527", desc: "Sync to Zoho leads, contacts, and accounts automatically with deduplication built in." },
+  { name: "MS Outlook", color: "#0078D4", desc: "Contacts land directly in your Outlook address book, synced across all your devices." },
+  { name: "Google Contacts", color: "#34A853", desc: "Every scanned card syncs to Google Contacts and appears instantly across Gmail and Calendar." },
+  { name: "Custom API", color: "#f5b800", desc: "Connect CamCard Business to any internal CRM or ATS using our enterprise REST API." },
+]
+
+// ── Comparison table ──────────────────────────────────────────────────────────
+const COMPARISON = [
+  { metric: "Contact entry method", manual: "Typed by hand, one by one", camcard: "AI scan — all fields in 2 seconds" },
+  { metric: "Language support", manual: "English only for most tools", camcard: "40+ languages including Arabic" },
+  { metric: "CRM sync", manual: "Manual CSV export/import", camcard: "Automatic, real-time sync" },
+  { metric: "Duplicate management", manual: "Manual deduplication", camcard: "AI auto-merge & detection" },
+  { metric: "Team sharing", manual: "Email attachments, messy", camcard: "Role-based, instant sharing" },
+  { metric: "Meeting notes", manual: "Manual note-taking during calls", camcard: "AI Notetaker auto-attaches to lead" },
+  { metric: "Follow-up emails", manual: "Written from scratch each time", camcard: "AI drafts personalized emails instantly" },
+  { metric: "Offline capability", manual: "Requires internet", camcard: "Full offline scan, auto-sync later" },
+  { metric: "Error rate", manual: "High — human typos, missed fields", camcard: "99.9% AI recognition accuracy" },
+]
+
+// ── Pricing tiers ─────────────────────────────────────────────────────────────
+const PRICING = [
+  {
+    tier: "Starter",
+    desc: "For small teams getting started with digital contact management.",
+    features: [
+      "Up to 5 team members",
+      "500 card scans/month",
+      "40+ language OCR",
+      "Google Contacts & Outlook sync",
+      "Basic deduplication",
+      "Export to CSV / vCard",
+    ],
+    highlight: false,
+  },
+  {
+    tier: "Business",
+    desc: "For growing teams who need CRM sync and AI-powered insights.",
+    features: [
+      "Up to 25 team members",
+      "Unlimited card scans",
+      "Salesforce, HubSpot & Zoho sync",
+      "AI Deep Intelligence",
+      "AI Notetaker (Zoom / video calls)",
+      "Email AI with 4 templates",
+      "Role-based access controls",
+      "Bulk scan mode",
+      "Digital business card creation",
+    ],
+    highlight: true,
+  },
+  {
+    tier: "Enterprise",
+    desc: "For large organisations needing custom workflows and API access.",
+    features: [
+      "Unlimited team members",
+      "Unlimited card scans",
+      "Custom CRM / ATS integration (REST API)",
+      "Advanced admin dashboard",
+      "SSO & SAML authentication",
+      "Priority support & SLA",
+      "Custom data retention policies",
+      "On-premise deployment option",
+      "Dedicated account manager",
+    ],
+    highlight: false,
+  },
+]
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+const FAQS = [
+  { q: "What makes CamCard Business different from free scanning apps?", a: "CamCard Business is purpose-built for teams, not individuals. It adds role-based access, CRM auto-sync, AI Deep Intelligence to qualify leads, AI Notetaker for meetings, and enterprise-grade security certifications — none of which exist in consumer apps." },
+  { q: "Which CRM systems does CamCard Business integrate with?", a: "CamCard Business natively integrates with Salesforce, HubSpot, Zoho CRM, Microsoft Outlook, and Google Contacts. For custom CRMs or ATS platforms, an enterprise REST API is available." },
+  { q: "How accurate is the AI card scanning?", a: "CamCard Business achieves 99.9% recognition accuracy across 40+ languages, including Arabic, English, Chinese, Japanese, Hindi, French, and Spanish. It handles rotated, low-quality, and handwritten cards reliably." },
+  { q: "Does it work in the UAE and Middle East?", a: "Yes. The 40+ language OCR engine includes full Arabic support, making it ideal for UAE and GCC markets where bilingual (Arabic/English) business cards are common." },
+  { q: "Can contacts be scanned without an internet connection?", a: "Yes. CamCard Business operates fully offline — cards are scanned and stored locally on the device, then synced to your CRM and team workspace automatically once connectivity is restored." },
+  { q: "Is our contact data secure?", a: "CamCard Business holds 6 enterprise security certifications including ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 9001, ISO/IEC 20000, DJCP, and CMMI V2.0 Level 3. Data is protected with offline synchronization, on-device encryption, and privacy controls that block unauthorized connections." },
+  { q: "How do we get started?", a: "Contact Techbee — the authorized CamCard Business partner for the UAE and GCC. Our team handles onboarding, CRM integration setup, and training so your team is scanning and syncing on day one." },
+]
+
 // ══════════════════════════════════════════════════════════════════════════════
 export default function CamCard() {
   const navigate = useNavigate()
   const [activeCase, setActiveCase] = useState(0)
+  const [openFaq, setOpenFaq] = useState(null)
 
   return (
     <div className="bg-black text-white overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -172,7 +256,6 @@ export default function CamCard() {
         </div>
 
         <div className="relative w-full" style={{ zIndex: 10, maxWidth: 1300, margin: "0 auto", padding: "140px 64px 80px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
-          {/* LEFT */}
           <div style={{ flex: "0 0 52%", maxWidth: 640 }}>
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}
               style={{ display: "inline-flex", alignItems: "center", gap: 4, background: "rgba(245,184,0,0.12)", border: "1px solid #f5b800", borderRadius: 6, padding: "5px 14px", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 28 }}>
@@ -194,22 +277,19 @@ export default function CamCard() {
 
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
               style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
-              <button
-                onClick={() => goToContact(navigate)}
+              <button onClick={() => goToContact(navigate)}
                 style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, borderRadius: 50, padding: "14px 40px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.45)", transition: "background 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                 Start Free Trial
               </button>
-              <button
-                style={{ background: "transparent", color: "#f5b800", fontSize: 15, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.5)", cursor: "default", opacity: 0.75, display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <button style={{ background: "transparent", color: "#f5b800", fontSize: 15, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.5)", cursor: "default", opacity: 0.75, display: "inline-flex", alignItems: "center", gap: 8 }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                 Watch Demo
               </button>
             </motion.div>
           </div>
 
-          {/* RIGHT — image */}
           <motion.div initial={{ opacity: 0, x: 48 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.25 }}
             style={{ flex: "0 0 40%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ width: "clamp(260px, 34vw, 460px)", aspectRatio: "1 / 1", borderRadius: 32, overflow: "hidden", boxShadow: "0 0 80px rgba(0,180,255,0.4), 0 0 160px rgba(0,180,255,0.18), 0 40px 80px rgba(0,0,0,0.7)", border: "1px solid rgba(0,200,255,0.25)" }}>
@@ -359,6 +439,63 @@ export default function CamCard() {
         </div>
       </section>
 
+      {/* ══ CRM INTEGRATIONS ══════════════════════════════════════════════════ */}
+      <section className="py-[100px] px-6" style={{ background: "#0a0a0a" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <SLabel>INTEGRATIONS</SLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
+            Plugs Into <span style={{ color: "#f5b800" }}>Every CRM You Use</span>
+          </h2>
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 540, margin: "0 auto 56px", lineHeight: 1.7 }}>
+            No messy CSV exports, no manual imports. CamCard Business pushes every scanned contact directly into the tools your team already relies on — in real time.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+            {CRM_INTEGRATIONS.map((crm, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
+                style={{ background: "#0d0d0d", border: "1px solid #1a1a1a", borderRadius: 16, padding: "28px 24px", transition: "border-color 0.3s" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(245,184,0,0.35)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#1a1a1a"}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                  <div style={{ width: 10, height: 10, borderRadius: "50%", background: crm.color, flexShrink: 0 }} />
+                  <h3 style={{ color: "#ffffff", fontSize: 15, fontWeight: 700, margin: 0 }}>{crm.name}</h3>
+                </div>
+                <p style={{ color: "#666", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{crm.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ COMPARISON TABLE ══════════════════════════════════════════════════ */}
+      <section className="py-[100px] px-6" style={{ background: "#000" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <SLabel>WHY CAMCARD BUSINESS</SLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
+            Manual vs. <span style={{ color: "#f5b800" }}>CamCard Business</span>
+          </h2>
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 52px", lineHeight: 1.7 }}>
+            Every minute your team spends typing contacts manually is a minute not spent closing deals.
+          </p>
+          <div style={{ border: "1px solid #1a1a1a", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", background: "#0d0d0d", borderBottom: "1px solid #1a1a1a" }}>
+              <div style={{ padding: "14px 20px", color: "#444", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Metric</div>
+              <div style={{ padding: "14px 20px", color: "#ff5c5c", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", borderLeft: "1px solid #1a1a1a" }}>Manual Process</div>
+              <div style={{ padding: "14px 20px", color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", borderLeft: "1px solid #1a1a1a" }}>CamCard Business</div>
+            </div>
+            {COMPARISON.map((row, i) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: i < COMPARISON.length - 1 ? "1px solid #111" : "none" }}>
+                <div style={{ padding: "14px 20px", color: "#aaa", fontSize: 13, fontWeight: 500 }}>{row.metric}</div>
+                <div style={{ padding: "14px 20px", color: "#666", fontSize: 13, borderLeft: "1px solid #111" }}>{row.manual}</div>
+                <div style={{ padding: "14px 20px", color: "#ccc", fontSize: 13, fontWeight: 600, borderLeft: "1px solid #111", display: "flex", alignItems: "center", gap: 8 }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="20 6 9 17 4 12"/></svg>
+                  {row.camcard}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══ DIGITAL BUSINESS CARD ═════════════════════════════════════════════ */}
       <section className="py-[100px] px-6" style={{ background: "linear-gradient(135deg, #0a0a1a 0%, #0d0d0d 50%, #0a0a0a 100%)", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245,184,0,0.04) 0%, transparent 70%)", pointerEvents: "none" }}/>
@@ -385,8 +522,47 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ SECURITY & COMPLIANCE ════════════════════════════════════════════ */}
+      {/* ══ PRICING ═══════════════════════════════════════════════════════════ */}
       <section className="py-[100px] px-6" style={{ background: "#000" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <SLabel>PLANS</SLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
+            The Right Plan for <span style={{ color: "#f5b800" }}>Every Team Size</span>
+          </h2>
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 480, margin: "0 auto 56px", lineHeight: 1.7 }}>
+            From solo sales reps to enterprise organisations — CamCard Business scales with your team. Contact Techbee for custom UAE pricing.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+            {PRICING.map((plan, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+                style={{ background: plan.highlight ? "rgba(245,184,0,0.05)" : "#0d0d0d", border: plan.highlight ? "1px solid rgba(245,184,0,0.5)" : "1px solid #1a1a1a", borderRadius: 20, padding: "36px 28px", position: "relative", boxShadow: plan.highlight ? "0 0 60px rgba(245,184,0,0.08)" : "none" }}>
+                {plan.highlight && (
+                  <div style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 10, fontWeight: 800, padding: "4px 16px", borderRadius: 50, letterSpacing: "0.12em", textTransform: "uppercase", whiteSpace: "nowrap" }}>Most Popular</div>
+                )}
+                <h3 style={{ color: plan.highlight ? "#f5b800" : "#fff", fontSize: 20, fontWeight: 800, marginBottom: 8 }}>{plan.tier}</h3>
+                <p style={{ color: "#666", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>{plan.desc}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 32 }}>
+                  {plan.features.map(f => (
+                    <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}><polyline points="20 6 9 17 4 12"/></svg>
+                      <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => goToContact(navigate)}
+                  style={{ width: "100%", background: plan.highlight ? "#f5b800" : "transparent", color: plan.highlight ? "#000" : "#f5b800", border: plan.highlight ? "none" : "1px solid rgba(245,184,0,0.4)", borderRadius: 50, padding: "12px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = plan.highlight ? "#ffc929" : "rgba(245,184,0,0.1)" }}
+                  onMouseLeave={e => { e.currentTarget.style.background = plan.highlight ? "#f5b800" : "transparent" }}>
+                  {plan.tier === "Enterprise" ? "Contact Us" : "Get Started"}
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ SECURITY & COMPLIANCE ════════════════════════════════════════════ */}
+      <section className="py-[100px] px-6" style={{ background: "#0a0a0a" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <SLabel>CAMCARD BUSINESS</SLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
@@ -395,7 +571,7 @@ export default function CamCard() {
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 520, margin: "0 auto 48px", lineHeight: 1.7 }}>
             Keep your data safe with offline synchronization, on-device protection, and privacy programs that block unauthorized connections.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center", marginBottom: 48 }}>
             {CERTS.map((cert, i) => (
               <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.07 }}
                 style={{ background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.18)", borderRadius: 14, padding: "18px 28px", textAlign: "center", minWidth: 120 }}>
@@ -403,10 +579,51 @@ export default function CamCard() {
               </motion.div>
             ))}
           </div>
+          {/* three security pillars */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+            {[
+              { icon: "🔒", title: "On-Device Encryption", desc: "All contact data and card images are encrypted directly on the device — never exposed in transit or at rest." },
+              { icon: "📵", title: "Offline Protection", desc: "Offline sync means your contact data never passes through unsecured public networks. It syncs only when you're ready." },
+              { icon: "🛡️", title: "Privacy by Design", desc: "Privacy programs actively block unauthorized third-party connections from accessing your team's contact database." },
+            ].map((p, i) => (
+              <div key={i} style={{ background: "#0d0d0d", border: "1px solid #1a1a1a", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{p.icon}</div>
+                <h4 style={{ color: "#fff", fontWeight: 700, fontSize: 14, marginBottom: 8 }}>{p.title}</h4>
+                <p style={{ color: "#666", fontSize: 12, lineHeight: 1.65, margin: 0 }}>{p.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-     
+      {/* ══ FAQ ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-[100px] px-6" style={{ background: "#000" }}>
+        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+          <SLabel>FAQ</SLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 52, letterSpacing: "-0.01em" }}>
+            Common <span style={{ color: "#f5b800" }}>Questions</span>
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            {FAQS.map((faq, i) => (
+              <div key={i} style={{ background: "#0d0d0d", borderBottom: "1px solid #141414", borderRadius: i === 0 ? "14px 14px 0 0" : i === FAQS.length - 1 ? "0 0 14px 14px" : 0, overflow: "hidden" }}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{ width: "100%", background: "none", border: "none", padding: "20px 24px", textAlign: "left", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
+                  <span style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>{faq.q}</span>
+                  <span style={{ color: "#f5b800", fontSize: 22, flexShrink: 0, lineHeight: 1, display: "inline-block", transform: openFaq === i ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>+</span>
+                </button>
+                <AnimatePresence>
+                  {openFaq === i && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }}
+                      style={{ overflow: "hidden" }}>
+                      <div style={{ padding: "0 24px 20px", fontSize: 13.5, color: "#777", lineHeight: 1.75 }}>{faq.a}</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ══ CTA BANNER ════════════════════════════════════════════════════════ */}
       <section className="py-[96px] px-6" style={{ background: "#000" }}>
@@ -422,22 +639,19 @@ export default function CamCard() {
               Join thousands of sales professionals, executives, and recruiters who never lose a contact again.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", alignItems: "center" }}>
-              <button
-                onClick={() => goToContact(navigate)}
+              <button onClick={() => goToContact(navigate)}
                 style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "14px 40px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.35)", transition: "background 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                 Start Free Trial →
               </button>
-              <button
-                onClick={() => goToContact(navigate)}
+              <button onClick={() => goToContact(navigate)}
                 style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
                 Get Started
               </button>
-              <button
-                onClick={() => navigate("/")}
+              <button onClick={() => navigate("/")}
                 style={{ background: "none", border: "none", color: "#888", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6, transition: "color 0.2s", padding: "14px 0" }}
                 onMouseEnter={e => e.currentTarget.style.color = "#f5b800"}
                 onMouseLeave={e => e.currentTarget.style.color = "#888"}>
@@ -447,7 +661,8 @@ export default function CamCard() {
           </div>
         </div>
       </section>
-       {/* ══ AUTHORIZED PARTNER ════════════════════════════════════════════════ */}
+
+      {/* ══ AUTHORIZED PARTNER ════════════════════════════════════════════════ */}
       <section className="py-[60px] px-6" style={{ background: "#0a0a0a", borderTop: "1px solid rgba(245,184,0,0.08)" }}>
         <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
           <p style={{ color: "#555", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 20 }}>AUTHORIZED PARTNER</p>

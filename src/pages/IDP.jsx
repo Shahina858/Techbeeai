@@ -431,7 +431,7 @@ export default function IDP() {
       </section>
 
       {/* ── CTA FOOTER ────────────────────────────────────────────────── */}
-      {/* <section className="py-[96px] px-6" style={{ background: "#050505" }}>
+      <section className="py-[96px] px-6" style={{ background: "#050505" }}>
         <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
           <PLabel>GET STARTED</PLabel>
           <h2 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16 }}>
@@ -452,7 +452,7 @@ export default function IDP() {
             📍 R-12, France Cluster, International City, Dubai &nbsp;·&nbsp; sales@techbee.ae
           </p>
         </div>
-      </section> */}
+      </section>
 
     </ProductPage>
   )

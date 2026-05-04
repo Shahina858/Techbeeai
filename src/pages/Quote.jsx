@@ -322,9 +322,9 @@ export default function Quote() {
               style={{ background: gold, color: "#000", fontSize: 14, fontWeight: 800, padding: "14px 32px", borderRadius: 50, textDecoration: "none", boxShadow: `0 0 24px rgba(245,184,0,0.35)` }}>
               ✉ sales@techbee.ae
             </a>
-            <a href="tel:+97142434882"
+            <a href="tel:+971564116174"
               style={{ background: "transparent", color: "#ccc", fontSize: 14, fontWeight: 600, padding: "14px 32px", borderRadius: 50, textDecoration: "none", border: "1px solid #2a2a2a" }}>
-              📞 +971 4 2434 882
+              📞 +971 564116174
             </a>
             <a href="https://webishopi.com" target="_blank" rel="noopener noreferrer"
               style={{ background: "transparent", color: gold, fontSize: 14, fontWeight: 700, padding: "14px 32px", borderRadius: 50, textDecoration: "none", border: `1px solid ${goldBorder}` }}>

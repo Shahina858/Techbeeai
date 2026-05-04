@@ -499,6 +499,47 @@ export default function Tegsoft() {
         </div>
       </section>
 
+      {/* ── FOOTER ── */}
+      <footer style={{ background: "#0a0a0a", borderTop: "1px solid #1a1a1a", padding: "48px 24px 32px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 40, marginBottom: 40 }}>
+            <div>
+              <h4 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 16 }}>TechBee AI</h4>
+              <p style={{ color: "#666", fontSize: 13, lineHeight: 1.7 }}>Empowering businesses across the UAE with cutting-edge AI solutions. Your trusted partner for digital transformation.</p>
+            </div>
+            <div>
+              <h4 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 16 }}>Products</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+                <li><a href="/camcard" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>CamCard AI</a></li>
+                <li><a href="/tegsoft" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>Tegsoft AI Agent</a></li>
+                <li><a href="/lyrebird" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>Lyrebird AI</a></li>
+                <li><a href="/idp" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>IDP</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 16 }}>Contact</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+                <li style={{ color: "#888", fontSize: 13 }}>📍 R12 France Cluster, International City, Dubai, UAE</li>
+                <li style={{ color: "#888", fontSize: 13 }}>📞 +971 56 411 6174</li>
+                <li style={{ color: "#888", fontSize: 13 }}>📧 info@techbee.ae</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 16 }}>Quick Links</h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+                <li><a href="/" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>Home</a></li>
+                <li><a href="/#contact" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>Get in Touch</a></li>
+                <li><a href="#" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>Privacy Policy</a></li>
+                <li><a href="#" style={{ color: "#888", fontSize: 13, textDecoration: "none" }}>Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+          <div style={{ borderTop: "1px solid #1a1a1a", paddingTop: 24, textAlign: "center" }}>
+            <p style={{ color: "#444", fontSize: 12, margin: 0 }}>© 2026 TechBee AI. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+
     </ProductPage>
   )
 }

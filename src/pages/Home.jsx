@@ -213,12 +213,6 @@ const PRODUCTS = [
 //   { name: "Microsoft", logo: "MS" }, { name: "AWS", logo: "AWS" },
 // ]
 
-const PLANS = [
-  { name: "Starter", price: "49", period: "/mo", desc: "Perfect for small teams getting started with AI automation.", features: ["Up to 5 users", "AI Powered Contact Management — 500 scans/mo", "Basic support automation", "Email support", "API access"], cta: "Get Started", featured: false },
-  { name: "Professional", price: "199", period: "/mo", desc: "For growing businesses that need full AI power across teams.", features: ["Up to 50 users", "All 7 AI products included", "AI-Powered Medical Intelligence", "IDP — 5,000 docs/mo", "Priority support + CSM", "Custom integrations", "Analytics dashboard"], cta: "Start Free Trial", featured: true },
-  { name: "Enterprise", price: "Custom", period: "", desc: "Tailored solutions for large organizations with compliance needs.", features: ["Unlimited users", "All products + white-label", "SOC2 / HIPAA compliance", "Dedicated infrastructure", "SLA-backed support", "On-premise option", "Custom AI training"], cta: "Contact Sales", featured: false },
-]
-
 const FAQS = [
   { q: "What AI products does TechBee offer?", a: "TechBee AI offers seven core products: AI Powered Contact Management, AI Contact Center Solutions, AI-Powered Medical Intelligence, Intelligent Document Processing (IDP), On-Premise LLM Deployment, AI Security, and AI-Powered Quote Generation." },
   { q: "Is there a free trial available?", a: "Yes! Our Professional plan includes a 14-day free trial with full access to all features. No credit card required to get started." },
@@ -558,46 +552,21 @@ export default function Home() {
         </div>
       </section> */} 
 
-      {/* ══ PRICING ══ */}
-      <section id="pricing" className="py-[112px] px-6" style={{ background: "#000" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto" }}>
-          <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", textAlign: "center", marginBottom: 16 }}>PRICING</p>
+      {/* ══ PRICING PAGE CTA ══ */}
+      <section className="py-[112px] px-6" style={{ background: "#000" }}>
+        <div style={{ maxWidth: 920, margin: "0 auto", textAlign: "center" }}>
+          <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>PRICING</p>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.9rem, 3.8vw, 2.8rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: 16, color: "#ffffff" }}>
-            Simple, <span style={{ color: "#f5b800" }}>Transparent Pricing</span>
+            Pricing is now on a dedicated page for clearer comparisons.
           </h2>
-          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 64px" }}>Start free, scale as you grow. No hidden fees. Cancel anytime.</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, alignItems: "start" }}>
-            {PLANS.map((plan, i) => (
-              <motion.div key={i} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}
-                style={{ background: plan.featured ? "rgba(245,184,0,0.06)" : "#0a0a0a", border: plan.featured ? "1px solid rgba(245,184,0,0.55)" : "1px solid rgba(245,184,0,0.12)", borderRadius: 20, padding: "36px 32px", position: "relative", overflow: "hidden", boxShadow: plan.featured ? "0 0 60px rgba(245,184,0,0.12)" : "none" }}>
-                {plan.featured && <div style={{ position: "absolute", top: 20, right: 20, background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 700, borderRadius: 50, padding: "4px 12px", letterSpacing: "0.1em" }}>POPULAR</div>}
-                <p style={{ color: plan.featured ? "#f5b800" : "#888", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 8 }}>{plan.name}</p>
-                <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 12 }}>
-                  {plan.price !== "Custom" && <span style={{ color: "#f5b800", fontSize: 14, fontWeight: 600 }}>$</span>}
-                  <span style={{ color: "#ffffff", fontSize: plan.price === "Custom" ? 28 : 44, fontWeight: 800, lineHeight: 1 }}>{plan.price}</span>
-                  <span style={{ color: "#555", fontSize: 14 }}>{plan.period}</span>
-                </div>
-                <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, marginBottom: 28 }}>{plan.desc}</p>
-                <div style={{ height: 1, background: "rgba(245,184,0,0.12)", marginBottom: 24 }}/>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
-                  {plan.features.map((f, j) => (
-                    <div key={j} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span style={{ color: "#ccc", fontSize: 13 }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-                {/* All pricing CTAs → contact */}
-                <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                  onClick={goToContact}
-                  style={{ width: "100%", background: plan.featured ? "#f5b800" : "transparent", color: plan.featured ? "#000" : "#f5b800", border: plan.featured ? "none" : "1px solid rgba(245,184,0,0.4)", borderRadius: 50, padding: "13px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
-                  onMouseEnter={e => { if (!plan.featured) { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" } }}
-                  onMouseLeave={e => { if (!plan.featured) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" } }}>
-                  {plan.cta}
-                </motion.button>
-              </motion.div>
-            ))}
-          </div>
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 600, margin: "0 auto 40px" }}>
+            Explore transparent AI plans, enterprise options, and custom packages on the new pricing page.
+          </p>
+          <motion.button whileHover={{ scale: 1.03, boxShadow: "0 0 44px rgba(245,184,0,0.45)" }} whileTap={{ scale: 0.97 }}
+            onClick={() => navigate("/pricing")}
+            style={{ ...btnPrimary }}>
+            View Pricing Page →
+          </motion.button>
         </div>
       </section>
 
@@ -774,7 +743,8 @@ export default function Home() {
                       <button key={opt}
                         onClick={() => {
                           setChatMsg(opt); setChatSent(true)
-                          if (opt === "Request a Demo" || opt === "Pricing") goToContact()
+                          if (opt === "Request a Demo") goToContact()
+                          else if (opt === "Pricing") navigate("/pricing")
                         }}
                         style={{ background: "transparent", border: "1px solid rgba(245,184,0,0.35)", borderRadius: 50, padding: "6px 14px", color: "#f5b800", fontSize: 12, cursor: "pointer", transition: "all 0.2s" }}
                         onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.1)"; e.currentTarget.style.borderColor = "#f5b800" }}

@@ -148,12 +148,12 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
       {children}
 
       {/* ══ CTA BANNER ════════════════════════════════════════════════════════ */}
-      <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
+      {/* <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.22)", borderRadius: 28, padding: "64px 56px", textAlign: "center", position: "relative", overflow: "hidden", boxShadow: "0 0 80px rgba(245,184,0,0.06)" }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(245,184,0,0.07) 0%, transparent 70%)", pointerEvents: "none" }}/>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(245,184,0,0.07) 0%, transparent 70%)", pointerEvents: "none" }}/> */}
 
-            <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
+            {/* <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
               GET STARTED TODAY
             </p>
             <h2 style={{ color: "#ffffff", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, lineHeight: 1.15, marginBottom: 16, letterSpacing: "-0.01em" }}>
@@ -163,10 +163,10 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
               Book a personalized demo and see how TechBee AI transforms your workflow.
             </p>
 
-            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}> */}
 
               {/* Book a Demo → home contact */}
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.55)" }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => goToContact(navigate)}
@@ -174,10 +174,10 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
                 onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                 Book a Demo →
-              </motion.button>
+              </motion.button> */}
 
               {/* Get Started → home contact */}
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => goToContact(navigate)}
@@ -185,10 +185,10 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
                 Get Started
-              </motion.button>
+              </motion.button> */}
 
               {/* Back to Home */}
-              <motion.button
+              {/* <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate("/")}
@@ -201,7 +201,7 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
     </div>
   )
