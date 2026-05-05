@@ -1,6 +1,17 @@
+import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 
 const BG = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
+
+// ── Navigate to home contact section ─────────────────────────────────────────
+const goToContact = (navigate) => {
+  navigate("/")
+  // Small delay so the home page loads before scrolling
+  setTimeout(() => {
+    const el = document.getElementById("contact")
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }, 300)
+}
 
 // ── shared primitives ────────────────────────────────────────────────────────
 
@@ -73,6 +84,7 @@ function ResearchStat({ value, label }) {
 // ── main page ────────────────────────────────────────────────────────────────
 
 export default function Lyrebird() {
+  const navigate = useNavigate()
   return (
     <ProductPage
       badge="LYREBIRD AI — MEDICAL AI SCRIBE"
@@ -426,9 +438,9 @@ export default function Lyrebird() {
             Techbee brings Lyrebird AI to healthcare organisations across the UAE and GCC. Our team handles onboarding, EMR integration, and ongoing support — so your clinicians can start saving time from day one.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="mailto:sales@techbee.ae" style={{ background: "#f5b800", color: "#000", fontWeight: 700, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none" }}>
+            <button onClick={() => goToContact(navigate)} style={{ background: "#f5b800", color: "#000", fontWeight: 700, fontSize: 15, padding: "14px 32px", borderRadius: 8, border: "none", cursor: "pointer", transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
               Request a Demo
-            </a>
+            </button>
             <a href="tel:042434882" style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", border: "1px solid #f5b80040" }}>
               Call +971 4 243 4882
             </a>

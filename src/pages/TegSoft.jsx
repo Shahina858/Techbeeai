@@ -1,6 +1,17 @@
+import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 
 const BG = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
+
+// ── Navigate to home contact section ─────────────────────────────────────────
+const goToContact = (navigate) => {
+  navigate("/")
+  // Small delay so the home page loads before scrolling
+  setTimeout(() => {
+    const el = document.getElementById("contact")
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }, 300)
+}
 
 // ── Channel card ──────────────────────────────────────────────────────────────
 const ChannelCard = ({ icon, title, subtitle, bullets }) => (
@@ -51,6 +62,7 @@ const ChannelPill = ({ emoji, label }) => (
 )
 
 export default function Tegsoft() {
+  const navigate = useNavigate()
   return (
     <ProductPage
       badge="TEGSOFT AI AGENT — CONTACT CENTER"
@@ -345,9 +357,9 @@ export default function Tegsoft() {
             Join leading businesses in the UAE that trust Tegsoft for their contact center needs. Get a personalized demo from our team.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="https://callcentersolutiondubai.com" target="_blank" rel="noopener noreferrer" style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, padding: "14px 40px", borderRadius: 50, textDecoration: "none", boxShadow: "0 0 28px rgba(245,184,0,0.4)" }}>
+            <button onClick={() => goToContact(navigate)} style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, padding: "14px 40px", borderRadius: 50, border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.4)", transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
               Request a Demo
-            </a>
+            </button>
           </div>
           <div style={{ marginTop: 48, color: "#666", fontSize: 13 }}>
             <p>📍 R12 France Cluster, International City, Dubai, UAE</p>

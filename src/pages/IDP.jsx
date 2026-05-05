@@ -1,6 +1,17 @@
+import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 
 const BG = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
+
+// ── Navigate to home contact section ─────────────────────────────────────────
+const goToContact = (navigate) => {
+  navigate("/")
+  // Small delay so the home page loads before scrolling
+  setTimeout(() => {
+    const el = document.getElementById("contact")
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }, 300)
+}
 
 // ── small shared primitives ──────────────────────────────────────────────────
 
@@ -89,6 +100,7 @@ function FAQItem({ q, a }) {
 // ── main page ────────────────────────────────────────────────────────────────
 
 export default function IDP() {
+  const navigate = useNavigate()
   return (
     <ProductPage
       badge="IDP — INTELLIGENT DOCUMENT PROCESSING"
@@ -441,9 +453,9 @@ export default function IDP() {
             Techbee is the authorised INTSIG IDP partner in the UAE and wider GCC. Our team handles scoping, deployment, integration, and ongoing support — so you can focus on results.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="mailto:sales@techbee.ae" style={{ background: "#f5b800", color: "#000", fontWeight: 700, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.02em" }}>
+            <button onClick={() => goToContact(navigate)} style={{ background: "#f5b800", color: "#000", fontWeight: 700, fontSize: 15, padding: "14px 32px", borderRadius: 8, border: "none", cursor: "pointer", letterSpacing: "0.02em", transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
               Request a Demo
-            </a>
+            </button>
             <a href="tel:042434882" style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", border: "1px solid #f5b80040" }}>
               Call +971 4 243 4882
             </a>
