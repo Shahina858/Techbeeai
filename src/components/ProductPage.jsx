@@ -7,7 +7,6 @@ const LOGO_IMG = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTq
 // ── Navigate to home contact section ─────────────────────────────────────────
 const goToContact = (navigate) => {
   navigate("/")
-  // Small delay so the home page loads before scrolling
   setTimeout(() => {
     const el = document.getElementById("contact")
     if (el) el.scrollIntoView({ behavior: "smooth" })
@@ -99,9 +98,27 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
         <div className="relative" style={{ zIndex: 10, maxWidth: 780 }}>
 
           {/* Badge */}
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid #f5b800", borderRadius: 8, padding: "7px 18px", color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 24, background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
-            <span>✦</span> {badge}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              border: "1px solid #f5b800",
+              borderRadius: 8,
+              padding: "7px 18px",
+              color: "#f5b800",
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              marginBottom: 24,
+              background: "rgba(0,0,0,0.4)",
+              backdropFilter: "blur(8px)",
+            }}>
+            {badge}
           </motion.div>
 
           {/* Headline */}
@@ -120,7 +137,6 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
             style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
 
-            {/* Primary CTA → contact */}
             <motion.button
               whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.6)" }}
               whileTap={{ scale: 0.97 }}
@@ -131,7 +147,6 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
               {cta || "Book a Demo →"}
             </motion.button>
 
-            {/* Watch Demo — no link, just visual */}
             <button
               style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 36px", border: "1px solid rgba(245,184,0,0.4)", cursor: "default", opacity: 0.7, display: "inline-flex", alignItems: "center", gap: 8 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -144,64 +159,8 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, childr
         </div>
       </section>
 
-      {/* Page-specific content (sections passed as children) */}
+      {/* Page-specific content */}
       {children}
-
-      {/* ══ CTA BANNER ════════════════════════════════════════════════════════ */}
-      {/* <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.22)", borderRadius: 28, padding: "64px 56px", textAlign: "center", position: "relative", overflow: "hidden", boxShadow: "0 0 80px rgba(245,184,0,0.06)" }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(245,184,0,0.07) 0%, transparent 70%)", pointerEvents: "none" }}/> */}
-
-            {/* <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>
-              GET STARTED TODAY
-            </p>
-            <h2 style={{ color: "#ffffff", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, lineHeight: 1.15, marginBottom: 16, letterSpacing: "-0.01em" }}>
-              Ready to Get <span style={{ color: "#f5b800" }}>Started?</span>
-            </h2>
-            <p style={{ color: "#888", fontSize: 15, lineHeight: 1.7, maxWidth: 480, margin: "0 auto 40px" }}>
-              Book a personalized demo and see how TechBee AI transforms your workflow.
-            </p>
-
-            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}> */}
-
-              {/* Book a Demo → home contact */}
-              {/* <motion.button
-                whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.55)" }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => goToContact(navigate)}
-                style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "14px 40px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.35)", transition: "background 0.2s" }}
-                onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
-                onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
-                Book a Demo →
-              </motion.button> */}
-
-              {/* Get Started → home contact */}
-              {/* <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => goToContact(navigate)}
-                style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", transition: "all 0.2s" }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
-                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
-                Get Started
-              </motion.button> */}
-
-              {/* Back to Home */}
-              {/* <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => navigate("/")}
-                style={{ background: "transparent", color: "#888", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 0", border: "none", cursor: "pointer", transition: "color 0.2s", display: "inline-flex", alignItems: "center", gap: 6 }}
-                onMouseEnter={e => e.currentTarget.style.color = "#f5b800"}
-                onMouseLeave={e => e.currentTarget.style.color = "#888"}>
-                ← Back to Home
-              </motion.button>
-
-            </div>
-          </div>
-        </div>
-      </section> */}
 
     </div>
   )
