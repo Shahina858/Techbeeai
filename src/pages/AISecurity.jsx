@@ -5,6 +5,12 @@ import Navbar from "../components/Navbar"
 
 const LOGO_IMG = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
 
+// ── Images ────────────────────────────────────────────────────────────────────
+const IMG_CHECKPOINT_PLATFORM  = "/checkpoint_platform.jpeg"
+const IMG_CHECKPOINT_WORKSPACE = "/checkpoint_workspace.jpeg"
+const IMG_CHECKPOINT_HERO = "/checkpoint_hero.png"
+
+
 const goToContact = (navigate) => {
   navigate("/")
   setTimeout(() => {
@@ -139,13 +145,13 @@ const VERTICALS = [
   },
 ]
 
-// ── Harmony workspace layers (from slide 7) ───────────────────────────────────
+// ── Harmony workspace layers ──────────────────────────────────────────────────
 const HARMONY_LAYERS = [
   { side: "left", items: ["Security Awareness Training", "Mobile Protection", "Endpoint / EDR", "Browser Security"] },
   { side: "right", items: ["Email Protection", "Apps Security", "SSE (Security Service Edge)", "SaaS Application Protection"] },
 ]
 
-// ── Firewall NSS full table (from slide 12) ───────────────────────────────────
+// ── Firewall NSS full table ───────────────────────────────────────────────────
 const FIREWALL_TABLE = [
   { vendor: "Check Point CP-CGS-9300", rating: "Recommended", effectiveness: "99.59%", fp: "99.36%", highlight: true },
   { vendor: "Forcepoint 2210", rating: "Neutral", effectiveness: "99.53%", fp: "92.11%", highlight: false },
@@ -156,7 +162,7 @@ const FIREWALL_TABLE = [
   { vendor: "Palo Alto Networks PA-1410", rating: "Caution", effectiveness: "46.37%", fp: "99.67%", highlight: false },
 ]
 
-// ── Hybrid architecture nodes (from slide 5) ──────────────────────────────────
+// ── Hybrid architecture nodes ─────────────────────────────────────────────────
 const HYBRID_NODES = [
   { label: "Roaming Users", icon: "👤", desc: "On-device enforcement for remote workers — up to 10x faster experience with local security processing." },
   { label: "Remote Site / Branch", icon: "🏢", desc: "SD-WAN connectivity with full security stack — branch offices protected without backhauling traffic to HQ." },
@@ -166,7 +172,7 @@ const HYBRID_NODES = [
   { label: "SaaS & Gen AI", icon: "🤖", desc: "Inline inspection of SaaS traffic and generative AI prompts — preventing data leakage and AI-driven attacks." },
 ]
 
-// ── CTEM 3 elements (from slide 13 & 14) ─────────────────────────────────────
+// ── CTEM 3 elements ───────────────────────────────────────────────────────────
 const CTEM_ELEMENTS = [
   {
     n: "01",
@@ -191,7 +197,7 @@ const CTEM_ELEMENTS = [
   },
 ]
 
-// ── Check Point Advantage 4 pillars (from slide 18) ───────────────────────────
+// ── Check Point Advantage 4 pillars ──────────────────────────────────────────
 const CP_ADVANTAGE = [
   {
     title: "Prevention First",
@@ -215,7 +221,7 @@ const CP_ADVANTAGE = [
   },
 ]
 
-// ── End-to-End AI Security Stack (from slide 19 & 20) ────────────────────────
+// ── End-to-End AI Security Stack ──────────────────────────────────────────────
 const AI_STACK = [
   {
     layer: "WAF",
@@ -255,7 +261,7 @@ const AI_STACK = [
   },
 ]
 
-// ── The AI threat landscape (from slide 15 & 17) ──────────────────────────────
+// ── The AI threat landscape ───────────────────────────────────────────────────
 const AI_THREATS = [
   {
     side: "ATTACKERS",
@@ -323,34 +329,218 @@ export default function AISecurity() {
       <Navbar logoSrc={LOGO_IMG} />
 
       {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
-      <section style={{ position: "relative", padding: "160px 24px 120px", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245,184,0,0.13), transparent)" }} />
-        <div style={{ position: "absolute", top: "15%", right: "-5%", width: 700, height: 700, background: "radial-gradient(circle, rgba(245,184,0,0.06) 0%, transparent 70%)", filter: "blur(100px)", pointerEvents: "none" }} />
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          style={{ maxWidth: 900, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(245,184,0,0.08)", border: "1px solid rgba(245,184,0,0.2)", borderRadius: 50, padding: "10px 22px", marginBottom: 32 }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span style={{ color: "#f5b800", fontSize: 12, fontWeight: 700, letterSpacing: "0.15em" }}>CHECK POINT INFINITY PLATFORM</span>
+      {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
+<section style={{ position: "relative", padding: "140px 24px 100px", overflow: "hidden" }}>
+
+  {/* Background gradients */}
+  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245,184,0,0.13), transparent)" }} />
+  <div style={{ position: "absolute", top: "15%", right: "-5%", width: 700, height: 700, background: "radial-gradient(circle, rgba(245,184,0,0.06) 0%, transparent 70%)", filter: "blur(100px)", pointerEvents: "none" }} />
+  <div style={{ position: "absolute", top: "40%", left: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(245,184,0,0.04) 0%, transparent 70%)", filter: "blur(80px)", pointerEvents: "none" }} />
+
+  {/* Two-column layout */}
+  <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: 64, flexWrap: "wrap" }}>
+
+    {/* LEFT — Text content */}
+    <motion.div
+      initial={{ opacity: 0, x: -30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+      style={{ flex: "1 1 420px", minWidth: 320 }}
+    >
+      <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(245,184,0,0.08)", border: "1px solid rgba(245,184,0,0.2)", borderRadius: 50, padding: "10px 22px", marginBottom: 32 }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span style={{ color: "#f5b800", fontSize: 12, fontWeight: 700, letterSpacing: "0.15em" }}>CHECK POINT INFINITY PLATFORM</span>
+      </div>
+
+      <h1 style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.025em", marginBottom: 24, color: "#fff" }}>
+        We Secure Your<br />
+        <span style={{ background: "linear-gradient(90deg, #f5a623 0%, #f5b800 60%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+          AI Transformation
+        </span>
+      </h1>
+
+      <p style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)", color: "#888", maxWidth: 520, marginBottom: 44, lineHeight: 1.8 }}>
+        Check Point's unified, prevention-first Infinity Platform secures users, data, applications, and AI workflows — defending against AI-powered threats while enabling safe AI adoption across your organization.
+      </p>
+
+      {/* Buttons */}
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => goToContact(navigate)}
+          style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, borderRadius: 50, padding: "16px 44px", border: "none", cursor: "pointer", boxShadow: "0 0 40px rgba(245,184,0,0.3)" }}
+        >
+          Get a Demo
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => goToContact(navigate)}
+          style={{ background: "transparent", color: "#fff", fontSize: 15, fontWeight: 600, borderRadius: 50, padding: "16px 40px", border: "1px solid rgba(255,255,255,0.18)", cursor: "pointer" }}
+        >
+          Talk to an Expert
+        </motion.button>
+      </div>
+
+      {/* Trust chips */}
+      <div style={{ display: "flex", gap: 24, marginTop: 48, flexWrap: "wrap" }}>
+        {[
+          { val: "99.59%", label: "Block Rate" },
+          { val: "165+", label: "Countries" },
+          { val: "4.6B", label: "Attacks Blocked" },
+        ].map((stat, i) => (
+          <div key={i} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <span style={{ color: "#f5b800", fontSize: 18, fontWeight: 800, lineHeight: 1 }}>{stat.val}</span>
+            <span style={{ color: "#555", fontSize: 11, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>{stat.label}</span>
           </div>
-          <h1 style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.025em", marginBottom: 24, color: "#fff" }}>
-            We Secure Your<br />
-            <span style={{ background: "linear-gradient(90deg, #f5a623 0%, #f5b800 60%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI Transformation</span>
-          </h1>
-          <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.2rem)", color: "#888", maxWidth: 620, margin: "0 auto 44px", lineHeight: 1.75 }}>
-            Check Point's unified, prevention-first Infinity Platform secures users, data, applications, and AI workflows — defending against AI-powered threats while enabling safe AI adoption across your organization.
-          </p>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => goToContact(navigate)}
-              style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, borderRadius: 50, padding: "16px 44px", border: "none", cursor: "pointer", boxShadow: "0 0 40px rgba(245,184,0,0.3)" }}>
-              Get a Demo
-            </motion.button>
-            <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => goToContact(navigate)}
-              style={{ background: "transparent", color: "#fff", fontSize: 15, fontWeight: 600, borderRadius: 50, padding: "16px 40px", border: "1px solid rgba(255,255,255,0.18)", cursor: "pointer" }}>
-              Talk to an Expert
-            </motion.button>
-          </div>
-        </motion.div>
-      </section>
+        ))}
+      </div>
+    </motion.div>
+
+    {/* RIGHT — Hero image with themed frame */}
+    <motion.div
+      initial={{ opacity: 0, x: 30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.7, delay: 0.15 }}
+      style={{ flex: "1 1 380px", minWidth: 300, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
+      {/* Outer glow ring */}
+      <div style={{
+        position: "absolute",
+        inset: -24,
+        borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(245,184,0,0.08) 0%, transparent 70%)",
+        filter: "blur(24px)",
+        pointerEvents: "none",
+      }} />
+
+      {/* Decorative rotating dashed ring */}
+      <div style={{
+        position: "absolute",
+        inset: -12,
+        borderRadius: 999,
+        border: "1px dashed rgba(245,184,0,0.18)",
+        animation: "spin 30s linear infinite",
+        pointerEvents: "none",
+      }} />
+
+      {/* Second static ring */}
+      <div style={{
+        position: "absolute",
+        inset: 12,
+        borderRadius: 999,
+        border: "1px solid rgba(245,184,0,0.08)",
+        pointerEvents: "none",
+      }} />
+
+      {/* Image container */}
+      <div style={{
+        position: "relative",
+        borderRadius: 24,
+        overflow: "hidden",
+        border: "1px solid rgba(245,184,0,0.2)",
+        boxShadow: "0 0 80px rgba(245,184,0,0.1), 0 0 0 1px rgba(245,184,0,0.06)",
+        background: "#0a0a0a",
+      }}>
+        {/* Gold top accent line */}
+        <div style={{
+          position: "absolute",
+          top: 0, left: 0, right: 0,
+          height: 2,
+          background: "linear-gradient(90deg, transparent, #f5b800, transparent)",
+          zIndex: 2,
+        }} />
+
+        {/* Corner accents */}
+        <div style={{ position: "absolute", top: 12, left: 12, width: 20, height: 20, borderTop: "2px solid #f5b800", borderLeft: "2px solid #f5b800", borderRadius: "4px 0 0 0", zIndex: 2 }} />
+        <div style={{ position: "absolute", top: 12, right: 12, width: 20, height: 20, borderTop: "2px solid #f5b800", borderRight: "2px solid #f5b800", borderRadius: "0 4px 0 0", zIndex: 2 }} />
+        <div style={{ position: "absolute", bottom: 12, left: 12, width: 20, height: 20, borderBottom: "2px solid #f5b800", borderLeft: "2px solid #f5b800", borderRadius: "0 0 0 4px", zIndex: 2 }} />
+        <div style={{ position: "absolute", bottom: 12, right: 12, width: 20, height: 20, borderBottom: "2px solid #f5b800", borderRight: "2px solid #f5b800", borderRadius: "0 0 4px 0", zIndex: 2 }} />
+
+        <img
+          src={IMG_CHECKPOINT_HERO}
+          alt="Check Point AI Protection Platform"
+          style={{ width: "100%", maxWidth: 520, display: "block", position: "relative", zIndex: 1 }}
+        />
+
+        {/* Bottom overlay fade */}
+        <div style={{
+          position: "absolute",
+          bottom: 0, left: 0, right: 0,
+          height: 60,
+          background: "linear-gradient(to top, rgba(0,0,0,0.5), transparent)",
+          zIndex: 2,
+          pointerEvents: "none",
+        }} />
+      </div>
+
+      {/* Floating badge — top right */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+        style={{
+          position: "absolute",
+          top: -16,
+          right: -8,
+          background: "#0d0d0d",
+          border: "1px solid rgba(245,184,0,0.3)",
+          borderRadius: 12,
+          padding: "10px 16px",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+          zIndex: 10,
+        }}
+      >
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px rgba(74,222,128,0.6)" }} />
+        <span style={{ color: "#fff", fontSize: 12, fontWeight: 600 }}>AI Protection Active</span>
+      </motion.div>
+
+      {/* Floating badge — bottom left */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.65 }}
+        style={{
+          position: "absolute",
+          bottom: -16,
+          left: -8,
+          background: "#0d0d0d",
+          border: "1px solid rgba(245,184,0,0.3)",
+          borderRadius: 12,
+          padding: "10px 16px",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+          zIndex: 10,
+        }}
+      >
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span style={{ color: "#f5b800", fontSize: 12, fontWeight: 700 }}>#1 NSS Rated</span>
+      </motion.div>
+
+    </motion.div>
+  </div>
+
+  {/* Spinning ring keyframe — inject once */}
+  <style>{`
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+  `}</style>
+
+</section>
+
 
       {/* ══ STATS ═════════════════════════════════════════════════════════════ */}
       <section style={{ background: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.04)", padding: "64px 24px" }}>
@@ -410,10 +600,26 @@ export default function AISecurity() {
               </motion.div>
             ))}
           </div>
+
+          {/* ── Platform Architecture Diagram Image ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{ marginTop: 48, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(245,184,0,0.18)", boxShadow: "0 0 60px rgba(245,184,0,0.06)" }}
+          >
+            <img
+              src={IMG_CHECKPOINT_PLATFORM}
+              alt="The Check Point Platform Architecture"
+              style={{ width: "100%", display: "block" }}
+            />
+          </motion.div>
+
         </div>
       </section>
 
-      {/* ══ HYBRID MESH ARCHITECTURE (slide 5) ════════════════════════════════ */}
+      {/* ══ HYBRID MESH ARCHITECTURE ══════════════════════════════════════════ */}
       <section style={{ background: "#0a0a0a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>HYBRID MESH ARCHITECTURE</SLabel>
@@ -446,16 +652,32 @@ export default function AISecurity() {
         </div>
       </section>
 
-      {/* ══ HARMONY WORKSPACE SECURITY (slide 7) ══════════════════════════════ */}
+      {/* ══ HARMONY WORKSPACE SECURITY ════════════════════════════════════════ */}
       <section style={{ background: "#000", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>HARMONY — WORKSPACE SECURITY</SLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#fff", marginBottom: 16, letterSpacing: "-0.01em" }}>
             Securing Humans. <span style={{ color: "#f5b800" }}>Protecting Your Workspace.</span>
           </h2>
-          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 580, margin: "0 auto 56px", lineHeight: 1.7 }}>
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 580, margin: "0 auto 40px", lineHeight: 1.7 }}>
             Layered security for users, devices, apps, and access — a single pane of glass manages complete anti-phishing and anti-ransomware coverage across any location, any device, and any application.
           </p>
+
+          {/* ── Workspace Security Visual Image ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{ marginBottom: 48, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(245,184,0,0.18)", boxShadow: "0 0 60px rgba(245,184,0,0.06)" }}
+          >
+            <img
+              src={IMG_CHECKPOINT_WORKSPACE}
+              alt="Securing Humans — Protect Your Workspace"
+              style={{ width: "100%", display: "block" }}
+            />
+          </motion.div>
+
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 32 }}>
             {/* Left stack */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -529,7 +751,7 @@ export default function AISecurity() {
         </div>
       </section>
 
-      {/* ══ CTEM — 3 ELEMENTS (slides 13 & 14) ════════════════════════════════ */}
+      {/* ══ CTEM — 3 ELEMENTS ══════════════════════════════════════════════════ */}
       <section style={{ background: "#000", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>EXPOSURE MANAGEMENT</SLabel>
@@ -567,7 +789,7 @@ export default function AISecurity() {
         </div>
       </section>
 
-      {/* ══ AI THREAT LANDSCAPE (slides 15 & 17) ══════════════════════════════ */}
+      {/* ══ AI THREAT LANDSCAPE ════════════════════════════════════════════════ */}
       <section style={{ background: "#0a0a0a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>THE AI ERA THREAT LANDSCAPE</SLabel>
@@ -670,7 +892,7 @@ export default function AISecurity() {
         </div>
       </section>
 
-      {/* ══ END-TO-END AI SECURITY STACK (slides 19 & 20) ═════════════════════ */}
+      {/* ══ END-TO-END AI SECURITY STACK ══════════════════════════════════════ */}
       <section style={{ background: "#0a0a0a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>END-TO-END AI SECURITY STACK</SLabel>
@@ -680,7 +902,7 @@ export default function AISecurity() {
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 600, margin: "0 auto 20px", lineHeight: 1.7 }}>
             Check Point embeds AI-native security models at every layer of your infrastructure — from WAF to endpoint — through one unified protection engine.
           </p>
-          {/* 3 pillars from slide 19 */}
+          {/* 3 pillars */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
             {[
               { title: "AI-native Security Models", desc: "Purpose-built AI models trained on Check Point's global threat intelligence — not bolt-on AI added to legacy products." },
@@ -693,7 +915,7 @@ export default function AISecurity() {
               </div>
             ))}
           </div>
-          {/* 6 product layers from slide 20 */}
+          {/* 6 product layers */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
             {AI_STACK.map((layer, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}
@@ -712,7 +934,7 @@ export default function AISecurity() {
         </div>
       </section>
 
-      {/* ══ CHECK POINT ADVANTAGE 4 PILLARS (slide 18) ════════════════════════ */}
+      {/* ══ CHECK POINT ADVANTAGE 4 PILLARS ════════════════════════════════════ */}
       <section style={{ background: "#000", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>PLATFORM STRENGTH</SLabel>

@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 
-const BG = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
+const HERO_IMG = "/lyrebird_hero.png"
 
 // ── Navigate to home contact section ─────────────────────────────────────────
 const goToContact = (navigate) => {
   navigate("/")
-  // Small delay so the home page loads before scrolling
   setTimeout(() => {
     const el = document.getElementById("contact")
     if (el) el.scrollIntoView({ behavior: "smooth" })
@@ -91,7 +90,7 @@ export default function Lyrebird() {
       headline={<>Clinical Documentation.<br /><span style={{ color: "#f5b800" }}>Done in Seconds.</span></>}
       sub="Australia's most deeply integrated AI Scribe. Lyrebird AI listens to patient consultations, transcribes speech in real time, and generates structured clinical notes automatically — saving clinicians up to 3 hours every single day."
       cta="Request a Demo"
-      bgImage={BG}
+      heroImg={HERO_IMG}
     >
 
       {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
@@ -230,7 +229,6 @@ export default function Lyrebird() {
           <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 620, margin: "0 auto 52px" }}>
             Deep integrations with leading EMRs and practice management platforms mean you finish notes, documents, and care plans without ever leaving your medical record system.
           </p>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 40 }}>
             <div style={{ background: "#0f0f0f", border: "1px solid #f5b80030", borderRadius: 14, padding: "24px 20px" }}>
               <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 10px" }}>Deep EMR Integration</p>
@@ -248,7 +246,6 @@ export default function Lyrebird() {
               <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, margin: 0 }}>Patient Summary formats medications, allergies, and history into one clear view — so you stop searching and start consulting.</p>
             </div>
           </div>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))", gap: 12 }}>
             {["Best Practice", "Genie / Gentu", "Oracle Cerner", "FHIR API", "Epic", "Cubiko", "Telehealth Platforms", "REST API"].map(n => <IntegrationBadge key={n} name={n} />)}
           </div>
@@ -256,44 +253,47 @@ export default function Lyrebird() {
       </section>
 
       {/* ── GOLD COAST CASE STUDY / RESEARCH ──────────────────────────── */}
-      <section className="py-[96px] px-6" style={{ background: "#000" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <PLabel>CLINICAL RESEARCH</PLabel>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 12 }}>
-            Proven in Real <span style={{ color: "#f5b800" }}>Clinical Practice</span>
-          </h2>
-          <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 640, margin: "0 auto 52px" }}>
-            Because changes to clinical work matter, Lyrebird partners with clinicians and research teams to study real-world performance. The results speak for themselves.
-          </p>
+      {/* ── GOLD COAST CASE STUDY / RESEARCH ──────────────────────────── */}
+<section className="py-[96px] px-6" style={{ background: "#000" }}>
+  <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+    <PLabel>CLINICAL RESEARCH</PLabel>
+    <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 12 }}>
+      Proven in Real <span style={{ color: "#f5b800" }}>Clinical Practice</span>
+    </h2>
+    <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 640, margin: "0 auto 52px" }}>
+      Because changes to clinical work matter, Lyrebird partners with clinicians and research teams to study real-world performance. The results speak for themselves.
+    </p>
 
-          {/* Case study callout */}
-          <div style={{ background: "#0a0a0a", border: "1px solid #f5b80025", borderRadius: 16, padding: "32px 36px", marginBottom: 32, display: "flex", gap: 32, flexWrap: "wrap", alignItems: "center" }}>
-            <div style={{ flex: "1 1 320px" }}>
-              <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 8px" }}>Case Study — Gold Coast Health</p>
-              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, margin: "0 0 12px" }}>100+ Clinicians. 21 Specialties.</h3>
-              <p style={{ color: "#888", fontSize: 14, lineHeight: 1.7, margin: 0 }}>
-                Gold Coast Health deployed Lyrebird across 21 specialties and 100+ clinicians. Clinicians reported they "can't imagine practicing without" it — with notes scoring higher on structured quality reviews (PDQI-9) than manually written notes.
-              </p>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12, flex: "0 0 auto" }}>
-              <ResearchStat value="80%" label="Reduction in post-consult documentation time" />
-              <ResearchStat value="+88%" label="Clinicians reporting improved note quality" />
-              <ResearchStat value="84%" label="Reported improved workflow efficiency" />
-              <ResearchStat value="68%" label="Patients noticed increased clinician engagement" />
-            </div>
-          </div>
+    {/* Case study card — text on top, stats full-width below */}
+    <div style={{ background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 16, padding: "36px", marginBottom: 24 }}>
+      <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 8px" }}>Case Study — Gold Coast Health</p>
+      <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "0 0 12px" }}>100+ Clinicians. 21 Specialties.</h3>
+      <p style={{ color: "#888", fontSize: 14, lineHeight: 1.75, margin: "0 0 32px", maxWidth: 720 }}>
+        Gold Coast Health deployed Lyrebird across 21 specialties and 100+ clinicians. Clinicians reported they "can't imagine practicing without" it — with notes scoring higher on structured quality reviews (PDQI-9) than manually written notes.
+      </p>
 
-          {/* NHS callout */}
-          <div style={{ background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 16, padding: "24px 32px", display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
-            <div style={{ flex: 1 }}>
-              <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 6px" }}>Announcement</p>
-              <h4 style={{ color: "#fff", fontSize: 17, fontWeight: 700, margin: "0 0 6px" }}>Four South West London NHS Trusts Deploy Lyrebird to 20,000 Clinicians</h4>
-              <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, margin: 0 }}>The UK's largest ambient AI implementation — confirming Lyrebird's position as a globally trusted clinical documentation platform.</p>
-            </div>
-            <span style={{ background: "#f5b80015", color: "#f5b800", fontWeight: 700, fontSize: 12, padding: "6px 14px", borderRadius: 6, border: "1px solid #f5b80030", flexShrink: 0 }}>20,000 Clinicians</span>
-          </div>
-        </div>
-      </section>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", marginBottom: 28 }} />
+
+      {/* 4-column stats grid */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+        <ResearchStat value="80%" label="Reduction in post-consult documentation time" />
+        <ResearchStat value="+88%" label="Clinicians reporting improved note quality" />
+        <ResearchStat value="84%" label="Reported improved workflow efficiency" />
+        <ResearchStat value="68%" label="Patients noticed increased clinician engagement" />
+      </div>
+    </div>
+
+    {/* NHS callout */}
+    <div style={{ background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "24px 32px", display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+      <div style={{ flex: 1, minWidth: 260 }}>
+        <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 6px" }}>Announcement</p>
+        <h4 style={{ color: "#fff", fontSize: 17, fontWeight: 700, margin: "0 0 6px" }}>Four South West London NHS Trusts Deploy Lyrebird to 20,000 Clinicians</h4>
+        <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, margin: 0 }}>The UK's largest ambient AI implementation — confirming Lyrebird's position as a globally trusted clinical documentation platform.</p>
+      </div>
+      <span style={{ background: "rgba(245,184,0,0.08)", color: "#f5b800", fontWeight: 700, fontSize: 13, padding: "8px 18px", borderRadius: 8, border: "1px solid rgba(245,184,0,0.25)", flexShrink: 0 }}>20,000 Clinicians</span>
+    </div>
+  </div>
+</section>
 
       {/* ── TESTIMONIALS ──────────────────────────────────────────────── */}
       <section className="py-[96px] px-6" style={{ background: "#050505" }}>
@@ -303,42 +303,12 @@ export default function Lyrebird() {
             Trusted by <span style={{ color: "#f5b800" }}>Thousands of Clinicians</span>
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-            <TestimonialCard
-              quote="It has shortened my note taking time by about 90%. In actual numbers, this translates to 40–60 minutes of time gained per 10-hour shift."
-              name="Dr Dhruv Mori"
-              role="Clinical Lead"
-              org="Bendigo Hospital ED"
-            />
-            <TestimonialCard
-              quote="The depth of information recorded with Lyrebird is more detailed than I would normally type during a consult or from memory later. Plus, I've been able to customise it to reflect my own structure, style, and technical language."
-              name="Jessica Triay"
-              role="Staff Specialist, Endocrinology"
-              org="Gold Coast Health"
-            />
-            <TestimonialCard
-              quote="Prior to using Lyrebird, I would spend an hour with a patient and another 1–2 hours on paperwork. Now it's just 15–20 minutes, saving me 2–3 hours a day. I can maintain eye contact with parents during deeper conversations."
-              name="Angela Owens"
-              role="Senior Medical Officer"
-              org="Gold Coast Health"
-            />
-            <TestimonialCard
-              quote="Lyrebird Health strikes the right balance between efficiency, security and patient-centred care. I highly recommend it to fellow practitioners."
-              name="Dr Sean Stevens"
-              role="Principal GP & Owner"
-              org="Grove Medical"
-            />
-            <TestimonialCard
-              quote="The results are so significant that we are planning to roll this out to all 32 of our doctors ASAP. This isn't just an efficiency tool; it's a critical investment in our entire operation."
-              name="Dene Creegan"
-              role="General Manager"
-              org="7 Springs Medical Practice"
-            />
-            <TestimonialCard
-              quote="In the last six months alone, our care plan process has become incredibly smoother. We have seen a significant increase in patient throughput, largely driven by Lyrebird's CDM and care plan processes."
-              name="Louise Forster"
-              role="Business Manager"
-              org="Lake Kawana General Practice"
-            />
+            <TestimonialCard quote="It has shortened my note taking time by about 90%. In actual numbers, this translates to 40–60 minutes of time gained per 10-hour shift." name="Dr Dhruv Mori" role="Clinical Lead" org="Bendigo Hospital ED" />
+            <TestimonialCard quote="The depth of information recorded with Lyrebird is more detailed than I would normally type during a consult or from memory later. Plus, I've been able to customise it to reflect my own structure, style, and technical language." name="Jessica Triay" role="Staff Specialist, Endocrinology" org="Gold Coast Health" />
+            <TestimonialCard quote="Prior to using Lyrebird, I would spend an hour with a patient and another 1–2 hours on paperwork. Now it's just 15–20 minutes, saving me 2–3 hours a day. I can maintain eye contact with parents during deeper conversations." name="Angela Owens" role="Senior Medical Officer" org="Gold Coast Health" />
+            <TestimonialCard quote="Lyrebird Health strikes the right balance between efficiency, security and patient-centred care. I highly recommend it to fellow practitioners." name="Dr Sean Stevens" role="Principal GP & Owner" org="Grove Medical" />
+            <TestimonialCard quote="The results are so significant that we are planning to roll this out to all 32 of our doctors ASAP. This isn't just an efficiency tool; it's a critical investment in our entire operation." name="Dene Creegan" role="General Manager" org="7 Springs Medical Practice" />
+            <TestimonialCard quote="In the last six months alone, our care plan process has become incredibly smoother. We have seen a significant increase in patient throughput, largely driven by Lyrebird's CDM and care plan processes." name="Louise Forster" role="Business Manager" org="Lake Kawana General Practice" />
           </div>
         </div>
       </section>
@@ -353,31 +323,12 @@ export default function Lyrebird() {
           <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 600, margin: "0 auto 52px" }}>
             We understand how sensitive clinical information is, and the responsibility that comes with protecting it. Every feature is designed with clinician and patient privacy front of mind.
           </p>
-
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 28, marginBottom: 48 }}>
-            <SecurityPoint
-              icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
-              title="Bank-Level Encryption"
-              desc="All consultations and notes are protected with AES-256 encryption and strict access controls — the same standard used by financial institutions."
-            />
-            <SecurityPoint
-              icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>}
-              title="Data Stored Onshore in Australia"
-              desc="All patient data is processed and stored within Australia, aligned with Australian Privacy Principles (APP). Not sent offshore."
-            />
-            <SecurityPoint
-              icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>}
-              title="We Never Train AI on Your Data"
-              desc="Notes, transcripts, and patient information are never sold, shared, or used to train external AI models. Your data stays yours."
-            />
-            <SecurityPoint
-              icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
-              title="Consent Timestamping"
-              desc="Lyrebird prompts clinicians to obtain patient consent before recording and timestamps it automatically — providing medicolegal clarity and peace of mind."
-            />
+            <SecurityPoint icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>} title="Bank-Level Encryption" desc="All consultations and notes are protected with AES-256 encryption and strict access controls — the same standard used by financial institutions." />
+            <SecurityPoint icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>} title="Data Stored Onshore in Australia" desc="All patient data is processed and stored within Australia, aligned with Australian Privacy Principles (APP). Not sent offshore." />
+            <SecurityPoint icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>} title="We Never Train AI on Your Data" desc="Notes, transcripts, and patient information are never sold, shared, or used to train external AI models. Your data stays yours." />
+            <SecurityPoint icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>} title="Consent Timestamping" desc="Lyrebird prompts clinicians to obtain patient consent before recording and timestamps it automatically — providing medicolegal clarity and peace of mind." />
           </div>
-
-          {/* Compliance badges */}
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             {["HIPAA Compliant", "GDPR Compliant", "APP (Australian Privacy Principles)", "TGA Aligned", "CEP Certified", "SOC 2"].map(c => (
               <div key={c} style={{ background: "#0a0a0a", border: "1px solid #f5b80025", borderRadius: 8, padding: "8px 16px", display: "flex", alignItems: "center", gap: 8 }}>
@@ -396,34 +347,13 @@ export default function Lyrebird() {
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 52 }}>
             Common <span style={{ color: "#f5b800" }}>Questions</span>
           </h2>
-          <FAQItem
-            q="Do I need to install any software to use Lyrebird?"
-            a="No. Lyrebird is entirely web-based — no downloads or installations required. Create an account and start right in your browser immediately. It works across all major browsers, though Google Chrome is strongly recommended."
-          />
-          <FAQItem
-            q="Is patient consent required?"
-            a="Yes. You should obtain patient consent before recording a consultation. Lyrebird prompts you to do this at the start of every consult and timestamps consent automatically for medicolegal clarity. A customisable patient privacy printout is also available for your clinic."
-          />
-          <FAQItem
-            q="What EMR systems does Lyrebird integrate with?"
-            a="Lyrebird offers deep integration with Best Practice and Genie/Gentu, allowing you to finish notes, documents, and care plans inside your EMR. It also works with Oracle Cerner via FHIR API. For systems without native integration, a simple one-click copy-paste transfer is available."
-          />
-          <FAQItem
-            q="Does Lyrebird work for telehealth consultations?"
-            a="Yes. Lyrebird supports both phone and video telehealth consults. For computer-based telehealth, Lyrebird can isolate audio directly from your video conferencing platform — capturing both clinician and patient voices clearly, even when using a headset."
-          />
-          <FAQItem
-            q="Can I customise the note format to match my style?"
-            a="Yes, fully. You can edit headings, structure, and content to match your preferred clinical style. Upload example letters and Lyrebird learns your preferred structure and language — applying it to future documents automatically."
-          />
-          <FAQItem
-            q="Are there discounts for part-time clinicians, registrars, or group practices?"
-            a="Yes. Discounts are available for part-time clinicians (working below 25 hours/week), registrars (with proof of registrar status), and practices with multiple clinicians. Discounts scale with practice size. Contact our team to discuss your organisation's needs."
-          />
-          <FAQItem
-            q="Is there a free trial?"
-            a="Yes — Lyrebird offers a 14-day free trial so you can fully experience the product before committing. No credit card required to start. You can also book a one-on-one onboarding session with the team."
-          />
+          <FAQItem q="Do I need to install any software to use Lyrebird?" a="No. Lyrebird is entirely web-based — no downloads or installations required. Create an account and start right in your browser immediately. It works across all major browsers, though Google Chrome is strongly recommended." />
+          <FAQItem q="Is patient consent required?" a="Yes. You should obtain patient consent before recording a consultation. Lyrebird prompts you to do this at the start of every consult and timestamps consent automatically for medicolegal clarity. A customisable patient privacy printout is also available for your clinic." />
+          <FAQItem q="What EMR systems does Lyrebird integrate with?" a="Lyrebird offers deep integration with Best Practice and Genie/Gentu, allowing you to finish notes, documents, and care plans inside your EMR. It also works with Oracle Cerner via FHIR API. For systems without native integration, a simple one-click copy-paste transfer is available." />
+          <FAQItem q="Does Lyrebird work for telehealth consultations?" a="Yes. Lyrebird supports both phone and video telehealth consults. For computer-based telehealth, Lyrebird can isolate audio directly from your video conferencing platform — capturing both clinician and patient voices clearly, even when using a headset." />
+          <FAQItem q="Can I customise the note format to match my style?" a="Yes, fully. You can edit headings, structure, and content to match your preferred clinical style. Upload example letters and Lyrebird learns your preferred structure and language — applying it to future documents automatically." />
+          <FAQItem q="Are there discounts for part-time clinicians, registrars, or group practices?" a="Yes. Discounts are available for part-time clinicians (working below 25 hours/week), registrars (with proof of registrar status), and practices with multiple clinicians. Discounts scale with practice size. Contact our team to discuss your organisation's needs." />
+          <FAQItem q="Is there a free trial?" a="Yes — Lyrebird offers a 14-day free trial so you can fully experience the product before committing. No credit card required to start. You can also book a one-on-one onboarding session with the team." />
         </div>
       </section>
 
