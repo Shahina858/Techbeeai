@@ -1,5 +1,10 @@
 import { useEffect, useRef } from "react"
 
+// Prevent runaway canvas bitmap size (OOM) while keeping full visual fidelity
+const MAX_DPR = 2
+const MAX_BITMAP_W = 2560
+const MAX_BITMAP_H = 1440
+
 export default function BrainBackground() {
     const canvasRef = useRef(null)
 
@@ -9,11 +14,13 @@ export default function BrainBackground() {
         const ctx = canvas.getContext("2d")
 
         let animId
+        let running = true
         let W, H
         let nodes = [],
             streams = [],
             circuits = []
         let scanY = 0
+        let resizeTimer
 
         const NODE_COLOR = "#f5b800"
         const ACCENT_COLOR = "#00e5ff"
@@ -27,10 +34,17 @@ export default function BrainBackground() {
 
         function resize() {
             const parent = canvas.parentElement
-            W = canvas.width = parent ? parent.offsetWidth : window.innerWidth
-            H = canvas.height = parent
-                ? parent.offsetHeight
-                : window.innerHeight
+            let cssW = parent ? parent.clientWidth : 0
+            let cssH = parent ? parent.clientHeight : 0
+            if (cssW < 2 || cssH < 2) {
+                cssW = window.innerWidth
+                cssH = window.innerHeight
+            }
+            const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR)
+            W = Math.min(Math.max(1, Math.round(cssW * dpr)), MAX_BITMAP_W)
+            H = Math.min(Math.max(1, Math.round(cssH * dpr)), MAX_BITMAP_H)
+            canvas.width = W
+            canvas.height = H
         }
 
         function buildNodes() {
@@ -147,6 +161,7 @@ export default function BrainBackground() {
 
         function draw() {
             animId = requestAnimationFrame(draw)
+            if (!running || document.hidden || W < 2 || H < 2) return
 
             // Pure black background
             ctx.fillStyle = "#000000"
@@ -283,22 +298,31 @@ export default function BrainBackground() {
             })
         }
 
-        resize()
-        buildNodes()
-        buildStreams()
-        buildCircuits()
-        draw()
-
-        const ro = new ResizeObserver(() => {
+        function rebuild() {
             resize()
             buildNodes()
-            buildCircuits()
             buildStreams()
+            buildCircuits()
+        }
+
+        rebuild()
+        draw()
+        requestAnimationFrame(() => {
+            rebuild()
         })
+
+        const onResize = () => {
+            clearTimeout(resizeTimer)
+            resizeTimer = setTimeout(rebuild, 200)
+        }
+
+        const ro = new ResizeObserver(onResize)
         ro.observe(canvas.parentElement || canvas)
 
         return () => {
+            running = false
             cancelAnimationFrame(animId)
+            clearTimeout(resizeTimer)
             ro.disconnect()
         }
     }, [])

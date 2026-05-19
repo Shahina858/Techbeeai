@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function MouseGlow() {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const ref = useRef(null);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
     const move = (e) => {
-      setPos({ x: e.clientX, y: e.clientY });
+      el.style.background = `radial-gradient(
+        400px at ${e.clientX}px ${e.clientY}px,
+        rgba(245,184,0,0.15),
+        transparent 80%
+      )`;
     };
 
-    window.addEventListener("mousemove", move);
+    window.addEventListener("mousemove", move, { passive: true });
     return () => window.removeEventListener("mousemove", move);
   }, []);
 
   return (
     <div
+      ref={ref}
       className="pointer-events-none fixed inset-0 z-0"
-      style={{
-        background: `radial-gradient(
-          400px at ${pos.x}px ${pos.y}px,
-          rgba(245,184,0,0.15),
-          transparent 80%
-        )`,
-      }}
     />
   );
 }
