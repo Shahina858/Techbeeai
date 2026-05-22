@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar"
 
 const LOGO_IMG   = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
 const HERO_BG    = "https://framerusercontent.com/images/TglGme8G89i1DDRAZDRD0tqp90.jpg"
-const CARD_IMG   = "/images.png"
+const CARD_IMG   = "/1200x630wa.jpg.jpeg"
 
 const IMG_MOBILE_BANNER  = "/mobile_banner-removebg-preview.png"
 const IMG_APP_SCREENS    = "/app_screen_clean.jpeg"
