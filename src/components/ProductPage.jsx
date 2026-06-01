@@ -76,10 +76,15 @@ export const StatPill = ({ value, label }) => (
 )
 
 // ── Main ProductPage wrapper ──────────────────────────────────────────────────
-// heroImg prop — pass an image URL to get a two-column hero (text left, image right)
-// bgImage still works for the old full-width background style
-export default function ProductPage({ badge, headline, sub, cta, bgImage, heroImg, children }) {
+// pricingCta — optional: pass an onClick handler to show a 3rd "View Pricing" button in the hero
+export default function ProductPage({ badge, headline, sub, cta, bgImage, heroImg, heroStats, heroFloatingBadges, pricingCta, children }) {
   const navigate = useNavigate()
+
+  const statRow = heroStats || [
+    { n: "99%+", l: "OCR accuracy" },
+    { n: "80%",  l: "less manual work" },
+    { n: "50+",  l: "languages" },
+  ]
 
   return (
     <div className="bg-black text-white overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -150,11 +155,7 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }}
                 style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "24px 0 36px" }}>
-                {[
-                  { n: "80%", l: "less doc time" },
-                  { n: "2–3h", l: "saved daily" },
-                  { n: "50+", l: "languages" },
-                ].map(s => (
+                {statRow.map(s => (
                   <div key={s.n} style={{
                     background: "rgba(255,255,255,0.04)", border: "1px solid rgba(245,184,0,0.18)",
                     borderRadius: 10, padding: "10px 18px", textAlign: "center", minWidth: 76,
@@ -165,10 +166,12 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
                 ))}
               </motion.div>
 
-              {/* CTAs */}
+              {/* ── CTAs ── */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
                 style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
+
+                {/* Primary CTA — Request a Demo */}
                 <motion.button
                   whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.6)" }}
                   whileTap={{ scale: 0.97 }}
@@ -178,10 +181,46 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
                   onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                   {cta || "Book a Demo →"}
                 </motion.button>
-                <button style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 36px", border: "1px solid rgba(245,184,0,0.35)", cursor: "default", opacity: 0.7, display: "inline-flex", alignItems: "center", gap: 8 }}>
+
+                {/* Watch Demo button */}
+                <button
+                  style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 28px", border: "1px solid rgba(245,184,0,0.35)", cursor: "default", opacity: 0.7, display: "inline-flex", alignItems: "center", gap: 8 }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                   Watch Demo
                 </button>
+
+                {/* ── View Pricing button — only rendered when pricingCta prop is passed ── */}
+                {pricingCta && (
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={pricingCta}
+                    style={{
+                      background: "transparent",
+                      color: "#f5b800",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      borderRadius: 50,
+                      padding: "13px 28px",
+                      border: "1px solid rgba(245,184,0,0.45)",
+                      cursor: "pointer",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.45)" }}
+                  >
+                    {/* Dollar sign icon — matches CamCard style */}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="12" y1="1" x2="12" y2="23"/>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    View Pricing
+                  </motion.button>
+                )}
+
               </motion.div>
             </div>
 
@@ -202,7 +241,8 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
                   boxShadow: "0 40px 90px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.05)",
                 }}
               />
-              {/* Floating badge — Live */}
+
+              {/* Floating badge — bottom left: live processing */}
               <div style={{
                 position: "absolute", bottom: -14, left: 24, zIndex: 2,
                 background: "rgba(8,8,8,0.95)", border: "1px solid rgba(245,184,0,0.22)",
@@ -211,17 +251,18 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
                 backdropFilter: "blur(12px)", boxShadow: "0 8px 28px rgba(0,0,0,0.4)",
               }}>
                 <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 7px #22c55e", animation: "livePulse 1.6s ease-in-out infinite" }} />
-                <span style={{ color: "#fff", fontSize: 12.5, fontWeight: 600 }}>Live Transcription Active</span>
+                <span style={{ color: "#fff", fontSize: 12.5, fontWeight: 600 }}>AI Processing Active</span>
               </div>
-              {/* Floating badge — accuracy */}
+
+              {/* Floating badge — top right: OCR accuracy */}
               <div style={{
                 position: "absolute", top: 20, right: -12, zIndex: 2,
                 background: "rgba(8,8,8,0.95)", border: "1px solid rgba(245,184,0,0.22)",
                 borderRadius: 10, padding: "10px 14px", textAlign: "center",
                 backdropFilter: "blur(12px)", boxShadow: "0 8px 28px rgba(0,0,0,0.4)",
               }}>
-                <div style={{ color: "#f5b800", fontSize: 20, fontWeight: 800, lineHeight: 1 }}>100%</div>
-                <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 10.5, marginTop: 3 }}>Accuracy</div>
+                <div style={{ color: "#f5b800", fontSize: 20, fontWeight: 800, lineHeight: 1 }}>99%+</div>
+                <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 10.5, marginTop: 3 }}>OCR Accuracy</div>
               </div>
             </motion.div>
           </div>
@@ -268,6 +309,7 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
 
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
               style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+
               <motion.button whileHover={{ scale: 1.04, boxShadow: "0 0 44px rgba(245,184,0,0.6)" }} whileTap={{ scale: 0.97 }}
                 onClick={() => goToContact(navigate)}
                 style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "13px 36px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.4)" }}
@@ -275,10 +317,43 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                 {cta || "Book a Demo →"}
               </motion.button>
+
               <button style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 36px", border: "1px solid rgba(245,184,0,0.4)", cursor: "default", opacity: 0.7, display: "inline-flex", alignItems: "center", gap: 8 }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                 Watch Demo
               </button>
+
+              {/* View Pricing — centered hero version */}
+              {pricingCta && (
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={pricingCta}
+                  style={{
+                    background: "transparent",
+                    color: "#f5b800",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    borderRadius: 50,
+                    padding: "13px 28px",
+                    border: "1px solid rgba(245,184,0,0.45)",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.45)" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                  </svg>
+                  View Pricing
+                </motion.button>
+              )}
+
             </motion.div>
           </div>
         </section>

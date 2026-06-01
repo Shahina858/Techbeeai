@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 
@@ -80,18 +81,67 @@ function ResearchStat({ value, label }) {
   )
 }
 
+// ── Pricing sub-components ───────────────────────────────────────────────────
+
+function PricingCheckIcon({ color = "#f5b800" }) {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  )
+}
+
+function PricingCrossIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  )
+}
+
+function PricingFeatRow({ children, type = "yes" }) {
+  return (
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 9 }}>
+      {type === "yes" && <PricingCheckIcon color="#f5b800" />}
+      {type === "limit" && <PricingCheckIcon color="#3d9e6e" />}
+      {type === "no" && <PricingCrossIcon />}
+      <span style={{ color: type === "no" ? "#444" : "#999", fontSize: 13, lineHeight: 1.55 }}>{children}</span>
+    </div>
+  )
+}
+
+function PricingFeatGroupTitle({ children }) {
+  return (
+    <p style={{ color: "#444", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10, marginTop: 18 }}>
+      {children}
+    </p>
+  )
+}
+
+function PricingDivider() {
+  return <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", margin: "18px 0" }} />
+}
+
 // ── main page ────────────────────────────────────────────────────────────────
 
 export default function Lyrebird() {
   const navigate = useNavigate()
+  const [billing, setBilling] = useState("monthly")
+
   return (
-    <ProductPage
-      badge="LYREBIRD AI — MEDICAL AI SCRIBE"
-      headline={<>Clinical Documentation.<br /><span style={{ color: "#f5b800" }}>Done in Seconds.</span></>}
-      sub="Australia's most deeply integrated AI Scribe. Lyrebird AI listens to patient consultations, transcribes speech in real time, and generates structured clinical notes automatically — saving clinicians up to 3 hours every single day."
-      cta="Request a Demo"
-      heroImg={HERO_IMG}
-    >
+   <ProductPage
+    badge="LYREBIRD AI — MEDICAL AI SCRIBE"
+   headline={<>Clinical Documentation.<br /><span style={{ color: "#f5b800" }}>Done in Seconds.</span></>}
+    sub="Australia's most deeply integrated AI Scribe. Lyrebird AI listens to patient consultations, transcribes speech in real time, and generates structured clinical notes automatically — saving clinicians up to 3 hours every single day."
+    cta="Request a Demo"
+    heroImg={HERO_IMG}
+    pricingCta={() => {
+       const el = document.getElementById("pricing")
+       if (el) el.scrollIntoView({ behavior: "smooth" })
+     }}
+  >
+
 
       {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
       <section className="py-[96px] px-6" style={{ background: "#000" }}>
@@ -147,7 +197,6 @@ export default function Lyrebird() {
             ].map(f => <Chip key={f}>{f}</Chip>)}
           </div>
 
-          {/* Feature cards grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
             <FeatureCard
               icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>}
@@ -253,47 +302,39 @@ export default function Lyrebird() {
       </section>
 
       {/* ── GOLD COAST CASE STUDY / RESEARCH ──────────────────────────── */}
-      {/* ── GOLD COAST CASE STUDY / RESEARCH ──────────────────────────── */}
-<section className="py-[96px] px-6" style={{ background: "#000" }}>
-  <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-    <PLabel>CLINICAL RESEARCH</PLabel>
-    <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 12 }}>
-      Proven in Real <span style={{ color: "#f5b800" }}>Clinical Practice</span>
-    </h2>
-    <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 640, margin: "0 auto 52px" }}>
-      Because changes to clinical work matter, Lyrebird partners with clinicians and research teams to study real-world performance. The results speak for themselves.
-    </p>
-
-    {/* Case study card — text on top, stats full-width below */}
-    <div style={{ background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 16, padding: "36px", marginBottom: 24 }}>
-      <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 8px" }}>Case Study — Gold Coast Health</p>
-      <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "0 0 12px" }}>100+ Clinicians. 21 Specialties.</h3>
-      <p style={{ color: "#888", fontSize: 14, lineHeight: 1.75, margin: "0 0 32px", maxWidth: 720 }}>
-        Gold Coast Health deployed Lyrebird across 21 specialties and 100+ clinicians. Clinicians reported they "can't imagine practicing without" it — with notes scoring higher on structured quality reviews (PDQI-9) than manually written notes.
-      </p>
-
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", marginBottom: 28 }} />
-
-      {/* 4-column stats grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
-        <ResearchStat value="80%" label="Reduction in post-consult documentation time" />
-        <ResearchStat value="+88%" label="Clinicians reporting improved note quality" />
-        <ResearchStat value="84%" label="Reported improved workflow efficiency" />
-        <ResearchStat value="68%" label="Patients noticed increased clinician engagement" />
-      </div>
-    </div>
-
-    {/* NHS callout */}
-    <div style={{ background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "24px 32px", display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
-      <div style={{ flex: 1, minWidth: 260 }}>
-        <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 6px" }}>Announcement</p>
-        <h4 style={{ color: "#fff", fontSize: 17, fontWeight: 700, margin: "0 0 6px" }}>Four South West London NHS Trusts Deploy Lyrebird to 20,000 Clinicians</h4>
-        <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, margin: 0 }}>The UK's largest ambient AI implementation — confirming Lyrebird's position as a globally trusted clinical documentation platform.</p>
-      </div>
-      <span style={{ background: "rgba(245,184,0,0.08)", color: "#f5b800", fontWeight: 700, fontSize: 13, padding: "8px 18px", borderRadius: 8, border: "1px solid rgba(245,184,0,0.25)", flexShrink: 0 }}>20,000 Clinicians</span>
-    </div>
-  </div>
-</section>
+      <section className="py-[96px] px-6" style={{ background: "#000" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <PLabel>CLINICAL RESEARCH</PLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 12 }}>
+            Proven in Real <span style={{ color: "#f5b800" }}>Clinical Practice</span>
+          </h2>
+          <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 640, margin: "0 auto 52px" }}>
+            Because changes to clinical work matter, Lyrebird partners with clinicians and research teams to study real-world performance. The results speak for themselves.
+          </p>
+          <div style={{ background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 16, padding: "36px", marginBottom: 24 }}>
+            <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 8px" }}>Case Study — Gold Coast Health</p>
+            <h3 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "0 0 12px" }}>100+ Clinicians. 21 Specialties.</h3>
+            <p style={{ color: "#888", fontSize: 14, lineHeight: 1.75, margin: "0 0 32px", maxWidth: 720 }}>
+              Gold Coast Health deployed Lyrebird across 21 specialties and 100+ clinicians. Clinicians reported they "can't imagine practicing without" it — with notes scoring higher on structured quality reviews (PDQI-9) than manually written notes.
+            </p>
+            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", marginBottom: 28 }} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+              <ResearchStat value="80%" label="Reduction in post-consult documentation time" />
+              <ResearchStat value="+88%" label="Clinicians reporting improved note quality" />
+              <ResearchStat value="84%" label="Reported improved workflow efficiency" />
+              <ResearchStat value="68%" label="Patients noticed increased clinician engagement" />
+            </div>
+          </div>
+          <div style={{ background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "24px 32px", display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 6px" }}>Announcement</p>
+              <h4 style={{ color: "#fff", fontSize: 17, fontWeight: 700, margin: "0 0 6px" }}>Four South West London NHS Trusts Deploy Lyrebird to 20,000 Clinicians</h4>
+              <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, margin: 0 }}>The UK's largest ambient AI implementation — confirming Lyrebird's position as a globally trusted clinical documentation platform.</p>
+            </div>
+            <span style={{ background: "rgba(245,184,0,0.08)", color: "#f5b800", fontWeight: 700, fontSize: 13, padding: "8px 18px", borderRadius: 8, border: "1px solid rgba(245,184,0,0.25)", flexShrink: 0 }}>20,000 Clinicians</span>
+          </div>
+        </div>
+      </section>
 
       {/* ── TESTIMONIALS ──────────────────────────────────────────────── */}
       <section className="py-[96px] px-6" style={{ background: "#050505" }}>
@@ -340,8 +381,189 @@ export default function Lyrebird() {
         </div>
       </section>
 
+      {/* ── PRICING ───────────────────────────────────────────────────── */}
+      <section className="py-[96px] px-6" style={{ background: "#050505" }} id="pricing">
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <PLabel>PRICING</PLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 14 }}>
+            Simple, Transparent <span style={{ color: "#f5b800" }}>Pricing</span>
+          </h2>
+          <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
+            All plans include a 14-day free trial — no credit card required to start.
+          </p>
+
+          {/* Billing toggle */}
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 52 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 0, background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 10, padding: 4 }}>
+              {["monthly", "annual"].map(b => (
+                <button
+                  key={b}
+                  onClick={() => setBilling(b)}
+                  style={{
+                    background: billing === b ? "#f5b800" : "transparent",
+                    color: billing === b ? "#000" : "#666",
+                    border: "none",
+                    fontWeight: 700,
+                    fontSize: 13,
+                    padding: "9px 22px",
+                    borderRadius: 7,
+                    cursor: "pointer",
+                    transition: "all 0.18s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8
+                  }}
+                >
+                  {b === "monthly" ? "Monthly" : "Annual"}
+                  {b === "annual" && (
+                    <span style={{
+                      background: billing === "annual" ? "#00000025" : "#f5b80015",
+                      color: billing === "annual" ? "#000" : "#f5b800",
+                      fontSize: 10,
+                      fontWeight: 800,
+                      padding: "2px 7px",
+                      borderRadius: 20,
+                      letterSpacing: "0.04em"
+                    }}>
+                      SAVE 33%
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Plan cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
+
+            {/* FREE */}
+            <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 14, padding: "28px 22px", display: "flex", flexDirection: "column" }}>
+              <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Free Plan</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Starter</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 18, minHeight: 44 }}>A taste tester of Lyrebird — great for trying the basics.</p>
+              <div style={{ marginBottom: 20 }}>
+                <span style={{ color: "#fff", fontSize: "2rem", fontWeight: 800 }}>$0</span>
+                <span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>/ forever</span>
+              </div>
+              <a href="https://lyrebirdhealth.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "transparent", color: "#ccc", border: "1px solid #2a2a2a", fontWeight: 700, fontSize: 14, padding: "11px", borderRadius: 8, textDecoration: "none", marginBottom: 20 }}>
+                Start free
+              </a>
+              <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 14 }} />
+              <PricingFeatGroupTitle>Transcribe & Dictate</PricingFeatGroupTitle>
+              <PricingFeatRow type="limit"><strong style={{ color: "#ccc" }}>50 actions</strong>&nbsp;per month</PricingFeatRow>
+              <PricingFeatRow type="limit">Consult notes & templates</PricingFeatRow>
+              <PricingFeatGroupTitle>Documents & Letters</PricingFeatGroupTitle>
+              <PricingFeatRow type="limit"><strong style={{ color: "#ccc" }}>10 actions</strong>&nbsp;per month</PricingFeatRow>
+              <PricingFeatGroupTitle>Care Plans</PricingFeatGroupTitle>
+              <PricingFeatRow type="no">Not available</PricingFeatRow>
+              <PricingFeatGroupTitle>Integrations</PricingFeatGroupTitle>
+              <PricingFeatRow type="no">No EMR integrations</PricingFeatRow>
+            </div>
+
+            {/* BP FREE */}
+            <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 14, padding: "28px 22px", display: "flex", flexDirection: "column" }}>
+              <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Bp Free</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>BP Premier</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 18, minHeight: 44 }}>Included with your Bp Premier subscription.</p>
+              <div style={{ marginBottom: 20 }}>
+                <span style={{ color: "#fff", fontSize: "2rem", fontWeight: 800 }}>$0</span>
+                <span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>via BP Premier</span>
+              </div>
+              <a href="https://lyrebirdhealth.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#111", color: "#ccc", border: "1px solid #2a2a2a", fontWeight: 700, fontSize: 14, padding: "11px", borderRadius: 8, textDecoration: "none", marginBottom: 20 }}>
+                Check eligibility
+              </a>
+              <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 14 }} />
+              <PricingFeatGroupTitle>Transcribe & Dictate</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes"><strong style={{ color: "#ccc" }}>Unlimited</strong>&nbsp;consult notes</PricingFeatRow>
+              <PricingFeatRow type="yes">Custom note templates</PricingFeatRow>
+              <PricingFeatGroupTitle>Documents & Letters</PricingFeatGroupTitle>
+              <PricingFeatRow type="limit"><strong style={{ color: "#ccc" }}>10 actions</strong>&nbsp;per month</PricingFeatRow>
+              <PricingFeatGroupTitle>Care Plans</PricingFeatGroupTitle>
+              <PricingFeatRow type="limit">20 all-time limit</PricingFeatRow>
+              <PricingFeatGroupTitle>Integrations</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes">BP integration included</PricingFeatRow>
+            </div>
+
+            {/* PRO — FEATURED */}
+            <div style={{ background: "#0f0f0f", border: "2px solid #f5b800", borderRadius: 14, padding: "28px 22px", display: "flex", flexDirection: "column", position: "relative" }}>
+              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>
+                MOST POPULAR
+              </div>
+              <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Pro Plan</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Pro</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 18, minHeight: 44 }}>For clinics & GPs to automate care plans and assessments.</p>
+              <div style={{ marginBottom: 4 }}>
+                <span style={{ color: "#f5b800", fontSize: "2rem", fontWeight: 800 }}>
+                  {billing === "annual" ? "$107" : "$160"}
+                </span>
+                <span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>/ month</span>
+              </div>
+              <p style={{ color: "#555", fontSize: 12, marginBottom: 16 }}>
+                {billing === "annual" ? "$1,280 billed annually" : "Billed monthly"}
+              </p>
+              <a href="https://lyrebirdhealth.com" target="_blank" rel="noopener noreferrer"
+                style={{ display: "block", textAlign: "center", background: "#f5b800", color: "#000", border: "none", fontWeight: 800, fontSize: 14, padding: "12px", borderRadius: 8, textDecoration: "none", marginBottom: 20, transition: "background 0.18s" }}
+                onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+                onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}
+              >
+                Try free for 14 days
+              </a>
+              <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 14 }} />
+              <PricingFeatGroupTitle>Transcribe & Dictate</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes"><strong style={{ color: "#ccc" }}>Unlimited</strong>&nbsp;consult notes</PricingFeatRow>
+              <PricingFeatRow type="yes">Custom note templates</PricingFeatRow>
+              <PricingFeatGroupTitle>Documents & Letters</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes"><strong style={{ color: "#ccc" }}>Unlimited</strong>&nbsp;(incl. PDFs)</PricingFeatRow>
+              <PricingFeatGroupTitle>Care Plans</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes"><strong style={{ color: "#ccc" }}>Unlimited</strong>&nbsp;care plans</PricingFeatRow>
+              <PricingFeatGroupTitle>Integrations</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes"><strong style={{ color: "#ccc" }}>All</strong>&nbsp;integrations included</PricingFeatRow>
+              <PricingFeatRow type="yes">BP + Cubiko + BetterConsult</PricingFeatRow>
+            </div>
+
+            {/* ENTERPRISE */}
+            <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 14, padding: "28px 22px", display: "flex", flexDirection: "column" }}>
+              <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Enterprise</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Enterprise</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 18, minHeight: 44 }}>Large organisations needing custom deployment & SSO.</p>
+              <div style={{ marginBottom: 20 }}>
+                <span style={{ color: "#fff", fontSize: "1.7rem", fontWeight: 800 }}>Custom</span>
+                <p style={{ color: "#555", fontSize: 12, marginTop: 4 }}>Flexible billing</p>
+              </div>
+              <a href="https://lyrebirdhealth.com/au/pricing" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "transparent", color: "#ccc", border: "1px solid #2a2a2a", fontWeight: 700, fontSize: 14, padding: "11px", borderRadius: 8, textDecoration: "none", marginBottom: 20 }}>
+                Talk to sales
+              </a>
+              <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 14 }} />
+              <PricingFeatGroupTitle>Everything in Pro, plus:</PricingFeatGroupTitle>
+              <PricingFeatRow type="yes">Tiered discounts</PricingFeatRow>
+              <PricingFeatRow type="yes">Organisation sharing</PricingFeatRow>
+              <PricingFeatRow type="yes">SSO as an add-on</PricingFeatRow>
+              <PricingFeatRow type="yes">Personalised onboarding</PricingFeatRow>
+              <PricingFeatRow type="yes">Dedicated account manager</PricingFeatRow>
+            </div>
+
+          </div>
+
+          {/* Discounts note + full pricing link */}
+          <div style={{ background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 12, padding: "20px 28px", display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+            <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, flex: 1, minWidth: 260 }}>
+              Discounts available for <span style={{ color: "#ddd" }}>part-time clinicians</span> (under 25h/week), <span style={{ color: "#ddd" }}>registrars</span>, and <span style={{ color: "#ddd" }}>group practices</span>. Prices in AUD — Techbee handles UAE & GCC onboarding and support.
+            </p>
+            <a
+              href="https://lyrebirdhealth.com/au/pricing"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#f5b800", fontSize: 13, fontWeight: 700, textDecoration: "none", border: "1px solid #f5b80040", padding: "10px 20px", borderRadius: 8, flexShrink: 0, whiteSpace: "nowrap" }}
+            >
+              View full pricing page
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
-      <section className="py-[96px] px-6" style={{ background: "#050505" }}>
+      <section className="py-[96px] px-6" style={{ background: "#000" }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <PLabel>FAQ</PLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 52 }}>
@@ -368,8 +590,42 @@ export default function Lyrebird() {
             Techbee brings Lyrebird AI to healthcare organisations across the UAE and GCC. Our team handles onboarding, EMR integration, and ongoing support — so your clinicians can start saving time from day one.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => goToContact(navigate)} style={{ background: "#f5b800", color: "#000", fontWeight: 700, fontSize: 15, padding: "14px 32px", borderRadius: 8, border: "none", cursor: "pointer", transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+            <button
+              onClick={() => goToContact(navigate)}
+              style={{ background: "#f5b800", color: "#000", fontWeight: 700, fontSize: 15, padding: "14px 32px", borderRadius: 8, border: "none", cursor: "pointer", transition: "background 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+              onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}
+            >
               Request a Demo
+            </button>
+            {/* ── PRICING CTA — eye-catching button ── */}
+            <button
+              onClick={() => {
+                const el = document.getElementById("pricing")
+                if (el) el.scrollIntoView({ behavior: "smooth" })
+              }}
+              style={{
+                background: "linear-gradient(135deg, #f5b80018 0%, #f5b80008 100%)",
+                color: "#f5b800",
+                fontWeight: 700,
+                fontSize: 15,
+                padding: "14px 32px",
+                borderRadius: 8,
+                border: "1px solid #f5b80060",
+                cursor: "pointer",
+                transition: "all 0.2s",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#f5b80025"; e.currentTarget.style.borderColor = "#f5b800" }}
+              onMouseLeave={e => { e.currentTarget.style.background = "linear-gradient(135deg, #f5b80018 0%, #f5b80008 100%)"; e.currentTarget.style.borderColor = "#f5b80060" }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+              View Pricing
             </button>
             <a href="tel:042434882" style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", border: "1px solid #f5b80040" }}>
               Call +971 4 243 4882

@@ -172,52 +172,41 @@ const COMPARISON = [
   { metric: "Error rate", manual: "High — human typos, missed fields", camcard: "99.9% AI recognition accuracy" },
 ]
 
-const PRICING = [
-  {
-    tier: "Starter",
-    desc: "For small teams getting started with digital contact management.",
-    features: [
-      "Up to 5 team members",
-      "500 card scans/month",
-      "40+ language OCR",
-      "Google Contacts & Outlook sync",
-      "Basic deduplication",
-      "Export to CSV / vCard",
-    ],
-    highlight: false,
-  },
-  {
-    tier: "Business",
-    desc: "For growing teams who need CRM sync and AI-powered insights.",
-    features: [
-      "Up to 25 team members",
-      "Unlimited card scans",
-      "Salesforce, HubSpot & Zoho sync",
-      "AI Deep Intelligence",
-      "AI Notetaker (Zoom / video calls)",
-      "Email AI with 4 templates",
-      "Role-based access controls",
-      "Bulk scan mode",
-      "Digital business card creation",
-    ],
-    highlight: true,
-  },
-  {
-    tier: "Enterprise",
-    desc: "For large organisations needing custom workflows and API access.",
-    features: [
-      "Unlimited team members",
-      "Unlimited card scans",
-      "Custom CRM / ATS integration (REST API)",
-      "Advanced admin dashboard",
-      "SSO & SAML authentication",
-      "Priority support & SLA",
-      "Custom data retention policies",
-      "On-premise deployment option",
-      "Dedicated account manager",
-    ],
-    highlight: false,
-  },
+// ── Pricing plan data (real CamCard Business pricing) ─────────────────────────
+const PROFESSIONAL_FEATURES = [
+  "Read unlimited cards",
+  "High Accurate Proofreading (50 pieces/ID/month)",
+  "Card Management",
+  "Communication History",
+  "Tag Management",
+  "Administration & Role Permissions",
+  "Sharing",
+  "Tasks and Reminders",
+  "Security",
+  "Send group email (10,000 mails/month)",
+  "Import from Excel",
+  "Export cards as Excel",
+  "Export to Outlook & Google Contacts",
+  "Export to Salesforce & Sugar CRM",
+  "Integration via Web service API",
+]
+
+const PREMIUM_FEATURES = [
+  "Read unlimited cards",
+  "High Accurate Proofreading (20 pieces/ID/month)",
+  "Card Management",
+  "Communication History",
+  "Tag Management",
+  "Administration & Role Permissions",
+  "Sharing",
+  "Tasks and Reminders",
+  "Security",
+  "Send group email (5,000 mails/month)",
+  "Import from Excel",
+  "Export cards as Excel",
+  "Export to Outlook & Google Contacts",
+  "Export to Salesforce & Sugar CRM",
+  "Integration via Web service API",
 ]
 
 const FAQS = [
@@ -230,7 +219,6 @@ const FAQS = [
   { q: "How do we get started?", a: "Contact Techbee — the authorized CamCard Business partner for the UAE and GCC. Our team handles onboarding, CRM integration setup, and training so your team is scanning and syncing on day one." },
 ]
 
-// Responsive grid helper styles injected once
 const gridResponsiveStyle = `
   @media (max-width: 900px) {
     .grid-3 { grid-template-columns: 1fr 1fr !important; }
@@ -245,8 +233,21 @@ const gridResponsiveStyle = `
     .comparison-cell { padding: 10px 10px !important; }
     .use-case-card { padding: 28px 20px !important; flex-direction: column !important; gap: 24px !important; }
     .cta-inner { padding: 40px 24px !important; }
+    .pricing-grid { grid-template-columns: 1fr !important; }
   }
 `
+
+// ── Pricing check row ─────────────────────────────────────────────────────────
+function PricingCheckRow({ children, gold = false }) {
+  return (
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 9 }}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={gold ? "#f5b800" : "#3d9e6e"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.55 }}>{children}</span>
+    </div>
+  )
+}
 
 export default function CamCard() {
   const navigate = useNavigate()
@@ -267,7 +268,6 @@ export default function CamCard() {
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 180, background: "linear-gradient(to top, #000 0%, transparent 100%)" }}/>
         </div>
 
-        {/* FIX: reduced padding, added flexWrap so it wraps on small screens */}
         <div className="hero-inner" style={{ position: "relative", zIndex: 10, maxWidth: 1300, margin: "0 auto", padding: "140px 32px 80px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap", width: "100%", boxSizing: "border-box" }}>
           <div className="hero-text" style={{ flex: "0 0 52%", maxWidth: 640, minWidth: 280 }}>
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}
@@ -304,6 +304,15 @@ export default function CamCard() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                 Watch Demo
               </button>
+              {/* ── Pricing CTA ── */}
+              <button
+                onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
+                style={{ background: "transparent", color: "#aaa", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 24px", border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)"; e.currentTarget.style.color = "#f5b800" }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "#aaa" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                View Pricing
+              </button>
             </motion.div>
           </div>
 
@@ -326,33 +335,22 @@ export default function CamCard() {
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 52px", lineHeight: 1.7 }}>
             Watch how your team can go from card scan to CRM entry in under 2 seconds — at any event, in any language.
           </p>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
             style={{ position: "relative", borderRadius: 24, overflow: "hidden", border: "1px solid rgba(245,184,0,0.25)", boxShadow: "0 0 80px rgba(245,184,0,0.08), 0 40px 80px rgba(0,0,0,0.6)", background: "#0d0d0d" }}>
             <video
-              controls
-              playsInline
-              preload="auto"
+              controls playsInline preload="auto"
               style={{ width: "100%", display: "block", maxHeight: 600, objectFit: "contain", borderRadius: 24, background: "#000" }}
-              onPlay={() => setVideoPlaying(true)}
-              onPause={() => setVideoPlaying(false)}
+              onPlay={() => setVideoPlaying(true)} onPause={() => setVideoPlaying(false)}
             >
               <source src={VIDEO_DEMO} type="video/mp4" />
-              Your browser does not support the video tag.
             </video>
             <div style={{ position: "absolute", inset: 0, borderRadius: 24, pointerEvents: "none", background: "linear-gradient(135deg, rgba(245,184,0,0.06) 0%, transparent 50%, rgba(245,184,0,0.03) 100%)" }} />
           </motion.div>
-
           <div style={{ display: "flex", justifyContent: "center", gap: 32, marginTop: 28, flexWrap: "wrap" }}>
-            {[
-              { icon: "⚡", label: "2-second scan to CRM" },
-              { icon: "🌍", label: "40+ languages" },
-              { icon: "🔄", label: "Live CRM sync" },
-            ].map((item, i) => (
+            {[{ icon: "⚡", label: "2-second scan to CRM" }, { icon: "🌍", label: "40+ languages" }, { icon: "🔄", label: "Live CRM sync" }].map((item, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, color: "#888", fontSize: 13, fontWeight: 500 }}>
-                <span style={{ fontSize: 16 }}>{item.icon}</span>
-                {item.label}
+                <span style={{ fontSize: 16 }}>{item.icon}</span>{item.label}
               </div>
             ))}
           </div>
@@ -366,7 +364,6 @@ export default function CamCard() {
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 64, letterSpacing: "-0.01em" }}>
             From Scan to <span style={{ color: "#f5b800" }}>Faster Follow-Up</span>
           </h2>
-          {/* FIX: responsive grid via className */}
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {STEPS.map((step, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.12 }} whileHover={{ y: -4 }}
@@ -381,16 +378,10 @@ export default function CamCard() {
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.2 }}
             style={{ marginTop: 72, display: "flex", justifyContent: "center" }}>
             <div style={{ borderRadius: 20, overflow: "hidden", border: "1px solid rgba(245,184,0,0.18)", boxShadow: "0 0 60px rgba(245,184,0,0.06), 0 32px 64px rgba(0,0,0,0.5)", maxWidth: 720, width: "100%" }}>
-              <img
-                src={IMG_APP_SCREENS}
-                alt="CamCard Business — Card Holder and Management UI"
-                style={{ width: "100%", display: "block", objectFit: "cover" }}
-              />
+              <img src={IMG_APP_SCREENS} alt="CamCard Business App Screens" style={{ width: "100%", display: "block", objectFit: "cover" }} />
             </div>
           </motion.div>
           <p style={{ textAlign: "center", color: "#555", fontSize: 12, marginTop: 16, letterSpacing: "0.05em" }}>
@@ -407,7 +398,7 @@ export default function CamCard() {
             Everything Your Team Needs to <span style={{ color: "#f5b800" }}>Win More Customers</span>
           </h2>
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 560, margin: "0 auto 48px", lineHeight: 1.7 }}>
-            Know your customer the moment you scan their business card. Capture key conversations automatically and send smarter follow-ups in seconds.
+            Know your customer the moment you scan their business card.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center", marginBottom: 56 }}>
             {FEATURES.map(f => <Chip key={f}>{f}</Chip>)}
@@ -432,8 +423,8 @@ export default function CamCard() {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {[
-              { value: "99.9%", label: "AI Card Recognition", sub: "Scans any card in 40+ languages with near-perfect precision. No manual corrections needed." },
-              { value: "2s", label: "Avg. Scan-to-CRM Time", sub: "From point-and-shoot to CRM entry — faster than writing a single field by hand." },
+              { value: "99.9%", label: "AI Card Recognition", sub: "Scans any card in 40+ languages with near-perfect precision." },
+              { value: "2s", label: "Avg. Scan-to-CRM Time", sub: "From point-and-shoot to CRM entry — faster than writing a single field." },
               { value: "40+", label: "Languages Supported", sub: "Arabic, English, Chinese, Japanese, French, Spanish and 34+ more." },
             ].map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.1 }}
@@ -455,7 +446,7 @@ export default function CamCard() {
             Let AI Handle <span style={{ color: "#f5b800" }}>Every Detail</span>
           </h2>
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 56px", lineHeight: 1.7 }}>
-            From identifying high-value leads to drafting personalized follow-ups — CamCard AI works alongside your team at every step.
+            From identifying high-value leads to drafting personalized follow-ups.
           </p>
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {AI_CAPS.map((cap, i) => (
@@ -524,7 +515,7 @@ export default function CamCard() {
             Plugs Into <span style={{ color: "#f5b800" }}>Every CRM You Use</span>
           </h2>
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 540, margin: "0 auto 56px", lineHeight: 1.7 }}>
-            No messy CSV exports, no manual imports. CamCard Business pushes every scanned contact directly into the tools your team already relies on — in real time.
+            No messy CSV exports, no manual imports. CamCard Business pushes every scanned contact directly into the tools your team relies on.
           </p>
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
             {CRM_INTEGRATIONS.map((crm, i) => (
@@ -553,7 +544,6 @@ export default function CamCard() {
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 52px", lineHeight: 1.7 }}>
             Every minute your team spends typing contacts manually is a minute not spent closing deals.
           </p>
-          {/* FIX: scrollable wrapper on small screens */}
           <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
             <div className="comparison-table" style={{ border: "1px solid #1a1a1a", borderRadius: 16, overflow: "hidden", minWidth: 520 }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", background: "#0d0d0d", borderBottom: "1px solid #1a1a1a" }}>
@@ -585,19 +575,12 @@ export default function CamCard() {
             Collect More Leads,<br /><span style={{ color: "#f5b800" }}>Go Green with CamCard Business</span>
           </h2>
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 480, margin: "0 auto 56px", lineHeight: 1.7 }}>
-            Maximize your revenue while reducing paper waste — create, customize, and share your digital business card in minutes.
+            Maximize your revenue while reducing paper waste.
           </p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}
+          <motion.div initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}
             style={{ marginBottom: 56, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(245,184,0,0.18)", boxShadow: "0 0 60px rgba(245,184,0,0.07), 0 32px 64px rgba(0,0,0,0.5)" }}>
-            <img
-              src={IMG_MOBILE_BANNER}
-              alt="CamCard Business — Create, Customize & Share your Digital Business Card"
-              style={{ width: "100%", display: "block", objectFit: "cover" }}
-            />
+            <img src={IMG_MOBILE_BANNER} alt="CamCard Business Digital Card" style={{ width: "100%", display: "block", objectFit: "cover" }} />
           </motion.div>
-
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {DIGITAL_CARD.map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.1 }}
@@ -614,41 +597,102 @@ export default function CamCard() {
       </section>
 
       {/* ══ PRICING ═══════════════════════════════════════════════════════════ */}
-      <section style={{ padding: "100px 24px", background: "#000" }}>
+      <section id="pricing" style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <SLabel>PLANS</SLabel>
+          <SLabel>PLANS & PRICING</SLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
-            The Right Plan for <span style={{ color: "#f5b800" }}>Every Team Size</span>
+            A variety of solutions to meet<br /><span style={{ color: "#f5b800" }}>the needs of every enterprise</span>
           </h2>
-          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 480, margin: "0 auto 56px", lineHeight: 1.7 }}>
-            From solo sales reps to enterprise organisations — CamCard Business scales with your team. Contact Techbee for custom UAE pricing.
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 16px", lineHeight: 1.7 }}>
+            Both plans require a minimum of 10 users. Contact Techbee for UAE-specific pricing and volume discounts.
           </p>
-          {/* FIX: pricing uses its own class that collapses to 1 col on mobile */}
-          <div className="grid-pricing" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-            {PRICING.map((plan, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-                style={{ background: plan.highlight ? "rgba(245,184,0,0.05)" : "#0d0d0d", border: plan.highlight ? "1px solid rgba(245,184,0,0.5)" : "1px solid #1a1a1a", borderRadius: 20, padding: "36px 28px", position: "relative", boxShadow: plan.highlight ? "0 0 60px rgba(245,184,0,0.08)" : "none" }}>
-                {plan.highlight && (
-                  <div style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 10, fontWeight: 800, padding: "4px 16px", borderRadius: 50, letterSpacing: "0.12em", textTransform: "uppercase", whiteSpace: "nowrap" }}>Most Popular</div>
-                )}
-                <h3 style={{ color: plan.highlight ? "#f5b800" : "#fff", fontSize: 20, fontWeight: 800, marginBottom: 8 }}>{plan.tier}</h3>
-                <p style={{ color: "#666", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>{plan.desc}</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 32 }}>
-                  {plan.features.map(f => (
-                    <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}><polyline points="20 6 9 17 4 12"/></svg>
-                      <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
-                    </div>
-                  ))}
-                </div>
-                <button onClick={() => goToContact(navigate)}
-                  style={{ width: "100%", background: plan.highlight ? "#f5b800" : "transparent", color: plan.highlight ? "#000" : "#f5b800", border: plan.highlight ? "none" : "1px solid rgba(245,184,0,0.4)", borderRadius: 50, padding: "12px 0", fontSize: 14, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = plan.highlight ? "#ffc929" : "rgba(245,184,0,0.1)" }}
-                  onMouseLeave={e => { e.currentTarget.style.background = plan.highlight ? "#f5b800" : "transparent" }}>
-                  {plan.tier === "Enterprise" ? "Contact Us" : "Get Started"}
-                </button>
-              </motion.div>
-            ))}
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 56 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(245,184,0,0.07)", border: "1px solid rgba(245,184,0,0.2)", borderRadius: 50, padding: "8px 20px", fontSize: 13, color: "#f5b800", fontWeight: 600 }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Prices in USD · Minimum 10 users per plan
+            </div>
+          </div>
+
+          {/* Plan cards — 2 columns, real pricing */}
+          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24, maxWidth: 860, margin: "0 auto 40px" }}>
+
+            {/* PROFESSIONAL */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              style={{ background: "rgba(245,184,0,0.04)", border: "2px solid rgba(245,184,0,0.5)", borderRadius: 24, padding: "40px 36px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}
+            >
+              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 10, fontWeight: 800, padding: "4px 16px", borderRadius: 50, letterSpacing: "0.12em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+                MOST FEATURES
+              </div>
+              <p style={{ color: "#f5b800", fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 20 }}>Professional</p>
+              <div style={{ marginBottom: 6 }}>
+                <span style={{ color: "#888", fontSize: 14 }}>USD $</span>
+                <span style={{ color: "#f5b800", fontSize: "3.2rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.02em" }}>25</span>
+                <span style={{ color: "#888", fontSize: 14 }}> /user/month</span>
+              </div>
+              <p style={{ color: "#555", fontSize: 13, marginBottom: 24 }}>At least 10 users</p>
+              <button onClick={() => goToContact(navigate)}
+                style={{ background: "#f5b800", color: "#000", fontWeight: 800, fontSize: 15, padding: "13px", borderRadius: 50, border: "none", cursor: "pointer", marginBottom: 28, transition: "background 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+                onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+                Get Started — Professional
+              </button>
+              <div style={{ borderTop: "1px solid rgba(245,184,0,0.15)", paddingTop: 22 }}>
+                <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Professional Functional Rights</p>
+                {PROFESSIONAL_FEATURES.map(f => (
+                  <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 9 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}><polyline points="20 6 9 17 4 12"/></svg>
+                    <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* PREMIUM */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: 24, padding: "40px 36px", display: "flex", flexDirection: "column" }}
+            >
+              <p style={{ color: "#888", fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 20 }}>Premium</p>
+              <div style={{ marginBottom: 6 }}>
+                <span style={{ color: "#888", fontSize: 14 }}>USD $</span>
+                <span style={{ color: "#fff", fontSize: "3.2rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.02em" }}>21</span>
+                <span style={{ color: "#888", fontSize: 14 }}> /user/month</span>
+              </div>
+              <p style={{ color: "#555", fontSize: 13, marginBottom: 24 }}>At least 10 users</p>
+              <button onClick={() => goToContact(navigate)}
+                style={{ background: "transparent", color: "#f5b800", fontWeight: 800, fontSize: 15, padding: "12px", borderRadius: 50, border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", marginBottom: 28, transition: "all 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.1)"; e.currentTarget.style.borderColor = "#f5b800" }}
+                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
+                Get Started — Premium
+              </button>
+              <div style={{ borderTop: "1px solid #1c1c1c", paddingTop: 22 }}>
+                <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 14 }}>Premium Functional Rights</p>
+                {PREMIUM_FEATURES.map(f => (
+                  <div key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 9 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3d9e6e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}><polyline points="20 6 9 17 4 12"/></svg>
+                    <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+          </div>
+
+          {/* Key difference callout */}
+          <div style={{ maxWidth: 860, margin: "0 auto 0", background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 14, padding: "22px 28px", display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+            <p style={{ color: "#888", fontSize: 13, lineHeight: 1.7, flex: 1, minWidth: 240 }}>
+              <span style={{ color: "#f5b800", fontWeight: 700 }}>Key difference:</span> Professional includes 50 proofreads/ID/month and 10,000 group emails. Premium includes 20 proofreads and 5,000 emails — at a lower per-user cost.
+            </p>
+            <a
+              href="https://b.camcard.com/payment/price"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#f5b800", fontSize: 13, fontWeight: 700, textDecoration: "none", border: "1px solid rgba(245,184,0,0.35)", padding: "10px 20px", borderRadius: 50, flexShrink: 0, whiteSpace: "nowrap" }}
+            >
+              Official pricing page
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
           </div>
         </div>
       </section>
@@ -661,7 +705,7 @@ export default function CamCard() {
             Confidently Protect Team<br /><span style={{ color: "#f5b800" }}>and Customer Data</span>
           </h2>
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 520, margin: "0 auto 48px", lineHeight: 1.7 }}>
-            Keep your data safe with offline synchronization, on-device protection, and privacy programs that block unauthorized connections.
+            Keep your data safe with offline synchronization, on-device protection, and privacy programs.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center", marginBottom: 48 }}>
             {CERTS.map((cert, i) => (
@@ -674,7 +718,7 @@ export default function CamCard() {
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
             {[
               { icon: "🔒", title: "On-Device Encryption", desc: "All contact data and card images are encrypted directly on the device — never exposed in transit or at rest." },
-              { icon: "📵", title: "Offline Protection", desc: "Offline sync means your contact data never passes through unsecured public networks. It syncs only when you're ready." },
+              { icon: "📵", title: "Offline Protection", desc: "Offline sync means your contact data never passes through unsecured public networks." },
               { icon: "🛡️", title: "Privacy by Design", desc: "Privacy programs actively block unauthorized third-party connections from accessing your team's contact database." },
             ].map((p, i) => (
               <div key={i} style={{ background: "#0d0d0d", border: "1px solid #1a1a1a", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
@@ -704,8 +748,7 @@ export default function CamCard() {
                 </button>
                 <AnimatePresence>
                   {openFaq === i && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }}
-                      style={{ overflow: "hidden" }}>
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} style={{ overflow: "hidden" }}>
                       <div style={{ padding: "0 24px 20px", fontSize: 13.5, color: "#777", lineHeight: 1.75 }}>{faq.a}</div>
                     </motion.div>
                   )}
@@ -736,11 +779,13 @@ export default function CamCard() {
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                 Start Free Trial →
               </button>
-              <button onClick={() => goToContact(navigate)}
-                style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", transition: "all 0.2s" }}
+              <button
+                onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
+                style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
-                Get Started
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                View Pricing
               </button>
               <button onClick={() => navigate("/")}
                 style={{ background: "none", border: "none", color: "#888", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6, transition: "color 0.2s", padding: "14px 0" }}

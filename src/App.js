@@ -9,6 +9,10 @@ import Quote   from "./pages/Quote"
 import Pricing from "./pages/Pricing"
 import AISecurity from "./pages/AISecurity"
 import ProductPage from "./components/ProductPage"
+// ── Add this import at the top of App.js ─────────────────────────────────────
+import LyrebirdPricing from "./pages/LyrebirdPricing"
+import CamCardPricing from "./pages/CamCardPricing"
+
 
 // Placeholder components for new products
 const OnPremiseLLM = () => <ProductPage badge="NEW" headline="On-Premise LLM Deployment" sub="Deploy large language models on your own infrastructure for complete data privacy, compliance control, and customized AI solutions tailored to your enterprise needs." cta="Book a Demo →" bgImage={null} />
@@ -74,6 +78,11 @@ export default function App() {
         <Route path="/security"   element={<AISecurity />} />
         <Route path="/quote"      element={<Quote />} />
         <Route path="/pricing"    element={<Pricing />} />
+        
+      
+<Route path="/lyrebird/pricing" element={<LyrebirdPricing />} />
+<Route path="/camcard/pricing" element={<CamCardPricing />} />
+
       </Routes>
     </BrowserRouter>
   )
