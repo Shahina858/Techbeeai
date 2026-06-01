@@ -99,7 +99,7 @@ export default function Navbar({ logoSrc }) {
           })}
 
           {/* Pricing link */}
-          <a
+          {/* <a
             href="/pricing"
             className="relative flex flex-col items-center"
             style={{
@@ -114,7 +114,7 @@ export default function Navbar({ logoSrc }) {
             onMouseLeave={e => { e.currentTarget.style.color = "#cccccc" }}
           >
             Pricing
-          </a>
+          </a> */}
 
           {/* Request a Demo button */}
           <a
