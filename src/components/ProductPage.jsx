@@ -2,8 +2,6 @@ import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import Navbar from "./Navbar"
 
-const LOGO_IMG = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
-
 // ── Navigate to home contact section ─────────────────────────────────────────
 const goToContact = (navigate) => {
   navigate("/")
@@ -88,7 +86,7 @@ export default function ProductPage({ badge, headline, sub, cta, bgImage, heroIm
 
   return (
     <div className="bg-black text-white overflow-x-hidden" style={{ fontFamily: "'Inter', sans-serif" }}>
-      <Navbar logoSrc={LOGO_IMG} />
+      <Navbar />
 
       {/* ══ HERO — two-column when heroImg is provided ════════════════════════ */}
       {heroImg ? (

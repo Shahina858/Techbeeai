@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 
-const LOGO_IMG   = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
 const HERO_BG    = "https://framerusercontent.com/images/TglGme8G89i1DDRAZDRD0tqp90.jpg"
 const CARD_IMG   = "/1200x630wa.jpg.jpeg"
 
@@ -258,7 +257,7 @@ export default function CamCard() {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#000", color: "#fff", overflowX: "hidden", width: "100%" }}>
       <style>{gridResponsiveStyle}</style>
-      <Navbar logoSrc={LOGO_IMG} />
+      <Navbar />
 
       {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
       <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden" }}>

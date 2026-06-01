@@ -1,7 +1,7 @@
 ﻿import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 
-const LOGO_IMG = "./logo_llc_v3.png"
+const LOGO_IMG = "/AI_Logo__2_.png"
 
 export default function Navbar({ logoSrc }) {
   const location = useLocation()
@@ -48,18 +48,23 @@ export default function Navbar({ logoSrc }) {
     >
       <div
         className="w-full flex items-center justify-between"
-        style={{ padding: "0 40px", height: 90 }}
+        style={{ padding: "0 40px", height: 96 }}
       >
-        {/* ΓöÇΓöÇ LEFT: Logo ΓöÇΓöÇ */}
+        {/* ── LEFT: Logo ── */}
         <a href={`${basePath}#home`} className="shrink-0">
           <img
             src={logoSrc || LOGO_IMG}
-            alt="TechBee IT & Designs"
-            style={{ height: 45, width: "150px", objectFit: "contain" }}
+            alt="TechBee AI"
+            style={{
+              height: 64,
+              width: "auto",
+              maxWidth: 240,
+              objectFit: "contain",
+            }}
           />
         </a>
 
-        {/* ΓöÇΓöÇ RIGHT: Nav links + Button ΓöÇΓöÇ */}
+        {/* ── RIGHT: Nav links + Button ── */}
         <div className="hidden md:flex items-center" style={{ gap: 36 }}>
 
           {/* Nav links */}
@@ -145,7 +150,7 @@ export default function Navbar({ logoSrc }) {
           </a>
         </div>
 
-        {/* ΓöÇΓöÇ Mobile hamburger ΓöÇΓöÇ */}
+        {/* ── Mobile hamburger ── */}
         <button
           className="md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9"
           onClick={() => setMenuOpen(o => !o)}
@@ -168,7 +173,7 @@ export default function Navbar({ logoSrc }) {
         </button>
       </div>
 
-      {/* ΓöÇΓöÇ Mobile dropdown ΓöÇΓöÇ */}
+      {/* ── Mobile dropdown ── */}
       <div style={{
         maxHeight:  menuOpen ? 320 : 0,
         overflow:   "hidden",

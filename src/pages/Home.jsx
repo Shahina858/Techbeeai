@@ -65,7 +65,7 @@ function SEOHead() {
         "@type": "Organization",
         "name": "TechBee IT & Designs LLC",
         "url": "https://techbeeai.vercel.app",
-        "logo": "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png",
+        "logo": "/AI_Logo__2_.png",
         "description": "TechBee AI offers cutting-edge AI solutions for businesses in Dubai and the UAE.",
         "address": {
           "@type": "PostalAddress",
@@ -252,7 +252,7 @@ function WhySection() {
 }
 
 // ── Assets ────────────────────────────────────────────────────────────────────
-const LOGO_IMG      = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
+const LOGO_IMG      = "/AI_Logo__2_.png"
 const BRAIN_IMG     = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
 const SOLUTIONS_IMG = "https://framerusercontent.com/images/IbtmEAV90Ebw8hTtTH4Z8Kyuc74.png"
 

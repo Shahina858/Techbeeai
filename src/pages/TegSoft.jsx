@@ -1,10 +1,13 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 
 // ── Images ────────────────────────────────────────────────────────────────────
- const IMG_HERO = "/tegsoft_hero.png" ;
- const IMG_DASHBOARD = "/tegsoft_dashboard.png";
-  const IMG_OMNI = "/tegsoft_omni.png";// ── Navigate to home contact section ─────────────────────────────────────────
+const IMG_HERO      = "/tegsoft_hero.png"
+const IMG_DASHBOARD = "/tegsoft_dashboard.png"
+const IMG_OMNI      = "/tegsoft_omni.png"
+
+// ── Navigate to home contact section ─────────────────────────────────────────
 const goToContact = (navigate) => {
   navigate("/")
   setTimeout(() => {
@@ -61,8 +64,63 @@ const ChannelPill = ({ emoji, label }) => (
   </div>
 )
 
+// ── Pricing check/cross ───────────────────────────────────────────────────────
+const Check = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+)
+const Cross = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </svg>
+)
+
+// ── Comparison table data ─────────────────────────────────────────────────────
+const COMPARISON = [
+  { feature: "TegsoftCRM Features",                   voice: true,  omni: true,  ai: true  },
+  { feature: "Basic IVR features",                    voice: true,  omni: true,  ai: true  },
+  { feature: "Advanced IVR features",                 voice: true,  omni: true,  ai: true  },
+  { feature: "Creating Custom Surveys / NPS Scoring", voice: true,  omni: true,  ai: true  },
+  { feature: "APIs for 3rd Party Integrations",       voice: true,  omni: true,  ai: true  },
+  { feature: "Inbound Management",                    voice: true,  omni: true,  ai: true  },
+  { feature: "Free IP PBX User Licenses",             voice: "700", omni: "1500",ai: "—"   },
+  { feature: "Call routing via time conditions",      voice: true,  omni: true,  ai: true  },
+  { feature: "Conference room management",            voice: true,  omni: true,  ai: false },
+  { feature: "Call Detail Reports (CDR)",             voice: true,  omni: true,  ai: true  },
+  { feature: "Voice recording",                       voice: true,  omni: true,  ai: true  },
+  { feature: "Voice reports and analytics",           voice: true,  omni: true,  ai: true  },
+  { feature: "Voice mail",                            voice: true,  omni: true,  ai: false },
+  { feature: "Integrated Webphone",                   voice: true,  omni: true,  ai: true  },
+  { feature: "CTI Popup Functionality",               voice: true,  omni: true,  ai: false },
+  { feature: "Creating IVR trees",                    voice: true,  omni: true,  ai: true  },
+  { feature: "Queue Management",                      voice: true,  omni: true,  ai: true  },
+  { feature: "Agent Management",                      voice: true,  omni: true,  ai: false },
+  { feature: "Preview, Progressive & Predictive Dialer", voice: true, omni: true, ai: false },
+  { feature: "Webchat",                               voice: false, omni: true,  ai: false },
+  { feature: "WhatsApp Business integration",         voice: false, omni: true,  ai: true  },
+  { feature: "Facebook Messenger & Instagram DM",     voice: false, omni: true,  ai: true  },
+  { feature: "SMS channel",                           voice: false, omni: true,  ai: true  },
+  { feature: "Email channel",                         voice: false, omni: true,  ai: true  },
+  { feature: "Chat Reports",                          voice: false, omni: true,  ai: true  },
+  { feature: "AI Voice Agent",                        voice: false, omni: false, ai: true  },
+  { feature: "AI Text Agent",                         voice: false, omni: false, ai: true  },
+  { feature: "Detailed AI Reporting",                 voice: false, omni: false, ai: true  },
+]
+
+function PricingCell({ val }) {
+  if (val === true)  return <div style={{ display: "flex", justifyContent: "center" }}><Check /></div>
+  if (val === false) return <div style={{ display: "flex", justifyContent: "center" }}><Cross /></div>
+  return <span style={{ color: "#f5b800", fontWeight: 700, fontSize: 13 }}>{val}</span>
+}
+
 export default function Tegsoft() {
   const navigate = useNavigate()
+  const [billing, setBilling] = useState("monthly")
+  const [showAll, setShowAll] = useState(false)
+
+  const visibleRows = showAll ? COMPARISON : COMPARISON.slice(0, 10)
+
   return (
     <ProductPage
       badge="TEGSOFT AI AGENT — CONTACT CENTER"
@@ -70,6 +128,10 @@ export default function Tegsoft() {
       sub="Tegsoft is the leading cloud contact center solution in the UAE — empowering businesses to reach their customers from anywhere via a single unified interface that drives smarter, more valuable conversations."
       cta="Request a Demo"
       heroImg={IMG_HERO}
+      pricingCta={() => {
+        const el = document.getElementById("pricing")
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }}
     >
 
       {/* ── 3 PRODUCTS OVERVIEW ── */}
@@ -97,7 +159,6 @@ export default function Tegsoft() {
       <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
-            {/* Left: text */}
             <div>
               <PLabel>AGENT DESKTOP</PLabel>
               <h2 style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 700, color: "#fff", margin: "0 0 20px", lineHeight: 1.2 }}>
@@ -122,7 +183,6 @@ export default function Tegsoft() {
                 ))}
               </div>
             </div>
-            {/* Right: dashboard image */}
             <div style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: -20, borderRadius: 24, background: "radial-gradient(ellipse at center, rgba(245,184,0,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
               <img src={IMG_DASHBOARD} alt="Tegsoft Agent Desktop" style={{ width: "100%", borderRadius: 16, display: "block", position: "relative", zIndex: 1, boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)" }} />
@@ -147,16 +207,14 @@ export default function Tegsoft() {
         </div>
       </section>
 
-      {/* ── OMNICHANNEL — image + channels ── */}
+      {/* ── OMNICHANNEL ── */}
       <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
-            {/* Left: omni image */}
             <div style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: -24, borderRadius: 28, background: "radial-gradient(ellipse at center, rgba(245,184,0,0.07) 0%, transparent 70%)", pointerEvents: "none" }} />
               <img src={IMG_OMNI} alt="Unified Omnichannel Experience" style={{ width: "100%", borderRadius: 16, display: "block", position: "relative", zIndex: 1, boxShadow: "0 32px 80px rgba(0,0,0,0.5)" }} />
             </div>
-            {/* Right: text + channel pills */}
             <div>
               <PLabel>SUPPORTED CHANNELS</PLabel>
               <h2 style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 700, color: "#fff", margin: "0 0 20px", lineHeight: 1.2 }}>
@@ -206,7 +264,7 @@ export default function Tegsoft() {
             Built for <span style={{ color: "#f5b800" }}>Enterprise Scale</span>
           </h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "center" }}>
-            {["HD Inbound & Outbound Calling","Interactive Voice Response (IVR)","Real-Time Call Monitoring & Analytics","Call Recording & Click-to-Call","Customisable SLAs & Queue Management","AI-Powered Workflows & Chatbot","Omnichannel: Voice, WhatsApp, Email, Chat","CRM Integration (Salesforce, Zoho, HubSpot)","Cloud & On-Premise Deployment","Secure & Compliant Communications","50+ Language Support","Real-Time Sentiment Analysis","Caller Identification & Call History","Agent Activity Management & Reporting","Scale from 1 to 100+ Agents Instantly",].map(f => <Chip key={f}>{f}</Chip>)}
+            {["HD Inbound & Outbound Calling","Interactive Voice Response (IVR)","Real-Time Call Monitoring & Analytics","Call Recording & Click-to-Call","Customisable SLAs & Queue Management","AI-Powered Workflows & Chatbot","Omnichannel: Voice, WhatsApp, Email, Chat","CRM Integration (Salesforce, Zoho, HubSpot)","Cloud & On-Premise Deployment","Secure & Compliant Communications","50+ Language Support","Real-Time Sentiment Analysis","Caller Identification & Call History","Agent Activity Management & Reporting","Scale from 1 to 100+ Agents Instantly"].map(f => <Chip key={f}>{f}</Chip>)}
           </div>
         </div>
       </section>
@@ -272,6 +330,193 @@ export default function Tegsoft() {
         </div>
       </section>
 
+      {/* ══ PRICING ═══════════════════════════════════════════════════════════ */}
+      <section id="pricing" className="py-[96px] px-6" style={{ background: "#050505" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <PLabel>PRICING</PLabel>
+          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 14 }}>
+            Simple, Transparent <span style={{ color: "#f5b800" }}>Pricing</span>
+          </h2>
+          <p style={{ textAlign: "center", color: "#777", fontSize: 15, maxWidth: 560, margin: "0 auto 14px", lineHeight: 1.7 }}>
+            All plans start from 3 licenses. Pay monthly or annually. For ownership options, contact us.
+          </p>
+
+          {/* Billing toggle */}
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: 52 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 0, background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 10, padding: 4 }}>
+              {["monthly", "annually"].map(b => (
+                <button key={b} onClick={() => setBilling(b)}
+                  style={{
+                    background: billing === b ? "#f5b800" : "transparent",
+                    color: billing === b ? "#000" : "#666",
+                    border: "none", fontWeight: 700, fontSize: 13,
+                    padding: "9px 22px", borderRadius: 7, cursor: "pointer",
+                    transition: "all 0.18s", display: "flex", alignItems: "center", gap: 8,
+                  }}>
+                  {b === "monthly" ? "Monthly" : "Annually"}
+                  {b === "annually" && (
+                    <span style={{
+                      background: billing === "annually" ? "#00000025" : "#f5b80015",
+                      color: billing === "annually" ? "#000" : "#f5b800",
+                      fontSize: 10, fontWeight: 800, padding: "2px 7px", borderRadius: 20,
+                    }}>SAVE</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Plan cards — 3 columns */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 32 }}>
+
+            {/* VOICECHANNEL */}
+            <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 16, padding: "32px 26px", display: "flex", flexDirection: "column" }}>
+              <div style={{ fontSize: 28, marginBottom: 12 }}>📞</div>
+              <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>VoiceChannel</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Voice</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 20, minHeight: 40 }}>Customer Services & Tele-Sales Teams</p>
+              <div style={{ marginBottom: 4 }}>
+                <span style={{ color: "#fff", fontSize: "2.2rem", fontWeight: 800 }}>$69</span>
+                <span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>/ agent / month</span>
+              </div>
+              <p style={{ color: "#555", fontSize: 12, marginBottom: 22 }}>
+                {billing === "annually" ? "Billed annually" : "Billed monthly"}
+              </p>
+              <a href="https://www.tegsoftcloud.com/Tobe/app/ApplicationServlet?login=cup_signUp&" target="_blank" rel="noopener noreferrer"
+                style={{ display: "block", textAlign: "center", background: "transparent", color: "#ccc", border: "1px solid #2a2a2a", fontWeight: 700, fontSize: 14, padding: "12px", borderRadius: 8, textDecoration: "none", marginBottom: 24, transition: "all 0.18s" }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "#555"; e.currentTarget.style.color = "#fff" }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "#2a2a2a"; e.currentTarget.style.color = "#ccc" }}>
+                Get Started
+              </a>
+              <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 16 }} />
+              <p style={{ color: "#555", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>Includes</p>
+              {["Inbound Call Management","Advanced IVR","Preview, Progressive & Predictive Dialer","Real-time monitoring panel","Embedded Webphone & Integrated CRM","Voice Recording & Voicemail","VPOS – Credit Card Payment"].map(f => (
+                <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
+                  <Check />
+                  <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* OMNICHANNEL — FEATURED */}
+            <div style={{ background: "#0f0f0f", border: "2px solid #f5b800", borderRadius: 16, padding: "32px 26px", display: "flex", flexDirection: "column", position: "relative" }}>
+              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>
+                MOST POPULAR
+              </div>
+              <div style={{ fontSize: 28, marginBottom: 12 }}>🌐</div>
+              <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>OmniChannel</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Omni</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 20, minHeight: 40 }}>360° Customer Experience — All Channels</p>
+              <div style={{ marginBottom: 4 }}>
+                <span style={{ color: "#f5b800", fontSize: "2.2rem", fontWeight: 800 }}>$99</span>
+                <span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>/ agent / month</span>
+              </div>
+              <p style={{ color: "#555", fontSize: 12, marginBottom: 22 }}>
+                {billing === "annually" ? "Billed annually" : "Billed monthly"}
+              </p>
+              <a href="https://www.tegsoftcloud.com/Tobe/app/ApplicationServlet?login=cup_signUp&" target="_blank" rel="noopener noreferrer"
+                style={{ display: "block", textAlign: "center", background: "#f5b800", color: "#000", border: "none", fontWeight: 800, fontSize: 14, padding: "13px", borderRadius: 8, textDecoration: "none", marginBottom: 24, transition: "background 0.18s" }}
+                onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+                onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+                Get Started
+              </a>
+              <hr style={{ border: "none", borderTop: "1px solid #2a2a2a", marginBottom: 16 }} />
+              <p style={{ color: "#555", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>Everything in Voice, plus</p>
+              {["Webchat","WhatsApp Business integration","Facebook Messenger & Instagram DM","SMS channel","Email channel","Chat Reports"].map(f => (
+                <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
+                  <Check />
+                  <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* AICHANNEL */}
+            <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 16, padding: "32px 26px", display: "flex", flexDirection: "column" }}>
+              <div style={{ fontSize: 28, marginBottom: 12 }}>🤖</div>
+              <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>AIChannel</p>
+              <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>AI</h3>
+              <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 20, minHeight: 40 }}>AI-Powered Communication Experience</p>
+              <div style={{ marginBottom: 4 }}>
+                <span style={{ color: "#fff", fontSize: "1.8rem", fontWeight: 800 }}>Contact Sales</span>
+              </div>
+              <p style={{ color: "#555", fontSize: 12, marginBottom: 22 }}>Custom pricing per agent</p>
+              <button onClick={() => goToContact(navigate)}
+                style={{ display: "block", textAlign: "center", background: "transparent", color: "#f5b800", border: "1px solid rgba(245,184,0,0.4)", fontWeight: 700, fontSize: 14, padding: "12px", borderRadius: 8, cursor: "pointer", marginBottom: 24, transition: "all 0.18s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
+                onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
+                Contact Us
+              </button>
+              <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 16 }} />
+              <p style={{ color: "#555", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>Includes</p>
+              {["AI Voice Agent (inbound & outbound)","AI Text Agent (chat, WhatsApp, SMS, email)","Natural Language Processing","24/7 availability — no queues","Seamless human handoff with context","Detailed AI Reporting"].map(f => (
+                <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
+                  <Check />
+                  <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Min license note */}
+          <div style={{ background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 12, padding: "18px 24px", display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", marginBottom: 56 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p style={{ color: "#777", fontSize: 13, lineHeight: 1.65, flex: 1, minWidth: 240 }}>
+              All plans start from <span style={{ color: "#ddd" }}>3 licenses minimum</span>. For ownership / on-premise options, contact Techbee — your authorized Tegsoft partner for the UAE and GCC.
+            </p>
+            <a href="https://tegsoft.com/pricing/" target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#f5b800", fontSize: 13, fontWeight: 700, textDecoration: "none", border: "1px solid #f5b80040", padding: "10px 20px", borderRadius: 8, flexShrink: 0, whiteSpace: "nowrap" }}>
+              Official pricing page
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+
+          {/* Comparison table */}
+          <PLabel>PLAN COMPARISON</PLabel>
+          <h3 style={{ textAlign: "center", fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 700, color: "#fff", marginBottom: 32 }}>
+            Feature <span style={{ color: "#f5b800" }}>Breakdown</span>
+          </h3>
+          <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+            <div style={{ border: "1px solid #1a1a1a", borderRadius: 14, overflow: "hidden", minWidth: 560 }}>
+              {/* Header */}
+              <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", background: "#0d0d0d", borderBottom: "1px solid #1a1a1a" }}>
+                <div style={{ padding: "14px 20px", color: "#444", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Feature</div>
+                <div style={{ padding: "14px 16px", color: "#888", fontSize: 11, fontWeight: 700, textAlign: "center", borderLeft: "1px solid #1a1a1a" }}>📞 Voice</div>
+                <div style={{ padding: "14px 16px", color: "#f5b800", fontSize: 11, fontWeight: 700, textAlign: "center", borderLeft: "1px solid #1a1a1a" }}>🌐 Omni</div>
+                <div style={{ padding: "14px 16px", color: "#888", fontSize: 11, fontWeight: 700, textAlign: "center", borderLeft: "1px solid #1a1a1a" }}>🤖 AI</div>
+              </div>
+              {visibleRows.map((row, i) => (
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", borderBottom: i < visibleRows.length - 1 ? "1px solid #111" : "none", background: i % 2 === 0 ? "#000" : "#060606" }}>
+                  <div style={{ padding: "13px 20px", color: "#aaa", fontSize: 13 }}>{row.feature}</div>
+                  <div style={{ padding: "13px 16px", borderLeft: "1px solid #111", display: "flex", justifyContent: "center", alignItems: "center" }}><PricingCell val={row.voice} /></div>
+                  <div style={{ padding: "13px 16px", borderLeft: "1px solid #111", display: "flex", justifyContent: "center", alignItems: "center" }}><PricingCell val={row.omni} /></div>
+                  <div style={{ padding: "13px 16px", borderLeft: "1px solid #111", display: "flex", justifyContent: "center", alignItems: "center" }}><PricingCell val={row.ai} /></div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Show more/less */}
+          {!showAll && (
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              <button onClick={() => setShowAll(true)}
+                style={{ background: "transparent", color: "#f5b800", border: "1px solid rgba(245,184,0,0.35)", fontWeight: 600, fontSize: 13, padding: "10px 24px", borderRadius: 50, cursor: "pointer", transition: "all 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.background = "rgba(245,184,0,0.08)"}
+                onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+                Show all {COMPARISON.length} features ↓
+              </button>
+            </div>
+          )}
+          {showAll && (
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              <button onClick={() => setShowAll(false)}
+                style={{ background: "transparent", color: "#666", border: "1px solid #222", fontWeight: 600, fontSize: 13, padding: "10px 24px", borderRadius: 50, cursor: "pointer" }}>
+                Show less ↑
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* ── DEPLOYMENT OPTIONS ── */}
       <section className="py-[96px] px-6" style={{ background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -314,7 +559,7 @@ export default function Tegsoft() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 16 }}>
             {[
               { q: "What is the difference between purchasing and cloud payment?", a: "Purchasing gives you full ownership of the software with a one-time license fee, while cloud payment is a monthly subscription model with no upfront costs." },
-              { q: "What is the difference on on-site rental and cloud?", a: "On-site rental involves hosting the system on your own servers, giving you full control. Cloud means we host the system and you access it via the internet." },
+              { q: "What is the difference between on-site rental and cloud?", a: "On-site rental involves hosting the system on your own servers, giving you full control. Cloud means we host the system and you access it via the internet." },
               { q: "Will I have to pay any additional fees after making a purchase?", a: "The initial quote includes all major costs. Optional add-ons like additional training, custom integrations, or extra storage may incur additional fees." },
               { q: "How does the update system work?", a: "Cloud customers receive automatic updates at no extra cost. On-premise customers can choose when to apply updates based on their release schedule." },
               { q: "Can we use Tegsoft with our own software?", a: "Yes! Tegsoft offers deep integrations with Salesforce, HubSpot, Zoho, SAP, Zendesk, and 100+ other business tools." },
@@ -357,8 +602,19 @@ export default function Tegsoft() {
             Join leading businesses in the UAE that trust Tegsoft for their contact center needs. Get a personalized demo from our team.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <button onClick={() => goToContact(navigate)} style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, padding: "14px 40px", borderRadius: 50, border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.4)", transition: "background 0.2s" }} onMouseEnter={e => e.currentTarget.style.background = "#ffc929"} onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+            <button onClick={() => goToContact(navigate)}
+              style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, padding: "14px 40px", borderRadius: 50, border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.4)", transition: "background 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+              onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
               Request a Demo
+            </button>
+            <button
+              onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
+              style={{ background: "transparent", color: "#f5b800", fontSize: 15, fontWeight: 700, padding: "13px 32px", borderRadius: 50, border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              View Pricing
             </button>
           </div>
           <div style={{ marginTop: 48, color: "#666", fontSize: 13 }}>
