@@ -13,6 +13,10 @@ import ProductPage from "./components/ProductPage"
 import LyrebirdPricing from "./pages/LyrebirdPricing"
 import CamCardPricing from "./pages/CamCardPricing"
 import AboutUs from "./pages/AboutUs"
+import TermsAndConditions from "./pages/TermsAndConditions"
+import PrivacyPolicy from "./pages/PrivacyPolicy"
+
+
 
 
 
@@ -86,6 +90,8 @@ export default function App() {
 <Route path="/lyrebird/pricing" element={<LyrebirdPricing />} />
 <Route path="/camcard/pricing" element={<CamCardPricing />} />
 <Route path="/about" element={<AboutUs />} />
+<Route path="/terms" element={<TermsAndConditions />} />
+<Route path="/privacy" element={<PrivacyPolicy />} />
 
       </Routes>
     </BrowserRouter>

@@ -792,7 +792,7 @@ const handleSubmit = async () => {
               </div>
               <div>
                 <h3 className="text-white text-[16px] font-semibold mb-6 pb-2 border-b border-[#f5b800] inline-block">Legal</h3>
-                <div className="mt-6 space-y-4">{["Privacy Policy","Terms of service","Cookie Policy","Security"].map(l => <p key={l} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{l}</p>)}</div>
+                <div className="mt-6 space-y-4">{[<p className="..." onClick={() => navigate("/privacy")}>Privacy Policy</p>,<p className="..." onClick={() => navigate("/terms")}>Terms of service</p>,"Cookie Policy","Security"].map(l => <p key={l} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{l}</p>)}</div>
               </div>
             </div>
           </div>
