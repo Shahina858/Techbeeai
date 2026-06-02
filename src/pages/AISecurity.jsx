@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 
-const LOGO_IMG = "https://framerusercontent.com/images/lyszrRNqAQlPxY5yLXK4YieTqM.png"
+const LOGO_IMG =  "/TechBee_AI_Logo_Modified.png"
 
 // ── Images ────────────────────────────────────────────────────────────────────
 const IMG_CHECKPOINT_PLATFORM  = "/checkpoint_platform.jpeg"

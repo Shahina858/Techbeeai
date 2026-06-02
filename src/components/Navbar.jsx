@@ -1,7 +1,9 @@
 ﻿import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 
-const LOGO_IMG = "/AI_Logo__2_.png"
+const LOGO_IMG = "/TechBee_AI_Logo_Modified.png"
+
+const PRODUCT_ROUTES = ["/idp", "/lyrebird", "/tegsoft", "/security", "/camcard", "/quote"]
 
 export default function Navbar({ logoSrc }) {
   const location = useLocation()
@@ -12,6 +14,12 @@ export default function Navbar({ logoSrc }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
+    if (PRODUCT_ROUTES.includes(location.pathname)) {
+      setActive("products")
+      setScrolled(true)
+      return
+    }
+
     const sections = document.querySelectorAll("section[id]")
     const onScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -25,7 +33,7 @@ export default function Navbar({ logoSrc }) {
     window.addEventListener("scroll", onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+  }, [location.pathname])
 
   const NAV_LINKS = [
     { id: "home",      label: "Home"        },
@@ -50,30 +58,24 @@ export default function Navbar({ logoSrc }) {
         className="w-full flex items-center justify-between"
         style={{ padding: "0 40px", height: 96 }}
       >
-        {/* ── LEFT: Logo ── */}
-        <a href={`${basePath}#home`} className="shrink-0">
+        {/* LEFT: Logo */}
+        <a href={basePath + "#home"} className="shrink-0">
           <img
             src={logoSrc || LOGO_IMG}
             alt="TechBee AI"
-            style={{
-              height: 64,
-              width: "auto",
-              maxWidth: 240,
-              objectFit: "contain",
-            }}
+            style={{ height: 64, width: "auto", maxWidth: 240, objectFit: "contain" }}
           />
         </a>
 
-        {/* ── RIGHT: Nav links + Button ── */}
+        {/* RIGHT: Nav links + Button */}
         <div className="hidden md:flex items-center" style={{ gap: 36 }}>
 
-          {/* Nav links */}
           {NAV_LINKS.map(({ id, label }) => {
             const isActive = active === id
             return (
               <a
                 key={id}
-                href={`${basePath}#${id}`}
+                href={basePath + "#" + id}
                 className="relative flex flex-col items-center"
                 style={{
                   color:          isActive ? "#f5b800" : "#cccccc",
@@ -103,27 +105,9 @@ export default function Navbar({ logoSrc }) {
             )
           })}
 
-          {/* Pricing link */}
-          {/* <a
-            href="/pricing"
-            className="relative flex flex-col items-center"
-            style={{
-              color:          "#cccccc",
-              fontSize:       15,
-              fontWeight:     400,
-              textDecoration: "none",
-              paddingBottom:  6,
-              transition:     "color 0.2s",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.color = "#ffffff" }}
-            onMouseLeave={e => { e.currentTarget.style.color = "#cccccc" }}
-          >
-            Pricing
-          </a> */}
-
           {/* Request a Demo button */}
           <a
-            href={`${basePath}#contact`}
+            href={basePath + "#contact"}
             style={{
               background:     "#f5b800",
               color:          "#000000",
@@ -150,7 +134,7 @@ export default function Navbar({ logoSrc }) {
           </a>
         </div>
 
-        {/* ── Mobile hamburger ── */}
+        {/* Mobile hamburger */}
         <button
           className="md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9"
           onClick={() => setMenuOpen(o => !o)}
@@ -173,7 +157,7 @@ export default function Navbar({ logoSrc }) {
         </button>
       </div>
 
-      {/* ── Mobile dropdown ── */}
+      {/* Mobile dropdown */}
       <div style={{
         maxHeight:  menuOpen ? 320 : 0,
         overflow:   "hidden",
@@ -183,7 +167,10 @@ export default function Navbar({ logoSrc }) {
       }}>
         <div style={{ display: "flex", flexDirection: "column", padding: "16px 24px", gap: 20 }}>
           {NAV_LINKS.map(({ id, label }) => (
-            <a key={id} href={`${basePath}#${id}`} onClick={() => setMenuOpen(false)}
+            <a
+              key={id}
+              href={basePath + "#" + id}
+              onClick={() => setMenuOpen(false)}
               style={{
                 color:          active === id ? "#f5b800" : "#aaaaaa",
                 fontSize:       14,
@@ -194,19 +181,9 @@ export default function Navbar({ logoSrc }) {
               {label}
             </a>
           ))}
-          <a href="/pricing" onClick={() => setMenuOpen(false)}
-            style={{
-              color:          "#aaaaaa",
-              fontSize:       14,
-              fontWeight:     400,
-              textDecoration: "none",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.color = "#f5b800" }}
-            onMouseLeave={e => { e.currentTarget.style.color = "#aaaaaa" }}
-          >
-            Pricing
-          </a>
-          <a href={`${basePath}#contact`} onClick={() => setMenuOpen(false)}
+          <a
+            href={basePath + "#contact"}
+            onClick={() => setMenuOpen(false)}
             style={{
               background:     "#f5b800",
               color:          "#000",

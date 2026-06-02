@@ -131,16 +131,22 @@ export default function Lyrebird() {
 
   return (
    <ProductPage
-    badge="LYREBIRD AI — MEDICAL AI SCRIBE"
-   headline={<>Clinical Documentation.<br /><span style={{ color: "#f5b800" }}>Done in Seconds.</span></>}
-    sub="Australia's most deeply integrated AI Scribe. Lyrebird AI listens to patient consultations, transcribes speech in real time, and generates structured clinical notes automatically — saving clinicians up to 3 hours every single day."
-    cta="Request a Demo"
-    heroImg={HERO_IMG}
-    pricingCta={() => {
-       const el = document.getElementById("pricing")
-       if (el) el.scrollIntoView({ behavior: "smooth" })
-     }}
-  >
+      badge="LYREBIRD AI — MEDICAL AI SCRIBE"
+      headline={<>Clinical Documentation.<br /><span style={{ color: "#f5b800" }}>Done in Seconds.</span></>}
+      sub="Australia's most deeply integrated AI Scribe. Lyrebird AI listens to patient consultations, transcribes speech in real time, and generates structured clinical notes automatically — saving clinicians up to 3 hours every single day."
+      cta="Request a Demo"
+      heroImg={HERO_IMG}
+      demoVideoSrc="/Short_Lyrebird_Demonstration__4_min_.mp4"
+      heroStats={[
+    { n: "80%", l: "less documentation time" },
+    { n: "2–3h", l: "saved per day" },
+    { n: "50+",  l: "languages" },
+  ]}
+      pricingCta={() => {
+        const el = document.getElementById("pricing")
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }}
+    >
 
 
       {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
@@ -627,8 +633,8 @@ export default function Lyrebird() {
               </svg>
               View Pricing
             </button>
-            <a href="tel:042434882" style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", border: "1px solid #f5b80040" }}>
-              Call +971 4 243 4882
+            <a href="tel:+971564116174" style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", border: "1px solid #f5b80040" }}>
+              Call +971 56 411 6174
             </a>
           </div>
           <p style={{ color: "#444", fontSize: 13, marginTop: 28 }}>

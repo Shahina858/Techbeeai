@@ -307,9 +307,9 @@ export default function CamCardPricing() {
           >
             Start Free Trial →
           </button>
-          <a href="tel:042434882"
+          <a href="tel:+971564116174"
             style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 50, textDecoration: "none", border: "1px solid rgba(245,184,0,0.4)" }}>
-            Call +971 4 243 4882
+            Call +971 56 411 6174
           </a>
         </div>
         <p style={{ color: "#333", fontSize: 13, marginTop: 28 }}>

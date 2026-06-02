@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
@@ -8,7 +8,8 @@ const CARD_IMG   = "/1200x630wa.jpg.jpeg"
 
 const IMG_MOBILE_BANNER  = "/mobile_banner-removebg-preview.png"
 const IMG_APP_SCREENS    = "/app_screen_clean.jpeg"
-const VIDEO_DEMO         = "/14ge.76jde8k3d.d87da863ee3c6fb04fd67be2b68207d1.mp4"
+const VIDEO_DEMO         = "/14ge.76jde8k3d.d87da863ee3c6fb04fd67be2b68207d1.mp4"  // inline section
+const VIDEO_MODAL        = "/WhatsApp Video 2026-06-02 at 11.53.17 AM.mp4"              // Watch Demo button modal
 
 const goToContact = (navigate) => {
   navigate("/")
@@ -28,6 +29,80 @@ const Chip = ({ children }) => (
     {children}
   </div>
 )
+
+// ── Video Modal ───────────────────────────────────────────────────────────────
+function VideoModal({ src, onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose() }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [onClose])
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        onClick={onClose}
+        style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          background: "rgba(0,0,0,0.92)",
+          backdropFilter: "blur(12px)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: 24,
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.92, y: 20 }}
+          transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+          onClick={e => e.stopPropagation()}
+          style={{
+            position: "relative", width: "100%", maxWidth: 900,
+            borderRadius: 20, overflow: "hidden",
+            border: "1px solid rgba(245,184,0,0.25)",
+            boxShadow: "0 40px 100px rgba(0,0,0,0.8), 0 0 60px rgba(245,184,0,0.08)",
+            background: "#000",
+          }}
+        >
+          {/* Header bar */}
+          <div style={{
+            background: "#0a0a0a",
+            borderBottom: "1px solid rgba(245,184,0,0.15)",
+            padding: "12px 20px",
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#f5b800" }} />
+              <span style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em" }}>CAMCARD BUSINESS — DEMO</span>
+            </div>
+            <button
+              onClick={onClose}
+              style={{
+                width: 30, height: 30, borderRadius: "50%",
+                background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)",
+                color: "#fff", fontSize: 16, cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}
+              aria-label="Close video"
+            >✕</button>
+          </div>
+
+          <video
+            src={src}
+            controls
+            autoPlay
+            playsInline
+            style={{ width: "100%", display: "block", maxHeight: "80vh", background: "#000" }}
+          />
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  )
+}
 
 const STEPS = [
   {
@@ -171,7 +246,6 @@ const COMPARISON = [
   { metric: "Error rate", manual: "High — human typos, missed fields", camcard: "99.9% AI recognition accuracy" },
 ]
 
-// ── Pricing plan data (real CamCard Business pricing) ─────────────────────────
 const PROFESSIONAL_FEATURES = [
   "Read unlimited cards",
   "High Accurate Proofreading (50 pieces/ID/month)",
@@ -236,28 +310,23 @@ const gridResponsiveStyle = `
   }
 `
 
-// ── Pricing check row ─────────────────────────────────────────────────────────
-function PricingCheckRow({ children, gold = false }) {
-  return (
-    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 9 }}>
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={gold ? "#f5b800" : "#3d9e6e"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
-      <span style={{ color: "#bbb", fontSize: 13, lineHeight: 1.55 }}>{children}</span>
-    </div>
-  )
-}
-
 export default function CamCard() {
   const navigate = useNavigate()
   const [activeCase, setActiveCase] = useState(0)
   const [openFaq, setOpenFaq] = useState(null)
   const [videoPlaying, setVideoPlaying] = useState(false)
+  // ── NEW: modal state ──────────────────────────────────────────────────────
+  const [videoModalOpen, setVideoModalOpen] = useState(false)
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#000", color: "#fff", overflowX: "hidden", width: "100%" }}>
       <style>{gridResponsiveStyle}</style>
       <Navbar />
+
+      {/* ── Video Modal — opens when hero Watch Demo is clicked ── */}
+      {videoModalOpen && (
+        <VideoModal src={VIDEO_MODAL} onClose={() => setVideoModalOpen(false)} />
+      )}
 
       {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
       <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden" }}>
@@ -295,14 +364,17 @@ export default function CamCard() {
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
                 Start Free Trial
               </button>
+
+              {/* ── Watch Demo — now opens modal ── */}
               <button
-                onClick={() => { const el = document.getElementById("demo-video"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
+                onClick={() => setVideoModalOpen(true)}
                 style={{ background: "transparent", color: "#f5b800", fontSize: 15, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.5)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.5)" }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                 Watch Demo
               </button>
+
               {/* ── Pricing CTA ── */}
               <button
                 onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
@@ -324,7 +396,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ VIDEO DEMO ════════════════════════════════════════════════════════ */}
+      {/* ══ VIDEO DEMO — inline section (unchanged) ═══════════════════════════ */}
       <section id="demo-video" style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>WATCH IT IN ACTION</SLabel>
@@ -612,7 +684,6 @@ export default function CamCard() {
             </div>
           </div>
 
-          {/* Plan cards — 2 columns, real pricing */}
           <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24, maxWidth: 860, margin: "0 auto 40px" }}>
 
             {/* PROFESSIONAL */}
@@ -678,7 +749,6 @@ export default function CamCard() {
 
           </div>
 
-          {/* Key difference callout */}
           <div style={{ maxWidth: 860, margin: "0 auto 0", background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 14, padding: "22px 28px", display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
             <p style={{ color: "#888", fontSize: 13, lineHeight: 1.7, flex: 1, minWidth: 240 }}>
               <span style={{ color: "#f5b800", fontWeight: 700 }}>Key difference:</span> Professional includes 50 proofreads/ID/month and 10,000 group emails. Premium includes 20 proofreads and 5,000 emails — at a lower per-user cost.

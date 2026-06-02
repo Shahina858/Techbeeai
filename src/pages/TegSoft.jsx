@@ -122,17 +122,20 @@ export default function Tegsoft() {
   const visibleRows = showAll ? COMPARISON : COMPARISON.slice(0, 10)
 
   return (
-    <ProductPage
-      badge="TEGSOFT AI AGENT — CONTACT CENTER"
-      headline={<>Automate Customer Support.<br /><span style={{ color: "#f5b800" }}>Delight Every Customer.</span></>}
-      sub="Tegsoft is the leading cloud contact center solution in the UAE — empowering businesses to reach their customers from anywhere via a single unified interface that drives smarter, more valuable conversations."
-      cta="Request a Demo"
-      heroImg={IMG_HERO}
-      pricingCta={() => {
-        const el = document.getElementById("pricing")
-        if (el) el.scrollIntoView({ behavior: "smooth" })
-      }}
-    >
+  
+  <ProductPage
+    badge="TEGSOFT AI AGENT — CONTACT CENTER"
+    headline={<>Automate Customer Support.<br /><span style={{ color: "#f5b800" }}>Delight Every Customer.</span></>}
+    sub="Tegsoft is the leading cloud contact center solution in the UAE — empowering businesses to reach their customers from anywhere via a single unified interface that drives smarter, more valuable conversations."
+    cta="Request a Demo"
+    heroImg={IMG_HERO}
+    demoVideoSrc="/tegsoft_demo.mp4"
+    pricingCta={() => {
+      const el = document.getElementById("pricing")
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    }}
+  >
+    
 
       {/* ── 3 PRODUCTS OVERVIEW ── */}
       <section className="py-[96px] px-6" style={{ background: "#000" }}>

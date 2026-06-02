@@ -356,7 +356,7 @@ export default function LyrebirdPricing() {
             Start free trial
           </a>
           <a
-            href="tel:042434882"
+            href="tel:+971564116174"
             style={{ background: "transparent", color: "#f5b800", fontWeight: 600, fontSize: 15, padding: "14px 32px", borderRadius: 8, textDecoration: "none", border: "1px solid #f5b80040" }}
           >
             Call +971 4 243 4882

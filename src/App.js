@@ -12,6 +12,8 @@ import ProductPage from "./components/ProductPage"
 // ── Add this import at the top of App.js ─────────────────────────────────────
 import LyrebirdPricing from "./pages/LyrebirdPricing"
 import CamCardPricing from "./pages/CamCardPricing"
+import AboutUs from "./pages/AboutUs"
+
 
 
 // Placeholder components for new products
@@ -79,9 +81,11 @@ export default function App() {
         <Route path="/quote"      element={<Quote />} />
         <Route path="/pricing"    element={<Pricing />} />
         
+        
       
 <Route path="/lyrebird/pricing" element={<LyrebirdPricing />} />
 <Route path="/camcard/pricing" element={<CamCardPricing />} />
+<Route path="/about" element={<AboutUs />} />
 
       </Routes>
     </BrowserRouter>

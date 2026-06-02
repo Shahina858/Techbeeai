@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Navbar from "../components/Navbar"
 import BrainBackground from "../components/BrainBackground"
 import MouseGlow from "../components/MouseGlow"
+import emailjs from "@emailjs/browser"
 
 // ── SEO Head Component ────────────────────────────────────────────────────────
 function SEOHead() {
@@ -65,7 +66,7 @@ function SEOHead() {
         "@type": "Organization",
         "name": "TechBee IT & Designs LLC",
         "url": "https://techbeeai.vercel.app",
-        "logo": "/AI_Logo__2_.png",
+        "logo": "/TechBee_AI_Logo_Modified.png",
         "description": "TechBee AI offers cutting-edge AI solutions for businesses in Dubai and the UAE.",
         "address": {
           "@type": "PostalAddress",
@@ -252,7 +253,7 @@ function WhySection() {
 }
 
 // ── Assets ────────────────────────────────────────────────────────────────────
-const LOGO_IMG      = "/AI_Logo__2_.png"
+const LOGO_IMG      = "/TechBee_AI_Logo_Modified.png"
 const BRAIN_IMG     = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
 const SOLUTIONS_IMG = "https://framerusercontent.com/images/IbtmEAV90Ebw8hTtTH4Z8Kyuc74.png"
 
@@ -287,9 +288,9 @@ function useCountUp(end, decimals = 0, duration = 2000) {
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const TESTIMONIALS = [
-  { quote: "Tegsoft AI Agent reduced our call center costs by 45% in the first quarter. The quality of conversations genuinely impresses our customers.", name: "Ahmed Al Rashid", role: "COO · Tegsoft", avatar: "A" },
-  { quote: "Lyrebird AI saves me nearly 2 hours of documentation every single day. I finish my shift on time now — something that hasn't happened in years.", name: "Dr. James Okafor", role: "General Practitioner · City Medical Centre", avatar: "J" },
-  { quote: "IDP cut our invoice processing time from 4 days to 4 hours. The accuracy is outstanding — genuinely better than our manual team.", name: "Priya Sharma", role: "CFO · Logistics Plus", avatar: "P" },
+  { quote: " The Tegsoft interface is very easy to use . Everything we need is recorded in our call center. We can access the date we want at any given time. What could be more beautiful than this?", name: "Kerem Erkmen", role: "E-commerce Manager - Lufian", avatar: "A" },
+  { quote: "Lyrebird Health strikes the right balance between effeciency , security and patient - centered care. I highly recommend it to follow practitioners.", name: "Dr. Sean Stevens", role: " Principal General Practitioner · Grove Medical", avatar: "J" },
+  // { quote: "IDP cut our invoice processing time from 4 days to 4 hours. The accuracy is outstanding — genuinely better than our manual team.", name: "Priya Sharma", role: "CFO · Logistics Plus", avatar: "P" },
 ]
 
 const COUNTRY_OPTIONS = ["UAE", "India", "Saudi Arabia", "Qatar", "Kuwait", "Oman"]
@@ -348,7 +349,7 @@ const FAQS = [
   { q: "What AI products does TechBee offer?", a: "TechBee AI offers seven core products: On-Premise LLM Deployment, Intelligent Document Processing (IDP), AI-Powered Medical Intelligence, AI Contact Center Solutions, AI Security, AI Powered Contact Management, and AI-Powered Quote Generation." },
   { q: "Is there a free trial available?", a: "Yes! Our Professional plan includes a 14-day free trial with full access to all features. No credit card required to get started." },
   { q: "How does Lyrebird AI handle patient data privacy?", a: "Lyrebird AI is fully HIPAA compliant. All medical data is encrypted with AES-256, stored in region-specific servers, and never used for model training without explicit consent." },
-  { q: "Can I integrate TechBee AI with my existing CRM?", a: "Absolutely. TechBee AI integrates with Salesforce, HubSpot, SAP, Zendesk, and 100+ other platforms via our REST API and pre-built connectors." },
+  { q: "Can I integrate TechBee AI Products with my existing CRM?", a: "Absolutely. TechBee AI integrates with Salesforce, HubSpot, SAP, Zendesk, and 100+ other platforms via our REST API and pre-built connectors." },
   { q: "What kind of support is included?", a: "All plans include email support. Professional plans include a dedicated Customer Success Manager. Enterprise plans include 24/7 SLA-backed support." },
   { q: "How long does onboarding take?", a: "Most customers are fully onboarded within 5-7 business days. Enterprise customers typically take 2-4 weeks including custom integration training." },
 ]
@@ -438,9 +439,42 @@ export default function Home() {
   const navigate = useNavigate()
 
   const [form, setForm] = useState({ name: "", email: "", company: "", address: "", jobTitle: "", country: "", phone: "", product: "", message: "", privacy: false })
-  const handleForm = (e) => { const { name, value, type, checked } = e.target; setForm(p => ({ ...p, [name]: type === "checkbox" ? checked : value })) }
-  const [aiProd,  aiProdRef]  = useCountUp(7, 0)
-  const [clients, clientsRef] = useCountUp(20, 0)
+const handleForm = (e) => { const { name, value, type, checked } = e.target; setForm(p => ({ ...p, [name]: type === "checkbox" ? checked : value })) }
+
+const [submitting, setSubmitting] = useState(false)
+const [submitted, setSubmitted] = useState(false)
+
+const handleSubmit = async () => {
+  if (!form.privacy) { alert("Please agree to the privacy policy."); return }
+  if (!form.name || !form.email) { alert("Name and email are required."); return }
+  setSubmitting(true)
+  try {
+    await emailjs.send(
+  process.env.REACT_APP_EMAILJS_SERVICE,
+  process.env.REACT_APP_EMAILJS_TEMPLATE,
+  {
+    from_name:  form.name,
+    from_email: form.email,
+    company:    form.company,
+    address:    form.address,
+    job_title:  form.jobTitle,
+    country:    form.country,
+    phone:      form.phone,
+    product:    form.product,
+    message:    form.message,
+    to_email:   "sales@techbee.ae",
+  },
+  process.env.REACT_APP_EMAILJS_KEY
+)
+    setSubmitted(true)
+  } catch (err) {
+    alert("Something went wrong. Please email us directly at sales@techbee.ae")
+  } finally {
+    setSubmitting(false)
+  }
+}
+  const [aiProd,  aiProdRef]  = useCountUp(6, 0)
+  const [clients, clientsRef] = useCountUp(100, 0)
   const [uptime,  uptimeRef]  = useCountUp(99.9, 1)
   const [openFaq,  setOpenFaq]  = useState(null)
   const [chatOpen, setChatOpen] = useState(false)
@@ -619,7 +653,7 @@ export default function Home() {
       <WhySection />
 
       {/* ══ PRICING PAGE CTA ══ */}
-      <section className="py-[112px] px-6" style={{ background: "#000" }} aria-label="Pricing">
+      {/* <section className="py-[112px] px-6" style={{ background: "#000" }} aria-label="Pricing">
         <div style={{ maxWidth: 920, margin: "0 auto", textAlign: "center" }}>
           <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", marginBottom: 16 }}>PRICING</p>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.9rem, 3.8vw, 2.8rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.01em", marginBottom: 16, color: "#ffffff" }}>
@@ -630,9 +664,9 @@ export default function Home() {
           </p>
           <motion.button whileHover={{ scale: 1.03, boxShadow: "0 0 44px rgba(245,184,0,0.45)" }} whileTap={{ scale: 0.97 }} onClick={() => navigate("/pricing")} style={{ ...btnPrimary }}>
             View Pricing Page →
-          </motion.button>
-        </div>
-      </section>
+          </motion.button> */}
+        {/* </div>
+      </section> */}
 
       {/* ══ FAQ ══ */}
       <section id="faq" className="py-[112px] px-6" style={{ background: "#0a0a0a" }} aria-label="Frequently Asked Questions">
@@ -712,9 +746,16 @@ export default function Home() {
                 </div>
                 <span className="text-[#999999] text-[13px]">Agree to privacy policy</span>
               </label>
-              <motion.button whileHover={{ scale: 1.015, boxShadow: "0 0 44px rgba(245,184,0,0.5)" }} whileTap={{ scale: 0.985 }}
-                className="mt-8 w-full bg-[#f5b800] text-black py-4 rounded-[12px] font-bold text-[15px] hover:bg-[#ffc929] transition-colors duration-200"
-                style={{ boxShadow: "0 0 24px rgba(245,184,0,0.22)" }}>Submit</motion.button>
+             <motion.button
+  onClick={handleSubmit}
+  disabled={submitting || submitted}
+  whileHover={{ scale: 1.015, boxShadow: "0 0 44px rgba(245,184,0,0.5)" }}
+  whileTap={{ scale: 0.985 }}
+  className="mt-8 w-full bg-[#f5b800] text-black py-4 rounded-[12px] font-bold text-[15px] hover:bg-[#ffc929] transition-colors duration-200"
+  style={{ boxShadow: "0 0 24px rgba(245,184,0,0.22)", opacity: submitting ? 0.7 : 1 }}
+>
+  {submitted ? "✓ Message Sent!" : submitting ? "Sending..." : "Submit"}
+</motion.button>
             </div>
           </div>
         </div>
@@ -736,14 +777,18 @@ export default function Home() {
               <div>
                 <h3 className="text-white text-[16px] font-semibold mb-6 pb-2 border-b border-[#f5b800] inline-block">Products</h3>
                 <div className="mt-6 space-y-4">
-                  {[{label:"CamCard", route:"/camcard"},{label:"Tegsoft AI", route:"/tegsoft"},{label:"Lyrebird AI", route:"/lyrebird"},{label:"IDP", route:"/idp"}].map(p => (
+                  {[{label:"CamCard", route:"/camcard"},{label:"Tegsoft AI", route:"/tegsoft"},{label:"Webishopi", route:"/quote"},{label:"Check Point", route:"/security"},{label:"Lyrebird AI", route:"/lyrebird"},{label:"IDP", route:"/idp"}].map(p => (
                     <p key={p.label} onClick={() => navigate(p.route)} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{p.label}</p>
                   ))}
                 </div>
               </div>
               <div>
                 <h3 className="text-white text-[16px] font-semibold mb-6 pb-2 border-b border-[#f5b800] inline-block">Company</h3>
-                <div className="mt-6 space-y-4">{["About Us","Career","Blog","Partner"].map(c => <p key={c} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{c}</p>)}</div>
+                <div className="mt-6 space-y-4">{[{"label": "About Us", "route": "/about"}, {"label": "Career", "route": "/career"}, {"label": "Blog", "route": "/blog"}, {"label": "Partner", "route": "/partner"}].map(c => (
+                  <p key={c.label} onClick={() => navigate(c.route)} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">
+                    {c.label}
+                  </p>
+                ))}</div>
               </div>
               <div>
                 <h3 className="text-white text-[16px] font-semibold mb-6 pb-2 border-b border-[#f5b800] inline-block">Legal</h3>
