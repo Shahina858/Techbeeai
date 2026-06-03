@@ -15,6 +15,11 @@ import CamCardPricing from "./pages/CamCardPricing"
 import AboutUs from "./pages/AboutUs"
 import TermsAndConditions from "./pages/TermsAndConditions"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
+import CookiePolicy from "./pages/CookiePolicy"
+import Partnership from "./pages/Partnership"
+
+// inside your <Routes>:
+
 
 
 
@@ -92,6 +97,9 @@ export default function App() {
 <Route path="/about" element={<AboutUs />} />
 <Route path="/terms" element={<TermsAndConditions />} />
 <Route path="/privacy" element={<PrivacyPolicy />} />
+
+<Route path="/cookies" element={<CookiePolicy />} />
+<Route path="/partnership" element={<Partnership />} />
 
       </Routes>
     </BrowserRouter>

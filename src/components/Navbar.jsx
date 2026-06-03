@@ -20,6 +20,13 @@ export default function Navbar({ logoSrc }) {
       return
     }
 
+    // Mark partnership as active when on that route
+    if (location.pathname === "/partnership") {
+      setActive("partnership")
+      setScrolled(true)
+      return
+    }
+
     const sections = document.querySelectorAll("section[id]")
     const onScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -35,12 +42,13 @@ export default function Navbar({ logoSrc }) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [location.pathname])
 
+  // Each link has an explicit href — partnership goes to its route, others scroll
   const NAV_LINKS = [
-    { id: "home",      label: "Home"        },
-    { id: "products",  label: "Products"    },
-    { id: "solutions", label: "Solution"    },
-    { id: "partner",   label: "Partnership" },
-    { id: "why",       label: "Why Us"      },
+    { id: "home",        label: "Home",        href: basePath + "#home"     },
+    { id: "products",    label: "Products",    href: basePath + "#products" },
+    { id: "solutions",   label: "Solution",    href: basePath + "#solutions"},
+    { id: "partnership", label: "Partnership", href: "/partnership"         },
+    { id: "why",         label: "Why Us",      href: basePath + "#why"      },
   ]
 
   return (
@@ -70,12 +78,12 @@ export default function Navbar({ logoSrc }) {
         {/* RIGHT: Nav links + Button */}
         <div className="hidden md:flex items-center" style={{ gap: 36 }}>
 
-          {NAV_LINKS.map(({ id, label }) => {
+          {NAV_LINKS.map(({ id, label, href }) => {
             const isActive = active === id
             return (
               <a
                 key={id}
-                href={basePath + "#" + id}
+                href={href}
                 className="relative flex flex-col items-center"
                 style={{
                   color:          isActive ? "#f5b800" : "#cccccc",
@@ -166,10 +174,10 @@ export default function Navbar({ logoSrc }) {
         borderTop:  menuOpen ? "1px solid rgba(255,255,255,0.06)" : "none",
       }}>
         <div style={{ display: "flex", flexDirection: "column", padding: "16px 24px", gap: 20 }}>
-          {NAV_LINKS.map(({ id, label }) => (
+          {NAV_LINKS.map(({ id, label, href }) => (
             <a
               key={id}
-              href={basePath + "#" + id}
+              href={href}
               onClick={() => setMenuOpen(false)}
               style={{
                 color:          active === id ? "#f5b800" : "#aaaaaa",

@@ -136,7 +136,7 @@ export default function Lyrebird() {
       sub="Australia's most deeply integrated AI Scribe. Lyrebird AI listens to patient consultations, transcribes speech in real time, and generates structured clinical notes automatically — saving clinicians up to 3 hours every single day."
       cta="Request a Demo"
       heroImg={HERO_IMG}
-      demoVideoSrc="/Short_Lyrebird_Demonstration__4_min_.mp4"
+     demoVideoSrc="https://www.youtube.com/embed/zafK5SGh_Fs?autoplay=1"
       heroStats={[
     { n: "80%", l: "less documentation time" },
     { n: "2–3h", l: "saved per day" },

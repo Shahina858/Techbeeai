@@ -4,22 +4,21 @@ import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../c
 
 const BG = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
 
-// ── Media assets ──────────────────────────────────────────────────────────────
 const IMG_INTSIG_HERO   = "/intsig_client_retention.png"
 const IMG_INTSIG_COLLAB = "/intsig_collab.png"
 
-// ── SEO meta helper ───────────────────────────────────────────────────────────
+// ── IDP demo video — place this file in your public/ folder ──────────────────
+const IDP_DEMO_VIDEO = "/home_video.mp4"
+
 function SEOMeta() {
   useEffect(() => {
     document.title = "IDP — Intelligent Document Processing | INTSIG AI | TechBee UAE"
-
     const setMeta = (name, content, prop = false) => {
       const attr  = prop ? "property" : "name"
       let el = document.querySelector(`meta[${attr}="${name}"]`)
       if (!el) { el = document.createElement("meta"); el.setAttribute(attr, name); document.head.appendChild(el) }
       el.setAttribute("content", content)
     }
-
     setMeta("description", "TechBee is the authorised INTSIG IDP partner in the UAE & GCC. Intelligent Document Processing powered by AI — 99%+ OCR accuracy, 50+ languages, SAP/Oracle integration. Automate invoices, KYC, contracts, and more.")
     setMeta("keywords", "intelligent document processing UAE, IDP software Dubai, INTSIG DocFlow, document automation GCC, OCR AI invoice processing, KYC automation UAE, accounts payable automation, contract extraction AI, document classification AI, CamScanner enterprise, Arabic OCR, SAP document integration, Oracle IDP connector, NLP document extraction, AI document processing Middle East, paperless office UAE, digital transformation document, TechBee INTSIG, RPA document automation, xParse AI parsing")
     setMeta("robots", "index, follow")
@@ -38,11 +37,9 @@ function SEOMeta() {
     setMeta("twitter:title",       "IDP — Intelligent Document Processing | TechBee UAE")
     setMeta("twitter:description", "Stop processing documents manually. INTSIG IDP automates extraction, classification, and routing — 99%+ accuracy, 80% less manual work.")
     setMeta("twitter:image",       "https://www.techbee.ae/intsig_client_retention.png")
-
     let canonical = document.querySelector("link[rel='canonical']")
     if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.appendChild(canonical) }
     canonical.href = "https://www.techbee.ae/products/idp"
-
     const schema = {
       "@context": "https://schema.org",
       "@graph": [
@@ -59,7 +56,6 @@ function SEOMeta() {
   return null
 }
 
-// ── Navigate helper ───────────────────────────────────────────────────────────
 const goToContact = (navigate) => {
   navigate("/")
   setTimeout(() => {
@@ -68,7 +64,6 @@ const goToContact = (navigate) => {
   }, 300)
 }
 
-// ── Small shared primitives ───────────────────────────────────────────────────
 function ComparisonRow({ label, manual, idp }) {
   return (
     <tr>
@@ -147,7 +142,6 @@ function FAQItem({ q, a }) {
   )
 }
 
-// ── Pricing check/cross icons ─────────────────────────────────────────────────
 function PCheck() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 1 }}>
@@ -156,14 +150,12 @@ function PCheck() {
   )
 }
 
-// ── IDP-specific hero stats ───────────────────────────────────────────────────
 const IDP_HERO_STATS = [
   { n: "99%+", l: "OCR accuracy" },
   { n: "80%",  l: "less manual work" },
   { n: "50+",  l: "languages" },
 ]
 
-// ── Docflow features list ─────────────────────────────────────────────────────
 const DOCFLOW_BASE_FEATURES = [
   "Create & configure workspaces",
   "Document parsing & classification",
@@ -176,15 +168,9 @@ const DOCFLOW_BASE_FEATURES = [
   "2 mandays remote implementation",
 ]
 
-const SMART_REVIEW_EXTRAS = [
-  "Everything in Essentials, plus:",
-  "Intelligent Audit / Smart Review",
-]
-
-// ── Main page ─────────────────────────────────────────────────────────────────
 export default function IDP() {
   const navigate = useNavigate()
-  const [deployTab, setDeployTab] = useState("onprem") // "onprem" | "saas"
+  const [deployTab, setDeployTab] = useState("onprem")
 
   return (
     <>
@@ -198,13 +184,14 @@ export default function IDP() {
         bgImage={BG}
         heroImg={IMG_INTSIG_HERO}
         heroStats={IDP_HERO_STATS}
+        demoVideoSrc={IDP_DEMO_VIDEO}
         pricingCta={() => {
           const el = document.getElementById("pricing")
           if (el) el.scrollIntoView({ behavior: "smooth" })
         }}
       >
 
-        {/* ══ ABOUT INTSIG — trust band below hero ══════════════════════════════ */}
+        {/* ══ ABOUT INTSIG ══════════════════════════════════════════════════════ */}
         <section style={{ background: "#000", borderTop: "1px solid #111", borderBottom: "1px solid #111", padding: "32px 60px" }}>
           <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 24 }}>
             <p style={{ color: "#555", fontSize: 13, margin: 0 }}>Authorised INTSIG IDP Partner · UAE & GCC</p>
@@ -461,12 +448,9 @@ export default function IDP() {
               </div>
             </div>
 
-            {/* ── ON-PREMISE / PRIVATE CLOUD PLANS ── */}
             {deployTab === "onprem" && (
               <>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24, maxWidth: 860, margin: "0 auto 32px" }}>
-
-                  {/* DocFlow Essentials */}
                   <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                       <div style={{ background: "#f5b80015", border: "1px solid #f5b80030", borderRadius: 10, width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -497,17 +481,12 @@ export default function IDP() {
                       </div>
                     ))}
                     <div style={{ marginTop: 16, background: "#0a0a0a", border: "1px solid #1a1a1a", borderRadius: 8, padding: "12px 14px" }}>
-                      <p style={{ color: "#555", fontSize: 12, lineHeight: 1.65, margin: 0 }}>
-                        Additional implementation days: <span style={{ color: "#888" }}>$640/day</span>. Travel expenses not included.
-                      </p>
+                      <p style={{ color: "#555", fontSize: 12, lineHeight: 1.65, margin: 0 }}>Additional implementation days: <span style={{ color: "#888" }}>$640/day</span>. Travel expenses not included.</p>
                     </div>
                   </div>
 
-                  {/* DocFlow Essentials + Smart Review — FEATURED */}
                   <div style={{ background: "#0f0f0f", border: "2px solid #f5b800", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}>
-                    <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>
-                      RECOMMENDED
-                    </div>
+                    <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>RECOMMENDED</div>
                     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                       <div style={{ background: "#f5b80015", border: "1px solid #f5b80040", borderRadius: 10, width: 44, height: 44, display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
@@ -534,9 +513,7 @@ export default function IDP() {
                       <PCheck />
                       <span style={{ color: "#f5b800", fontSize: 13, lineHeight: 1.5, fontWeight: 600 }}>Intelligent Audit (Smart Review)</span>
                     </div>
-                    <p style={{ color: "#666", fontSize: 12, lineHeight: 1.65, marginBottom: 16, marginLeft: 22 }}>
-                      Built-in human-in-the-loop review queue — low-confidence extractions are automatically flagged for human verification, ensuring accuracy even in edge cases.
-                    </p>
+                    <p style={{ color: "#666", fontSize: 12, lineHeight: 1.65, marginBottom: 16, marginLeft: 22 }}>Built-in human-in-the-loop review queue — low-confidence extractions are automatically flagged for human verification, ensuring accuracy even in edge cases.</p>
                     {DOCFLOW_BASE_FEATURES.map(f => (
                       <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 9 }}>
                         <PCheck />
@@ -544,34 +521,23 @@ export default function IDP() {
                       </div>
                     ))}
                     <div style={{ marginTop: 16, background: "#0a0a0a", border: "1px solid #1a1a1a", borderRadius: 8, padding: "12px 14px" }}>
-                      <p style={{ color: "#555", fontSize: 12, lineHeight: 1.65, margin: 0 }}>
-                        Additional implementation days: <span style={{ color: "#888" }}>$640/day</span>. Travel expenses not included.
-                      </p>
+                      <p style={{ color: "#555", fontSize: 12, lineHeight: 1.65, margin: 0 }}>Additional implementation days: <span style={{ color: "#888" }}>$640/day</span>. Travel expenses not included.</p>
                     </div>
                   </div>
-
                 </div>
 
-                {/* Note strip */}
                 <div style={{ maxWidth: 860, margin: "0 auto", background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 12, padding: "18px 24px", display: "flex", gap: 14, alignItems: "flex-start" }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  <p style={{ color: "#777", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-                    Pricing is per-year subscription for 1 production license. For multi-license deployments, additional site deployments, or custom enterprise terms, contact Techbee — the authorised INTSIG partner for UAE & GCC. Implementation support beyond the included 2 days remote is charged at <span style={{ color: "#ddd" }}>$640/day</span>.
-                  </p>
+                  <p style={{ color: "#777", fontSize: 13, lineHeight: 1.7, margin: 0 }}>Pricing is per-year subscription for 1 production license. For multi-license deployments, additional site deployments, or custom enterprise terms, contact Techbee — the authorised INTSIG partner for UAE & GCC. Implementation support beyond the included 2 days remote is charged at <span style={{ color: "#ddd" }}>$640/day</span>.</p>
                 </div>
               </>
             )}
 
-            {/* ── SAAS PAY-PER-PAGE PLANS ── */}
             {deployTab === "saas" && (
               <>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24, maxWidth: 720, margin: "0 auto 32px" }}>
-
-                  {/* Singapore DC */}
                   <div style={{ background: "#0f0f0f", border: "2px solid #f5b800", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}>
-                    <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>
-                      RECOMMENDED FOR UAE
-                    </div>
+                    <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>RECOMMENDED FOR UAE</div>
                     <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>SaaS · Singapore DC</p>
                     <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 8 }}>textin.ai/docflow</h3>
                     <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>Pay-per-page SaaS deployment hosted in Singapore. Closest data center for UAE & GCC customers.</p>
@@ -595,7 +561,6 @@ export default function IDP() {
                     ))}
                   </div>
 
-                  {/* China Mainland DC */}
                   <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column" }}>
                     <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>SaaS · China Mainland DC</p>
                     <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 8 }}>textin.com/docflow</h3>
@@ -619,15 +584,11 @@ export default function IDP() {
                       </div>
                     ))}
                   </div>
-
                 </div>
 
-                {/* Note strip */}
                 <div style={{ maxWidth: 720, margin: "0 auto", background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 12, padding: "18px 24px", display: "flex", gap: 14, alignItems: "flex-start" }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  <p style={{ color: "#777", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-                    SaaS pricing is consumption-based — you only pay for pages processed. For UAE & GCC customers with data residency requirements, the <span style={{ color: "#ddd" }}>Singapore DC ($0.18/page)</span> is recommended. Contact Techbee for volume discount pricing on high-page-count deployments.
-                  </p>
+                  <p style={{ color: "#777", fontSize: 13, lineHeight: 1.7, margin: 0 }}>SaaS pricing is consumption-based — you only pay for pages processed. For UAE & GCC customers with data residency requirements, the <span style={{ color: "#ddd" }}>Singapore DC ($0.18/page)</span> is recommended. Contact Techbee for volume discount pricing on high-page-count deployments.</p>
                 </div>
               </>
             )}
@@ -646,24 +607,24 @@ export default function IDP() {
                   {[
                     { feature: "Deployment",              e: "Private Cloud / OP", sr: "Private Cloud / OP", s: "Cloud (SaaS)" },
                     { feature: "Pricing model",           e: "$101,600/yr",        sr: "$118,400/yr",        s: "$0.06–$0.18/page" },
-                    { feature: "Document parsing",        e: true,                 sr: true,                 s: true },
-                    { feature: "Classification",          e: true,                 sr: true,                 s: true },
-                    { feature: "Information extraction",  e: true,                 sr: true,                 s: true },
-                    { feature: "API access",              e: true,                 sr: true,                 s: true },
-                    { feature: "Intelligent Audit",       e: false,                sr: true,                 s: false },
-                    { feature: "Image quality enhance",   e: true,                 sr: true,                 s: false },
-                    { feature: "Watermark removal",       e: true,                 sr: true,                 s: false },
-                    { feature: "On-premise deployment",   e: true,                 sr: true,                 s: false },
-                    { feature: "Data residency control",  e: true,                 sr: true,                 s: "DC choice only" },
-                    { feature: "Implementation support",  e: "24 mandays/yr",      sr: "24 mandays/yr",      s: "Self-service" },
+                    { feature: "Document parsing",        e: true,  sr: true,  s: true  },
+                    { feature: "Classification",          e: true,  sr: true,  s: true  },
+                    { feature: "Information extraction",  e: true,  sr: true,  s: true  },
+                    { feature: "API access",              e: true,  sr: true,  s: true  },
+                    { feature: "Intelligent Audit",       e: false, sr: true,  s: false },
+                    { feature: "Image quality enhance",   e: true,  sr: true,  s: false },
+                    { feature: "Watermark removal",       e: true,  sr: true,  s: false },
+                    { feature: "On-premise deployment",   e: true,  sr: true,  s: false },
+                    { feature: "Data residency control",  e: true,  sr: true,  s: "DC choice only" },
+                    { feature: "Implementation support",  e: "24 mandays/yr", sr: "24 mandays/yr", s: "Self-service" },
                   ].map((row, i) => (
                     <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", borderBottom: i < 11 ? "1px solid #111" : "none", background: i % 2 === 0 ? "#000" : "#060606" }}>
                       <div style={{ padding: "12px 20px", color: "#aaa", fontSize: 13 }}>{row.feature}</div>
                       {[row.e, row.sr, row.s].map((val, j) => (
                         <div key={j} style={{ padding: "12px 12px", borderLeft: "1px solid #111", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                          {val === true ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                           : val === false ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2a2a2a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                           : <span style={{ color: j === 1 ? "#f5b800" : "#bbb", fontSize: 11, fontWeight: 600, textAlign: "center" }}>{val}</span>}
+                          {val === true  ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                         : val === false ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2a2a2a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                         : <span style={{ color: j === 1 ? "#f5b800" : "#bbb", fontSize: 11, fontWeight: 600, textAlign: "center" }}>{val}</span>}
                         </div>
                       ))}
                     </div>
@@ -671,7 +632,6 @@ export default function IDP() {
                 </div>
               </div>
             </div>
-
           </div>
         </section>
 

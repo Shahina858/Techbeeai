@@ -340,9 +340,8 @@ const PRODUCTS = [
   {
     route: "/quote",
     icon: <svg width="20" height="20" viewBox="1.707031 0.769531 15.07 15.16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 5.648438 5.636719 C 5.8125 5.277344 6.238281 5.121094 6.59375 5.285156 C 6.953125 5.453125 7.109375 5.875 6.945312 6.234375 C 6.941406 6.242188 5.941406 8.359375 7.324219 10.113281 C 7.6875 10.574219 8.128906 10.824219 8.574219 10.914062 C 9.976562 11.195312 11.027344 10.160156 11.511719 8.964844 C 11.738281 8.402344 11.828125 7.851562 11.660156 7.523438 C 11.652344 7.503906 11.636719 7.484375 11.621094 7.460938 L 11.601562 7.433594 C 11.574219 7.402344 11.542969 7.371094 11.507812 7.347656 C 11.390625 7.261719 11.242188 7.214844 11.089844 7.214844 C 10.941406 7.210938 10.796875 7.253906 10.683594 7.335938 C 10.644531 7.367188 10.613281 7.398438 10.582031 7.4375 C 10.34375 7.757812 10.273438 8.324219 10.378906 8.914062 C 10.414062 9.109375 10.46875 9.304688 10.546875 9.492188 C 10.269531 9.9375 9.773438 10.242188 9.378906 10.363281 C 9.207031 10.007812 9.042969 9.546875 8.976562 9.167969 C 8.800781 8.203125 8.964844 7.21875 9.441406 6.582031 C 9.558594 6.429688 9.6875 6.300781 9.835938 6.191406 C 10.203125 5.917969 10.652344 5.785156 11.101562 5.789062 C 11.546875 5.792969 12 5.933594 12.363281 6.207031 C 12.5 6.308594 12.621094 6.425781 12.730469 6.5625 C 12.742188 6.574219 12.753906 6.589844 12.765625 6.605469 C 12.828125 6.6875 12.882812 6.78125 12.933594 6.878906 C 13.304688 7.605469 13.207031 8.589844 12.835938 9.5 C 12.648438 9.96875 12.382812 10.425781 12.070312 10.828125 C 12.355469 10.882812 12.675781 10.882812 13.039062 10.816406 C 13.640625 10.710938 14.105469 10.445312 14.441406 10.0625 C 14.453125 10.050781 14.460938 10.039062 14.472656 10.027344 C 14.828125 9.609375 15.050781 9.039062 15.140625 8.378906 C 15.226562 7.777344 15.191406 7.105469 14.972656 6.414062 C 14.78125 5.804688 14.453125 5.175781 13.9375 4.570312 C 12.914062 3.355469 11.625 2.679688 10.300781 2.46875 C 8.855469 2.234375 7.359375 2.546875 6.117188 3.308594 C 4.871094 4.070312 3.929688 5.246094 3.53125 6.667969 C 3.167969 7.964844 3.253906 9.476562 3.964844 11.085938 C 4.195312 11.601562 4.507812 12.066406 4.882812 12.472656 C 5.695312 13.355469 6.804688 13.964844 8.015625 14.21875 C 9.230469 14.472656 10.539062 14.371094 11.75 13.835938 C 11.925781 13.761719 12.097656 13.671875 12.269531 13.578125 C 12.492188 13.453125 12.679688 13.289062 12.949219 13.289062 C 13.34375 13.289062 13.664062 13.605469 13.664062 14 C 13.664062 14.398438 13.417969 14.558594 13.132812 14.726562 C 12.871094 14.882812 12.597656 15.023438 12.324219 15.144531 C 10.835938 15.804688 9.21875 15.929688 7.726562 15.613281 C 6.226562 15.300781 4.847656 14.542969 3.832031 13.441406 C 3.351562 12.921875 2.953125 12.324219 2.660156 11.664062 C 1.804688 9.730469 1.707031 7.882812 2.15625 6.28125 C 2.65625 4.5 3.828125 3.035156 5.375 2.089844 C 6.898438 1.152344 8.738281 0.769531 10.527344 1.058594 C 12.171875 1.324219 13.769531 2.15625 15.027344 3.648438 C 15.671875 4.410156 16.09375 5.207031 16.339844 5.988281 C 16.621094 6.894531 16.667969 7.78125 16.554688 8.574219 C 16.425781 9.503906 16.097656 10.320312 15.550781 10.960938 C 15.539062 10.976562 15.527344 10.992188 15.515625 11.007812 C 14.972656 11.625 14.234375 12.050781 13.292969 12.222656 C 12.324219 12.394531 11.515625 12.25 10.863281 11.90625 L 10.804688 11.9375 C 10.050781 12.320312 9.164062 12.488281 8.296875 12.3125 C 7.535156 12.160156 6.800781 11.746094 6.207031 10.996094 C 4.273438 8.546875 5.644531 5.644531 5.648438 5.636719 Z" fill="#f5b800"/></svg>,
-    title: "AI-Powered Quote Generation", subtitle: "Webishopi - B2B IT Procurement",
-    desc: "UAE's leading B2B platform for IT product quotations. Features AI Product Search (upload BOQ for instant matches), quick quotes, verified suppliers, and expert support. Learn more at webishopi.com"
-  },
+    title: "AI-Powered Quote Generation", subtitle: "Webishopi - Smart Sales Agent",
+desc: "Your AI sales team, available 24/7. Webishopi transforms your product catalog into an intelligent sales engine — AI product search, instant BOQ matching, automated quotations, and auto email responses. Learn more at webishopi.com"  },
 ]
 
 const FAQS = [
@@ -626,7 +625,7 @@ const handleSubmit = async () => {
                   icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>,
                   title: "Document Workflow Automation",
                   desc: "Stop manually processing invoices, contracts, and onboarding forms. IDP reads, extracts, and routes data automatically with human-level accuracy.",
-                  powered: "Powered by IDP Document Processing"
+                  powered: "Powered by INTSIG"
                 },
               ].map((s, i) => (
                 <motion.div key={i} whileHover={{ y: -2 }} transition={{ duration: 0.2 }} className="group relative overflow-hidden cursor-pointer"
@@ -784,7 +783,7 @@ const handleSubmit = async () => {
               </div>
               <div>
                 <h3 className="text-white text-[16px] font-semibold mb-6 pb-2 border-b border-[#f5b800] inline-block">Company</h3>
-                <div className="mt-6 space-y-4">{[{"label": "About Us", "route": "/about"}, {"label": "Career", "route": "/career"}, {"label": "Blog", "route": "/blog"}, {"label": "Partner", "route": "/partner"}].map(c => (
+                <div className="mt-6 space-y-4">{[{"label": "About Us", "route": "/about"}, {"label": "Partner", "route": "/partnership"}].map(c => (
                   <p key={c.label} onClick={() => navigate(c.route)} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">
                     {c.label}
                   </p>
@@ -792,7 +791,7 @@ const handleSubmit = async () => {
               </div>
               <div>
                 <h3 className="text-white text-[16px] font-semibold mb-6 pb-2 border-b border-[#f5b800] inline-block">Legal</h3>
-                <div className="mt-6 space-y-4">{[<p className="..." onClick={() => navigate("/privacy")}>Privacy Policy</p>,<p className="..." onClick={() => navigate("/terms")}>Terms of service</p>,"Cookie Policy","Security"].map(l => <p key={l} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{l}</p>)}</div>
+                <div className="mt-6 space-y-4">{[<p className="..." onClick={() => navigate("/privacy")}>Privacy Policy</p>,<p className="..." onClick={() => navigate("/terms")}>Terms of service</p>,<p onClick={() => navigate("/cookies")}>Cookie Policy</p>].map(l => <p key={l} className="text-[#f2f2f2] text-[14px] hover:text-[#f5b800] transition-colors duration-200 cursor-pointer">{l}</p>)}</div>
               </div>
             </div>
           </div>

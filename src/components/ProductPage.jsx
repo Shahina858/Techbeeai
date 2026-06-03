@@ -141,12 +141,22 @@ function VideoModal({ src, onClose, label }) {
             >✕</button>
           </div>
 
-          <video
-            src={src}
-            controls
-            autoPlay
-            style={{ width: "100%", display: "block", maxHeight: "80vh", background: "#000" }}
-          />
+         {src.includes("youtube.com") || src.includes("youtu.be") ? (
+  <iframe
+    src={src}
+    title="Demo Video"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+    style={{ width: "100%", height: "500px", display: "block", border: "none", background: "#000" }}
+  />
+) : (
+  <video
+    src={src}
+    controls
+    autoPlay
+    style={{ width: "100%", display: "block", maxHeight: "80vh", background: "#000" }}
+  />
+)}
         </motion.div>
       </motion.div>
     </AnimatePresence>

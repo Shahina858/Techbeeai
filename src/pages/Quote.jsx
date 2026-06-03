@@ -130,6 +130,26 @@ function CellVal({ val }) {
   return <span style={{ color: val === "Unlimited" || val === "Basic" ? gold : "#bbb", fontSize: 12, fontWeight: 600 }}>{val}</span>;
 }
 
+// ── AI Sales Team capabilities ────────────────────────────────────────────────
+const AI_SALES_CAPABILITIES = [
+  { icon: "🧠", title: "Understands Requirements", desc: "AI reads customer inquiries, BOQs, and RFQs — extracting product needs automatically without manual interpretation." },
+  { icon: "🔍", title: "Recommends Products", desc: "Matches customer requirements to your catalog instantly. Suggests alternatives and bundles based on past patterns." },
+  { icon: "📄", title: "Generates Quotations", desc: "Professional, audit-ready PDF quotations created automatically — with correct pricing, VAT, and your branding." },
+  { icon: "💬", title: "Answers Inquiries", desc: "Responds to common customer questions about products, availability, and specifications — 24/7, without your team." },
+  { icon: "🔄", title: "Follows Up Automatically", desc: "Sends follow-up emails to customers who submitted requests but haven't responded — keeping deals warm." },
+  { icon: "🤝", title: "Escalates to Humans", desc: "Complex deals or VIP customers get flagged and routed to your sales team with full context already captured." },
+];
+
+const AI_SALES_INDUSTRIES = [
+  { emoji: "💻", label: "Technology & IT" },
+  { emoji: "🏭", label: "Industrial Products" },
+  { emoji: "🪑", label: "Furniture" },
+  { emoji: "🏥", label: "Medical Supplies" },
+  { emoji: "🏗️", label: "Building Materials" },
+  { emoji: "🚗", label: "Automotive Products" },
+  { emoji: "📦", label: "Wholesale & Distribution" },
+];
+
 export default function Quote() {
   const [openFaq, setOpenFaq] = useState(null);
   const [billing, setBilling] = useState("monthly");
@@ -166,21 +186,21 @@ export default function Quote() {
         {/* LEFT CONTENT */}
         <div style={{ flex: "1 1 440px", minWidth: 300 }}>
           <span style={{ background: "transparent", border: `1px solid ${gold}`, color: gold, fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", padding: "7px 18px", borderRadius: 6, display: "inline-block", marginBottom: 32 }}>
-            Smart IT Procurement Platform
+            AI Sales Team · 24/7 · B2B Procurement Platform
           </span>
 
           <h1 style={{ fontSize: "clamp(2.6rem, 4.5vw, 4rem)", fontWeight: 800, lineHeight: 1.08, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
-            Stop Chasing Quotes.<br />
-            <span style={{ color: gold }}>Start Winning Deals.</span>
+            Your AI Sales Team,<br />
+            <span style={{ color: gold }}>Available 24/7.</span>
           </h1>
 
           <p style={{ color: "#888", fontSize: 16, lineHeight: 1.8, margin: "0 0 40px", maxWidth: 500 }}>
-            Webishopi is a fully branded B2B eCommerce and quotation platform that TechBee builds and manages for your business — AI-powered, ready in days, zero technical work.
+            Webishopi transforms your product catalog into an intelligent sales engine — helping customers discover products, submit requirements, receive quotations, and engage with your business instantly. No waiting. No manual work. Just results.
           </p>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 44 }}>
             {[
-              { val: "24/7",    label: "Store Always Open"   },
+              { val: "24/7",    label: "AI Sales Active"     },
               { val: "1000+",   label: "Products in Minutes" },
               { val: "Instant", label: "Quote Turnaround"    },
             ].map((s, i) => (
@@ -200,7 +220,6 @@ export default function Quote() {
               style={{ background: "transparent", color: "#ccc", fontWeight: 600, fontSize: 14, padding: "15px 36px", borderRadius: 50, textDecoration: "none", border: "1px solid #2a2a2a", display: "flex", alignItems: "center", gap: 8 }}>
               ✉ Talk to Us
             </a>
-            {/* ── View Pricing CTA ── */}
             <button
               onClick={scrollToPricing}
               style={{ background: "transparent", color: gold, fontWeight: 700, fontSize: 14, padding: "15px 28px", borderRadius: 50, border: `1px solid rgba(245,184,0,0.45)`, cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
@@ -224,7 +243,7 @@ export default function Quote() {
           </div>
           <div style={{ position: "absolute", bottom: 24, left: 0, zIndex: 3, background: "#111", border: "1px solid #222", borderRadius: 50, padding: "10px 20px", display: "flex", alignItems: "center", gap: 8 }}>
             <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22cc66", display: "inline-block", boxShadow: "0 0 6px #22cc66" }} />
-            <span style={{ fontSize: 13, color: "#ccc", fontWeight: 600 }}>AI Always Active</span>
+            <span style={{ fontSize: 13, color: "#ccc", fontWeight: 600 }}>AI Sales Team Active</span>
           </div>
           <img src={IMG_HERO} alt="Webishopi Platform" style={{ width: "100%", display: "block", position: "relative", zIndex: 1, filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.6))", borderRadius: 12 }} />
         </div>
@@ -233,7 +252,7 @@ export default function Quote() {
       {/* ── STAT BAR ── */}
       <div style={{ borderTop: "1px solid #1a1a1a", borderBottom: "1px solid #1a1a1a", display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
         {[
-          { val: "24/7",    label: "Store Always Open"   },
+          { val: "24/7",    label: "AI Sales Active"    },
           { val: "1000+",   label: "Products in Minutes" },
           { val: "Instant", label: "Quote Turnaround"    },
           { val: "100%",    label: "Your Own Brand"      },
@@ -322,6 +341,58 @@ export default function Quote() {
                 <p style={{ fontSize: 14, color: "#777", lineHeight: 1.7, margin: 0 }}>{c.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* ══ AI SALES TEAM ════════════════════════════════════════════════════ */}
+        <div style={{ marginBottom: 80 }}>
+          <p style={labelStyle}>YOUR AI SALES TEAM</p>
+          <h2 style={h2}>Meet Your New <span style={{ color: gold }}>24/7 Sales Team</span></h2>
+          <p style={body}>
+            Customers expect answers immediately. Webishopi acts as your digital sales team — engaging customers the moment they visit, understanding their needs, and converting them into qualified leads automatically.
+          </p>
+
+          {/* Key benefits banner */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginTop: 32, marginBottom: 40 }}>
+            {[
+              { val: "24/7", label: "Always Available", desc: "Never miss a customer inquiry — day, night, or weekend." },
+              { val: "Faster", label: "Response Times", desc: "Instant replies vs hours or days from manual teams." },
+              { val: "More", label: "Deals Closed", desc: "More opportunities captured and converted at scale." },
+            ].map((b, i) => (
+              <div key={i} style={{ background: goldDim, border: `1px solid ${goldBorder}`, borderRadius: 16, padding: "24px 20px", textAlign: "center" }}>
+                <div style={{ fontSize: "1.8rem", fontWeight: 900, color: gold, marginBottom: 4 }}>{b.val}</div>
+                <div style={{ color: "#fff", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>{b.label}</div>
+                <div style={{ color: "#777", fontSize: 12, lineHeight: 1.6 }}>{b.desc}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 6 capabilities */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16, marginBottom: 48 }}>
+            {AI_SALES_CAPABILITIES.map((cap, i) => (
+              <div key={i} style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: 16, padding: "26px 24px", display: "flex", gap: 16, alignItems: "flex-start", transition: "border-color 0.2s" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = goldBorder}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#1e1e1e"}>
+                <div style={{ fontSize: 28, flexShrink: 0 }}>{cap.icon}</div>
+                <div>
+                  <h4 style={{ color: gold, fontSize: 14, fontWeight: 700, margin: "0 0 8px" }}>{cap.title}</h4>
+                  <p style={{ color: "#666", fontSize: 13, lineHeight: 1.65, margin: 0 }}>{cap.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Industries */}
+          <div style={{ background: "#0d0d0d", border: `1px solid ${goldBorder}`, borderRadius: 20, padding: "32px 28px" }}>
+            <p style={{ color: gold, fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 20 }}>Built for Every Product-Based Business</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              {AI_SALES_INDUSTRIES.map((ind, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, background: "#111", border: "1px solid #222", borderRadius: 50, padding: "10px 18px" }}>
+                  <span style={{ fontSize: 16 }}>{ind.emoji}</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "#ccc" }}>{ind.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -495,12 +566,9 @@ export default function Quote() {
                     MOST POPULAR
                   </div>
                 )}
-
                 <p style={{ color: plan.highlight ? gold : "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>{plan.tag}</p>
                 <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 800, marginBottom: 8 }}>{plan.name}</h3>
                 <p style={{ color: "#555", fontSize: 12, lineHeight: 1.6, marginBottom: 18, minHeight: 40 }}>{plan.desc}</p>
-
-                {/* Price */}
                 {plan.monthlyAED ? (
                   <div style={{ marginBottom: 4 }}>
                     <span style={{ color: plan.highlight ? gold : "#fff", fontSize: "2rem", fontWeight: 900, lineHeight: 1 }}>
@@ -515,18 +583,14 @@ export default function Quote() {
                     <span style={{ color: "#fff", fontSize: "1.6rem", fontWeight: 800 }}>Custom</span>
                   </div>
                 )}
-
                 {plan.monthlyAED && billing === "annual" && (
                   <p style={{ color: "#555", fontSize: 12, marginBottom: 4 }}>
                     AED {plan.annualAED.toLocaleString()} billed annually
                   </p>
                 )}
-
                 <p style={{ color: "#444", fontSize: 11, marginBottom: 18 }}>
                   Setup: {typeof plan.setupAED === "number" ? `AED ${plan.setupAED.toLocaleString()}` : plan.setupAED}
                 </p>
-
-                {/* CTA */}
                 {plan.name === "Enterprise" ? (
                   <button onClick={goToContact}
                     style={{ display: "block", textAlign: "center", background: "transparent", color: gold, border: `1px solid rgba(245,184,0,0.4)`, fontWeight: 700, fontSize: 13, padding: "11px", borderRadius: 8, cursor: "pointer", marginBottom: 20, transition: "all 0.18s" }}
@@ -549,16 +613,11 @@ export default function Quote() {
                     Get Started
                   </a>
                 )}
-
                 <hr style={{ border: "none", borderTop: "1px solid #1e1e1e", marginBottom: 16 }} />
-
-                {/* Product & user limit badges */}
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 16 }}>
                   <span style={{ background: "#111", border: "1px solid #2a2a2a", borderRadius: 50, padding: "4px 10px", fontSize: 11, color: "#888", fontWeight: 600 }}>{plan.productLimit}</span>
                   <span style={{ background: "#111", border: "1px solid #2a2a2a", borderRadius: 50, padding: "4px 10px", fontSize: 11, color: "#888", fontWeight: 600 }}>{plan.users}</span>
                 </div>
-
-                {/* Features */}
                 {plan.features.map(f => (
                   <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
                     <PCheck color={plan.highlight ? gold : "#3d9e6e"} />
@@ -576,7 +635,6 @@ export default function Quote() {
           </h3>
           <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
             <div style={{ border: "1px solid #1a1a1a", borderRadius: 14, overflow: "hidden", minWidth: 560 }}>
-              {/* Header */}
               <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", background: "#0d0d0d", borderBottom: "1px solid #1a1a1a" }}>
                 <div style={{ padding: "13px 18px", color: "#444", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Feature</div>
                 {["Starter", "Professional", "Business", "Enterprise"].map((h, i) => (
@@ -650,11 +708,11 @@ export default function Quote() {
             Ready to Start?
           </span>
           <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 800, margin: "0 0 16px", lineHeight: 1.15 }}>
-            The Company That Responds First —<br />
-            <span style={{ color: gold }}>Wins.</span>
+            Turn Your Catalog Into a<br />
+            <span style={{ color: gold }}>24/7 Sales Engine.</span>
           </h2>
           <p style={{ color: "#777", fontSize: 15, lineHeight: 1.75, maxWidth: 500, margin: "0 auto 40px" }}>
-            Let Webishopi make sure that company is yours. Transform your B2B sales and procurement workflow today.
+            Generate more leads. Respond faster. Close more deals. Let Webishopi's AI sales team work for you around the clock.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginBottom: 36 }}>
             <a href="mailto:sales@techbee.ae"
