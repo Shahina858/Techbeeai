@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 
 const HERO_BG    = "https://framerusercontent.com/images/TglGme8G89i1DDRAZDRD0tqp90.jpg"
 const CARD_IMG   = "/1200x630wa.jpg.jpeg"
@@ -881,7 +882,7 @@ export default function CamCard() {
           </p>
         </div>
       </section>
-
+<Footer/>
     </div>
   )
 }

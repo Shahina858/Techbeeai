@@ -2,7 +2,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
-
+import Footer from "../components/Footer"
 const LOGO_IMG =  "/TechBee_AI_Logo_Modified.png"
 
 // ── Images ────────────────────────────────────────────────────────────────────
@@ -1066,7 +1066,9 @@ export default function AISecurity() {
           </div>
         </div>
       </section>
-
+<Footer/>
     </div>
   )
 }
+ 
+            

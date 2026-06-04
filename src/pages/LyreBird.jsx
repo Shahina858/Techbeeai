@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
-
+ import Footer from "../components/Footer"
 const HERO_IMG = "/lyrebird_hero.png"
 
 // ── Navigate to home contact section ─────────────────────────────────────────
@@ -642,7 +642,9 @@ export default function Lyrebird() {
           </p>
         </div>
       </section>
-
+    <Footer/>
     </ProductPage>
+    
   )
+   
 }

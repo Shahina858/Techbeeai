@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const IMG_HERO     = "/image_hero_clean.png";
 const IMG_PRODUCT  = "/image_product_clean.png";
@@ -741,6 +742,7 @@ export default function Quote() {
         </div>
 
       </div>
+      <Footer/>
     </div>
   );
 }

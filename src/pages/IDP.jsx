@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
+import Footer from "../components/Footer"
 
 const BG = "https://framerusercontent.com/images/iuqtZdxTFuhutGpJoq0zkLbFw.png"
 
@@ -686,7 +687,7 @@ export default function IDP() {
             </p>
           </div>
         </section>
-
+<Footer/>
       </ProductPage>
     </>
   )

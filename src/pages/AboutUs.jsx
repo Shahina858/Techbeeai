@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
-
+ import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 
 // ── shared label ──────────────────────────────────────────────────────────────
@@ -311,7 +311,9 @@ export default function AboutUs() {
           </p>
         </div>
       </section>
-
+<Footer/>
     </div>
+    
   )
 }
+

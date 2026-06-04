@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar"
 import BrainBackground from "../components/BrainBackground"
 import MouseGlow from "../components/MouseGlow"
 import emailjs from "@emailjs/browser"
+import Footer from "../components/Footer"
 
 // ── SEO Head Component ────────────────────────────────────────────────────────
 function SEOHead() {
@@ -649,7 +650,7 @@ const handleSubmit = async () => {
       </section>
 
       {/* ══ WHY TECHBEE ══ */}
-      <WhySection />
+      {/* <WhySection /> */}
 
       {/* ══ PRICING PAGE CTA ══ */}
       {/* <section className="py-[112px] px-6" style={{ background: "#000" }} aria-label="Pricing">
@@ -761,7 +762,7 @@ const handleSubmit = async () => {
       </section>
 
       {/* ══ FOOTER ══ */}
-      <footer className="w-full px-6 py-16 overflow-hidden" style={{ background: "#000" }} aria-label="Footer">
+      {/* <footer className="w-full px-6 py-16 overflow-hidden" style={{ background: "#000" }} aria-label="Footer">
         <div className="relative w-full max-w-[1400px] mx-auto rounded-[30px] p-10"
           style={{ background: "rgba(10,10,10,0.96)", border: "2px solid rgba(211,162,14,0.54)", boxShadow: "inset 0 0 55px rgb(207,157,9), inset 0 0 1px rgba(245,184,0,0.22)" }}>
           <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at top left, rgba(245,184,0,0.09), transparent 22%), radial-gradient(circle at bottom right, rgba(245,184,0,0.06), transparent 28%)" }}/>
@@ -815,8 +816,10 @@ const handleSubmit = async () => {
             <div className="text-[#aaaaaa]">© 2026 TechBee AI. All rights reserved.</div>
           </div>
         </div>
-      </footer>
+      </footer> */}
 
+
+<Footer />
       {/* ══ LIVE CHAT WIDGET ══ */}
       <div style={{ position: "fixed", bottom: 28, right: 28, zIndex: 999, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
         <AnimatePresence>

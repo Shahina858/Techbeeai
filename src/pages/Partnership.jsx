@@ -2,7 +2,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import emailjs from "@emailjs/browser"
 import Navbar from "../components/Navbar"
-
+import Footer from "../components/Footer"
 const LOGO_IMG = "/TechBee_AI_Logo_Modified.png"
 
 // Replace `image` URLs with your final partner photos when ready
@@ -298,13 +298,11 @@ export default function Partnership() {
       {/* TECHNOLOGY PARTNERS */}
       <section id="our-partners" style={{ padding: "80px 24px", background: "#000", scrollMarginTop: 100 }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", textAlign: "center", marginBottom: 14 }}>TECHNOLOGY PARTNERS</p>
+          <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", textAlign: "center", marginBottom: 14 }}>PARTNERS</p>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#fff", marginBottom: 8 }}>
-            Our <span style={{ color: "#f5b800" }}>Certified Vendor Partners</span>
+            Our <span style={{ color: "#f5b800" }}>Certified Partners</span>
           </h2>
-          <p style={{ textAlign: "center", color: "#666", fontSize: 14, marginBottom: 48, lineHeight: 1.7 }}>
-            TechBee is an authorized reseller and implementation partner for these globally trusted technology brands across UAE and GCC.
-          </p>
+          
 
            {/* Filters */}
           <div style={{ background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 16, padding: "24px", marginBottom: 32 }}>
@@ -441,38 +439,7 @@ export default function Partnership() {
       </section>
 
       {/* PARTNER TIERS */}
-      <section style={{ padding: "80px 24px", background: "#050505" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", textAlign: "center", marginBottom: 14 }}>PARTNER TIERS</p>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#fff", marginBottom: 48 }}>
-            A Program Built for <span style={{ color: "#f5b800" }}>Every Stage</span>
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
-            {[
-              { tier: "Silver",   icon: "🥈", req: "1+ certified staff · $25K annual revenue",   perks: ["Partner portal access", "Sales training", "Co-branded materials", "Email support"] },
-              { tier: "Gold",     icon: "🥇", req: "2+ certified staff · $100K annual revenue",  perks: ["All Silver benefits", "Dedicated partner manager", "Deal registration", "Co-marketing budget", "Priority support"], featured: true },
-              { tier: "Platinum", icon: "💎", req: "5+ certified staff · $500K annual revenue",  perks: ["All Gold benefits", "Executive sponsorship", "Custom SLA", "Joint business planning", "Early product access", "Regional exclusivity"] },
-            ].map((t, i) => (
-              <motion.div key={i} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}
-                style={{ background: "#0d0d0d", border: t.featured ? "2px solid #f5b800" : "1px solid rgba(255,255,255,0.07)", borderRadius: 20, padding: "32px 28px", position: "relative" }}>
-                {t.featured && <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 16px", borderRadius: 20, whiteSpace: "nowrap" }}>MOST POPULAR</div>}
-                <div style={{ fontSize: 32, marginBottom: 12 }}>{t.icon}</div>
-                <h3 style={{ color: TIER_COLORS[t.tier].text, fontSize: 22, fontWeight: 800, marginBottom: 8 }}>{t.tier} Partner</h3>
-                <p style={{ color: "#555", fontSize: 12, marginBottom: 24, lineHeight: 1.6 }}>{t.req}</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  {t.perks.map(p => (
-                    <div key={p} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span style={{ color: "#ccc", fontSize: 13 }}>{p}</span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+     
       {/* BENEFITS */}
       <section style={{ padding: "80px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -597,7 +564,7 @@ export default function Partnership() {
           )}
         </div>
       </section>
-
+      
       {/* FOOTER CTA */}
       <section style={{ padding: "80px 24px", background: "#000", textAlign: "center" }}>
         <div style={{ maxWidth: 600, margin: "0 auto" }}>
@@ -611,6 +578,7 @@ export default function Partnership() {
           </div>
         </div>
       </section>
+<Footer />
     </div>
   )
 }

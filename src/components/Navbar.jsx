@@ -8,25 +8,34 @@ const PRODUCT_ROUTES = ["/idp", "/lyrebird", "/tegsoft", "/security", "/camcard"
 export default function Navbar({ logoSrc }) {
   const location = useLocation()
   const isHome = location.pathname === "/"
-  const basePath = isHome ? "" : "/"
   const [active,   setActive]   = useState("home")
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
+    // Static route active states
     if (PRODUCT_ROUTES.includes(location.pathname)) {
       setActive("products")
       setScrolled(true)
       return
     }
-
-    // Mark partnership as active when on that route
     if (location.pathname === "/partnership") {
       setActive("partnership")
       setScrolled(true)
       return
     }
+    if (location.pathname === "/about") {
+      setActive("about")
+      setScrolled(true)
+      return
+    }
+    if (["/terms", "/privacy", "/cookies"].includes(location.pathname)) {
+      setActive("")
+      setScrolled(true)
+      return
+    }
 
+    // Home page — use scroll to detect active section
     const sections = document.querySelectorAll("section[id]")
     const onScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -42,13 +51,45 @@ export default function Navbar({ logoSrc }) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [location.pathname])
 
-  // Each link has an explicit href — partnership goes to its route, others scroll
+  // If page loads with a hash (e.g. /#products from another page), scroll to it
+  useEffect(() => {
+    if (isHome && location.hash) {
+      const id = location.hash.replace("#", "")
+      setTimeout(() => {
+        const el = document.getElementById(id)
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    }
+  }, [isHome, location.hash])
+
+  const handleNavClick = (e, section, href) => {
+    e.preventDefault()
+    setMenuOpen(false)
+
+    // External routes — just navigate
+    if (!section) {
+      window.location.href = href
+      return
+    }
+
+    // Scroll section links
+    if (!isHome) {
+      // On a different page — go to home with hash, useEffect above will scroll
+      window.location.href = "/#" + section
+      return
+    }
+
+    // Already on home — scroll directly, don't change URL hash
+    const el = document.getElementById(section)
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }
+
   const NAV_LINKS = [
-    { id: "home",        label: "Home",        href: basePath + "#home"     },
-    { id: "products",    label: "Products",    href: basePath + "#products" },
-    { id: "solutions",   label: "Solution",    href: basePath + "#solutions"},
-    { id: "partnership", label: "Partnership", href: "/partnership"         },
-    { id: "why",         label: "Why Us",      href: basePath + "#why"      },
+    { id: "home",        label: "Home",        href: "/",              section: "home"      },
+    { id: "about",       label: "About Us",    href: "/about",         section: null        },
+    { id: "products",    label: "Products",    href: "/#products",     section: "products"  },
+    { id: "solutions",   label: "Solutions",   href: "/#solutions",    section: "solutions" },
+    { id: "partnership", label: "Partnership", href: "/partnership",   section: null        },
   ]
 
   return (
@@ -66,8 +107,8 @@ export default function Navbar({ logoSrc }) {
         className="w-full flex items-center justify-between"
         style={{ padding: "0 40px", height: 96 }}
       >
-        {/* LEFT: Logo */}
-        <a href={basePath + "#home"} className="shrink-0">
+        {/* Logo */}
+        <a href="/" onClick={e => { e.preventDefault(); window.location.href = "/" }}>
           <img
             src={logoSrc || LOGO_IMG}
             alt="TechBee AI"
@@ -75,15 +116,15 @@ export default function Navbar({ logoSrc }) {
           />
         </a>
 
-        {/* RIGHT: Nav links + Button */}
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center" style={{ gap: 36 }}>
-
-          {NAV_LINKS.map(({ id, label, href }) => {
+          {NAV_LINKS.map(({ id, label, href, section }) => {
             const isActive = active === id
             return (
               <a
                 key={id}
                 href={href}
+                onClick={(e) => handleNavClick(e, section, href)}
                 className="relative flex flex-col items-center"
                 style={{
                   color:          isActive ? "#f5b800" : "#cccccc",
@@ -113,9 +154,10 @@ export default function Navbar({ logoSrc }) {
             )
           })}
 
-          {/* Request a Demo button */}
+          {/* Contact Us button */}
           <a
-            href={basePath + "#contact"}
+            href="/#contact"
+            onClick={(e) => handleNavClick(e, "contact", "/#contact")}
             style={{
               background:     "#f5b800",
               color:          "#000000",
@@ -138,7 +180,7 @@ export default function Navbar({ logoSrc }) {
               e.currentTarget.style.transform  = "scale(1)"
             }}
           >
-            Request a Demo
+            Contact Us
           </a>
         </div>
 
@@ -167,18 +209,18 @@ export default function Navbar({ logoSrc }) {
 
       {/* Mobile dropdown */}
       <div style={{
-        maxHeight:  menuOpen ? 320 : 0,
+        maxHeight:  menuOpen ? 360 : 0,
         overflow:   "hidden",
         transition: "max-height 0.3s ease",
         background: "rgba(0,0,0,0.96)",
         borderTop:  menuOpen ? "1px solid rgba(255,255,255,0.06)" : "none",
       }}>
         <div style={{ display: "flex", flexDirection: "column", padding: "16px 24px", gap: 20 }}>
-          {NAV_LINKS.map(({ id, label, href }) => (
+          {NAV_LINKS.map(({ id, label, href, section }) => (
             <a
               key={id}
               href={href}
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, section, href)}
               style={{
                 color:          active === id ? "#f5b800" : "#aaaaaa",
                 fontSize:       14,
@@ -190,8 +232,8 @@ export default function Navbar({ logoSrc }) {
             </a>
           ))}
           <a
-            href={basePath + "#contact"}
-            onClick={() => setMenuOpen(false)}
+            href="/#contact"
+            onClick={(e) => handleNavClick(e, "contact", "/#contact")}
             style={{
               background:     "#f5b800",
               color:          "#000",
@@ -204,7 +246,7 @@ export default function Navbar({ logoSrc }) {
               marginTop:      4,
             }}
           >
-            Request a Demo
+            Contact Us
           </a>
         </div>
       </div>

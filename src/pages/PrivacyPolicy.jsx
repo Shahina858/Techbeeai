@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 
 const LOGO_IMG = "/TechBee_AI_Logo_Modified.png"
 
@@ -287,6 +288,7 @@ export default function PrivacyPolicy() {
 
         </div>
       </section>
+      <Footer/>
     </div>
   )
 }

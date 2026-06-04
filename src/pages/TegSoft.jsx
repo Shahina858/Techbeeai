@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
+import Footer from "../components/Footer"
 
 // ── Images ────────────────────────────────────────────────────────────────────
 const IMG_HERO      = "/tegsoft_hero.png"
@@ -627,7 +628,7 @@ export default function Tegsoft() {
           </div>
         </div>
       </section>
-
+<Footer/>
     </ProductPage>
   )
 }
