@@ -343,7 +343,7 @@ export default function Lyrebird() {
       </section>
 
       {/* ── TESTIMONIALS ──────────────────────────────────────────────── */}
-      <section className="py-[96px] px-6" style={{ background: "#050505" }}>
+      {/* <section className="py-[96px] px-6" style={{ background: "#050505" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <PLabel>WHAT CLINICIANS SAY</PLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 56 }}>
@@ -358,7 +358,7 @@ export default function Lyrebird() {
             <TestimonialCard quote="In the last six months alone, our care plan process has become incredibly smoother. We have seen a significant increase in patient throughput, largely driven by Lyrebird's CDM and care plan processes." name="Louise Forster" role="Business Manager" org="Lake Kawana General Practice" />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── SECURITY & COMPLIANCE ─────────────────────────────────────── */}
       <section className="py-[96px] px-6" style={{ background: "#000" }}>
