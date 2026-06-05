@@ -343,22 +343,52 @@ export default function Lyrebird() {
       </section>
 
       {/* ── TESTIMONIALS ──────────────────────────────────────────────── */}
-      {/* <section className="py-[96px] px-6" style={{ background: "#050505" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <PLabel>WHAT CLINICIANS SAY</PLabel>
-          <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 56 }}>
-            Trusted by <span style={{ color: "#f5b800" }}>Thousands of Clinicians</span>
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-            <TestimonialCard quote="It has shortened my note taking time by about 90%. In actual numbers, this translates to 40–60 minutes of time gained per 10-hour shift." name="Dr Dhruv Mori" role="Clinical Lead" org="Bendigo Hospital ED" />
-            <TestimonialCard quote="The depth of information recorded with Lyrebird is more detailed than I would normally type during a consult or from memory later. Plus, I've been able to customise it to reflect my own structure, style, and technical language." name="Jessica Triay" role="Staff Specialist, Endocrinology" org="Gold Coast Health" />
-            <TestimonialCard quote="Prior to using Lyrebird, I would spend an hour with a patient and another 1–2 hours on paperwork. Now it's just 15–20 minutes, saving me 2–3 hours a day. I can maintain eye contact with parents during deeper conversations." name="Angela Owens" role="Senior Medical Officer" org="Gold Coast Health" />
-            <TestimonialCard quote="Lyrebird Health strikes the right balance between efficiency, security and patient-centred care. I highly recommend it to fellow practitioners." name="Dr Sean Stevens" role="Principal GP & Owner" org="Grove Medical" />
-            <TestimonialCard quote="The results are so significant that we are planning to roll this out to all 32 of our doctors ASAP. This isn't just an efficiency tool; it's a critical investment in our entire operation." name="Dene Creegan" role="General Manager" org="7 Springs Medical Practice" />
-            <TestimonialCard quote="In the last six months alone, our care plan process has become incredibly smoother. We have seen a significant increase in patient throughput, largely driven by Lyrebird's CDM and care plan processes." name="Louise Forster" role="Business Manager" org="Lake Kawana General Practice" />
-          </div>
-        </div>
-      </section> */}
+      <section className="py-[96px] px-6" style={{ background: "#050505" }}>
+  <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+    <PLabel>WHAT CLINICIANS SAY</PLabel>
+    <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 56 }}>
+      Trusted by <span style={{ color: "#f5b800" }}>Thousands of Clinicians</span>
+    </h2>
+   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+  <TestimonialCard
+    quote="Prior to using Lyrebird, I would spend an hour with a patient and another 1-2 hours on paperwork. Now, it's just 15-20 minutes, saving me 2-3 hours a day. In my consultations, I have more time to interact with the kids, and I can maintain eye contact with parents during those deeper conversations which is improving my relationships with the families."
+    name="Angela Owens"
+    role="Senior Medical Officer"
+    org="Gold Coast Health"
+  />
+  <TestimonialCard
+    quote="The depth of information recorded with Lyrebird is more detailed than I would normally type during a consult or from memory later. Plus, I've been able to customize it to reflect my own structure, style, and technical language, making it even more tailored to my workflow."
+    name="Jessica Triay"
+    role="Staff Specialist, Endocrinology"
+    org="Gold Coast Health"
+  />
+  <TestimonialCard
+    quote="Lyrebird's commitment to data security and its proven track record with other medical groups gave us the immediate confidence we needed. Coupled with the seamless integration with Cubiko and Best Practice, choosing Lyrebird was an absolute no-brainer for our practice."
+    name="Louise Forster"
+    role="Business Manager"
+    org="Lake Kawana General Practice"
+  />
+  <TestimonialCard
+    quote="Lyrebird Health strikes the right balance between efficiency, security and patient-centred care. I highly recommend it to fellow practitioners."
+    name="Dr Sean Stevens"
+    role="Principal GP & Owner"
+    org="Grove Medical"
+  />
+  <TestimonialCard
+    quote="The results are so significant that we are planning to roll this out to all 32 of our doctors ASAP. This isn't just an efficiency tool; it's a critical investment in our entire operation."
+    name="Dene Creegan"
+    role="General Manager"
+    org="7 Springs Medical Practice"
+  />
+  <TestimonialCard
+    quote="In the last six months alone, our care plan process has become incredibly smoother. We have seen a significant increase in patient throughput, largely driven by leveraging the solution for Lyrebird's chronic disease management (CDM) and care plan processes (965 and 967)."
+    name="Louise Forster"
+    role="Business Manager"
+    org="Lake Kawana General Practice"
+  />
+</div>
+  </div>
+</section>
 
       {/* ── SECURITY & COMPLIANCE ─────────────────────────────────────── */}
       <section className="py-[96px] px-6" style={{ background: "#000" }}>
