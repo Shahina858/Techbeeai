@@ -402,20 +402,7 @@ export default function IDP() {
           </div>
         </section>
 
-        {/* ══ TESTIMONIALS ══════════════════════════════════════════════════════ */}
-        <section className="py-[96px] px-6" style={{ background: "#050505" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-            <PLabel>CUSTOMER SUCCESS</PLabel>
-            <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 56 }}>
-              Trusted by <span style={{ color: "#f5b800" }}>Enterprise Teams Globally</span>
-            </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-              <TestimonialCard quote="IDP reduced our invoice processing time from 10 minutes to under 30 seconds per document. Our AP team now focuses on strategy, not data entry." role="VP of Finance Operations" company="International Financial Shared Services Center" />
-              <TestimonialCard quote="The accuracy on multi-language invoices is remarkable. We process documents in 12 languages and IDP handles them all without breaking a sweat." role="Head of Shared Services" company="Global Integrated Circuit Manufacturer" />
-              <TestimonialCard quote="Onboarding time for KYC dropped by 85%. Our compliance team can now handle 5x the volume with the same headcount." role="Chief Compliance Officer" company="Regional Bank, Middle East" />
-            </div>
-          </div>
-        </section>
+        
 
         {/* ══ PRICING ═══════════════════════════════════════════════════════════ */}
         <section id="pricing" className="py-[96px] px-6" style={{ background: "#000" }}>
