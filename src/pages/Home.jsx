@@ -6,6 +6,7 @@ import BrainBackground from "../components/BrainBackground"
 import MouseGlow from "../components/MouseGlow"
 import emailjs from "@emailjs/browser"
 import Footer from "../components/Footer"
+import { TestimonialsCarousel } from "../components/TestimonialsCarousel"
 
 // ── SEO Head Component ────────────────────────────────────────────────────────
 function SEOHead() {
@@ -370,69 +371,7 @@ const btnOutline = {
   cursor: "pointer", transition: "all 0.2s",
 }
 
-function TestimonialsCarousel() {
-  const [curr, setCurr] = useState(0)
-  useEffect(() => {
-    const timer = setInterval(() => { setCurr(c => (c + 1) % TESTIMONIALS.length) }, 4000)
-    return () => clearInterval(timer)
-  }, [])
-  return (
-    <section className="py-[112px] px-6 relative overflow-hidden" style={{ background: "#080808" }} aria-label="Client Testimonials">
-      <div className="max-w-[1120px] mx-auto relative z-10">
-        <SLabel>TESTIMONIALS</SLabel>
-        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-16 mt-20">
-          <div className="w-full lg:w-[45%] flex flex-col items-start lg:mt-[50px]">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#f5b800]/30 bg-[#f5b800]/5 mb-10">
-              <div className="w-2 h-2 rounded-full bg-[#f5b800]"></div>
-              <span className="text-[#f5b800] text-[12px] font-bold uppercase tracking-widest">Client Stories</span>
-            </div>
-            <h2 className="font-black leading-[0.95] tracking-tighter"
-              style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(2.4rem, 4vw, 3.4rem)", fontWeight: 800, letterSpacing: "-0.02em", marginLeft: "-2px" }}>
-              <div className="text-white">Trusted by</div>
-              <div className="text-white">Teams</div>
-              <div className="text-white">That</div>
-              <div style={{ background: "linear-gradient(90deg, #ff6b00 0%, #f5b800 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Demand</div>
-              <div style={{ background: "linear-gradient(90deg, #f5a000 0%, #f5b800 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>the Best</div>
-            </h2>
-          </div>
-          <div className="w-full lg:w-[50%] relative min-h-[360px] mt-12 lg:mt-0 flex justify-end items-center">
-            <div className="relative w-full max-w-[480px]">
-              <AnimatePresence>
-                {TESTIMONIALS.map((t, i) => {
-                  const offset = (i - curr + TESTIMONIALS.length) % TESTIMONIALS.length
-                  const isFront = offset === 0
-                  return (
-                    <motion.div key={i} className="absolute w-full rounded-3xl p-8" initial={false}
-                      animate={{ top: offset * -22, right: offset * -22, zIndex: 30 - offset * 10, opacity: 1 }}
-                      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-                      style={{ background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.05)", boxShadow: isFront ? "0 40px 80px rgba(0,0,0,0.8)" : "0 10px 30px rgba(0,0,0,0.5)" }}>
-                      <div className="flex gap-1.5 mb-5">
-                        {[...Array(5)].map((_, idx) => <svg key={idx} width="16" height="16" viewBox="0 0 24 24" fill="#f5b800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
-                      </div>
-                      <svg width="24" height="24" viewBox="0 0 24 24" className="mb-4">
-                        <path d="M9.467 18H5.975C5.975 12.181 8.878 9.531 12.5 8L13 9.771C10.702 10.665 9.467 12 9.467 14.5V18ZM20.467 18H16.975C16.975 12.181 19.878 9.531 23.5 8L24 9.771C21.702 10.665 20.467 12 20.467 14.5V18Z" fill="#333333"/>
-                      </svg>
-                      <p className="text-[#a1a1aa] text-[15px] leading-[1.75] font-medium mb-6">{t.quote}</p>
-                      <hr className="border-[#1a1a1a] mb-6"/>
-                      <div className="flex items-center gap-4">
-                        <div className="w-[42px] h-[42px] rounded-full flex items-center justify-center bg-[#f5b800] text-black text-[15px] font-bold shrink-0">{t.avatar}</div>
-                        <div>
-                          <p className="text-white text-[15px] font-bold leading-tight">{t.name}</p>
-                          <p className="text-[#555555] text-[12px] mt-1">{t.role}</p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )
-                })}
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#f5b800] opacity-[0.03] rounded-full blur-[120px] pointer-events-none -translate-y-1/2 -translate-x-1/2"/>
-    </section>
-  )
-}
+
 
 // ══════════════════════════════════════════════════════════════════════════════
 export default function Home() {
@@ -503,7 +442,7 @@ const handleSubmit = async () => {
           <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.13 }}
             style={{ fontSize: "clamp(2.2rem, 4.4vw, 3.8rem)", fontWeight: 700, lineHeight: 1.15, letterSpacing: "-0.01em", color: "#ffffff", textAlign: "center", margin: 0 }}>
             Powering the Future<br />with{" "}
-            <span style={{ color: "#f5b800", textShadow: "0 0 35px rgba(245,184,0,0.6), 0 0 70px rgba(245,184,0,0.25)" }}>Artificial Intelligence</span>
+            <span style={{ color: "#f5b800", textShadow: "0 0 15px rgba(227, 171, 4, 0.46), 0 0 70px rgba(245,184,0,0.25)" }}>Artificial Intelligence</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.26 }}
             style={{ marginTop: 18, color: "#eae4e4", fontSize: "clamp(0.82rem, 1.3vw, 0.95rem)", lineHeight: 1.7, maxWidth: 480, textAlign: "center" }}>
@@ -705,7 +644,7 @@ const handleSubmit = async () => {
       </section>
 
       {/* ══ TESTIMONIALS ══ */}
-      <TestimonialsCarousel />
+      <TestimonialsCarousel /> 
 
       {/* ══ CONTACT ══ */}
       <section id="contact" className="w-full py-[112px] px-0" style={{ background: "#000" }} aria-label="Contact TechBee AI">
@@ -820,79 +759,149 @@ const handleSubmit = async () => {
 
 
 <Footer />
-      {/* ══ LIVE CHAT WIDGET ══ */}
+            {/* ══ LIVE CHAT WIDGET ══ */}
       <div style={{ position: "fixed", bottom: 28, right: 28, zIndex: 999, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
         <AnimatePresence>
           {chatOpen && (
-            <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.95 }} transition={{ duration: 0.25 }}
-              style={{ width: 320, borderRadius: 20, overflow: "hidden", background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.3)", boxShadow: "0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(245,184,0,0.1)" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              style={{ width: 320, borderRadius: 20, overflow: "hidden", background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.3)", boxShadow: "0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(245,184,0,0.1)" }}
+            >
+              {/* Header */}
               <div style={{ background: "#f5b800", padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
                   <p style={{ color: "#000", fontWeight: 700, fontSize: 14, margin: 0 }}>TechBee AI Support</p>
                   <p style={{ color: "rgba(0,0,0,0.6)", fontSize: 11, margin: 0 }}>● Online — typically replies instantly</p>
                 </div>
-                <button onClick={() => setChatOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#000", fontSize: 18, lineHeight: 1 }}>✕</button>
+                <button
+                  onClick={() => setChatOpen(false)}
+                  style={{ background: "none", border: "none", cursor: "pointer", color: "#000", fontSize: 18, lineHeight: 1 }}
+                >✕</button>
               </div>
+
+              {/* Body */}
               <div style={{ padding: "20px 20px 16px" }}>
+                {/* Bot greeting */}
                 <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                   <div style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(245,184,0,0.2)", border: "1px solid rgba(245,184,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 14 }}>🐝</div>
                   <div style={{ background: "#1a1a1a", borderRadius: "0 12px 12px 12px", padding: "12px 14px", maxWidth: 220 }}>
-                    <p style={{ color: "#ddd", fontSize: 13, lineHeight: 1.65, margin: 0 }}>Hi! 👋 Welcome to TechBee AI. How can I help you today?</p>
+                    <p style={{ color: "#ddd", fontSize: 13, lineHeight: 1.65, margin: 0 }}>
+                      Hi! 👋 Welcome to TechBee AI. How can I help you today?
+                    </p>
                   </div>
                 </div>
+
+                {/* Quick reply buttons */}
                 {!chatSent && (
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 16 }}>
                     {["Request a Demo", "Product Info", "Pricing", "Support"].map(opt => (
-                      <button key={opt}
-                        onClick={() => { setChatMsg(opt); setChatSent(true); if (opt === "Request a Demo") goToContact(); else if (opt === "Pricing") navigate("/pricing") }}
+                      <button
+                        key={opt}
+                        onClick={() => {
+                          setChatMsg(opt)
+                          setChatSent(true)
+                          const waMsg = encodeURIComponent("Hi TechBee! I'm interested in: " + opt)
+                          window.open("https://wa.me/971564116174?text=" + waMsg, "_blank")
+                        }}
                         style={{ background: "transparent", border: "1px solid rgba(245,184,0,0.35)", borderRadius: 50, padding: "6px 14px", color: "#f5b800", fontSize: 12, cursor: "pointer", transition: "all 0.2s" }}
                         onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.1)"; e.currentTarget.style.borderColor = "#f5b800" }}
-                        onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.35)" }}>
+                        onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.35)" }}
+                      >
                         {opt}
                       </button>
                     ))}
                   </div>
                 )}
+
+                {/* After send — show user bubble + bot reply */}
                 {chatSent && (
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    {/* User bubble */}
                     <div style={{ alignSelf: "flex-end", background: "#f5b800", borderRadius: "12px 0 12px 12px", padding: "10px 14px" }}>
                       <p style={{ color: "#000", fontSize: 13, margin: 0, fontWeight: 600 }}>{chatMsg}</p>
                     </div>
+                    {/* Bot reply */}
                     <div style={{ display: "flex", gap: 10 }}>
                       <div style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(245,184,0,0.2)", border: "1px solid rgba(245,184,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 14 }}>🐝</div>
                       <div style={{ background: "#1a1a1a", borderRadius: "0 12px 12px 12px", padding: "12px 14px" }}>
                         <p style={{ color: "#ddd", fontSize: 13, lineHeight: 1.65, margin: 0 }}>
-                          Thanks! Our team will get back to you shortly.{" "}
-                          <span style={{ color: "#f5b800", cursor: "pointer", textDecoration: "underline" }} onClick={goToContact}>Fill out the contact form</span>{" "}for faster response.
+                          Opening WhatsApp… If it didn't open,{" "}
+                          <a
+                            href={"https://wa.me/971564116174?text=" + encodeURIComponent("Hi TechBee! " + chatMsg)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "#f5b800", textDecoration: "underline" }}
+                          >
+                            click here
+                          </a>.
                         </p>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
+
+              {/* Input row */}
               <div style={{ padding: "0 16px 16px", display: "flex", gap: 8 }}>
-                <input placeholder="Type a message..." value={chatMsg} onChange={e => setChatMsg(e.target.value)}
-                  onKeyDown={e => { if (e.key === "Enter" && chatMsg.trim()) setChatSent(true) }}
-                  style={{ flex: 1, background: "#1a1a1a", border: "1px solid rgba(245,184,0,0.2)", borderRadius: 50, padding: "10px 16px", color: "#fff", fontSize: 13, outline: "none" }}/>
-                <button onClick={() => { if (chatMsg.trim()) setChatSent(true) }}
-                  style={{ width: 38, height: 38, borderRadius: "50%", background: "#f5b800", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                <input
+                  placeholder="Type a message..."
+                  value={chatMsg}
+                  onChange={e => setChatMsg(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === "Enter" && chatMsg.trim()) {
+                      setChatSent(true)
+                      const waMsg = encodeURIComponent("Hi TechBee! " + chatMsg.trim())
+                      window.open("https://wa.me/971564116174?text=" + waMsg, "_blank")
+                    }
+                  }}
+                  style={{ flex: 1, background: "#1a1a1a", border: "1px solid rgba(245,184,0,0.2)", borderRadius: 50, padding: "10px 16px", color: "#fff", fontSize: 13, outline: "none" }}
+                />
+                <button
+                  onClick={() => {
+                    if (chatMsg.trim()) {
+                      setChatSent(true)
+                      const waMsg = encodeURIComponent("Hi TechBee! " + chatMsg.trim())
+                      window.open("https://wa.me/971564116174?text=" + waMsg, "_blank")
+                    }
+                  }}
+                  style={{ width: 38, height: 38, borderRadius: "50%", background: "#f5b800", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
                 </button>
+              </div>
+
+              {/* WhatsApp footer */}
+              <div style={{ padding: "0 16px 14px", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 12 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span style={{ color: "#555", fontSize: 11 }}>Messages go to WhatsApp · +971 56 411 6174</span>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.button onClick={() => { setChatOpen(o => !o); setChatSent(false); setChatMsg("") }}
-          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
+
+        {/* Floating button */}
+        <motion.button
+          onClick={() => { setChatOpen(o => !o); setChatSent(false); setChatMsg("") }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.93 }}
           style={{ width: 58, height: 58, borderRadius: "50%", background: "#f5b800", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 30px rgba(245,184,0,0.5), 0 4px 20px rgba(0,0,0,0.4)", position: "relative" }}
-          aria-label="Open chat">
+          aria-label="Open chat"
+        >
           <AnimatePresence mode="wait">
             {chatOpen
               ? <motion.span key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }} transition={{ duration: 0.2 }} style={{ color: "#000", fontSize: 20, fontWeight: 700, lineHeight: 1 }}>✕</motion.span>
               : <motion.span key="open" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }} transition={{ duration: 0.2 }} style={{ fontSize: 24 }}>💬</motion.span>
             }
           </AnimatePresence>
-          {!chatOpen && <div style={{ position: "absolute", top: 6, right: 6, width: 10, height: 10, borderRadius: "50%", background: "#22c55e", border: "2px solid #000" }}/>}
+          {!chatOpen && (
+            <div style={{ position: "absolute", top: 6, right: 6, width: 10, height: 10, borderRadius: "50%", background: "#22c55e", border: "2px solid #000" }} />
+          )}
         </motion.button>
       </div>
 
