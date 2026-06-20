@@ -6,7 +6,7 @@ import Footer from "../components/Footer"
 // ── Image assets (copy all to /public/) ──────────────────────────────────────
 const LYREBIRD_LOGO_H   = "/lyrebird_logo_horizontal.png"  // wide black logo
 const LYREBIRD_LOGO_W   = "/lyrebird_logo_white.png"       // white logo for dark bg
-const HERO_IMG          = "/lyrebird_clinical_note.png"    // img1 — clinical note UI
+const HERO_IMG          = "/lyrebird_hero (2).png"    // img1 — clinical note UI
 const PATIENT_HIST_IMG  = "/lyrebird_patient_history.png"  // img2 — patient history
 const DOCUMENTS_IMG     = "/lyrebird_documents.png"        // img3 — documents/letters
 
@@ -409,6 +409,7 @@ export default function Lyrebird() {
           </div>
         </div>
       </section>
+      
 
       {/* ── PRICING ── */}
       <section className="py-[96px] px-6" style={{ background: "#050505" }} id="pricing">
