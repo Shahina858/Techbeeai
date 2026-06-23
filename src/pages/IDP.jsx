@@ -257,7 +257,7 @@ export default function IDP() {
               />
               <ProductCard name="xParse" tag="AI Parsing & Data Extraction"
                 icon={<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>}
-                desc="Advanced AI-powered parsing engine that extracts structured data from semi-structured and unstructured documents. Combines OCR, NLP, and LLM intelligence to deliver schema-level extraction accuracy at enterprise scale."
+                desc="xParse is an AI-powered accelerator to create application with general large language model(LLM), it converts different format files into Mackdown or JSON which empowers LLM to be able to recognize and comprehend information from documents and images, it supports to detecte the page, section, column, paragraph and chunk of a document automatically, these elements will be helpful for LLM to do pre-train or fine-tune, and play an import role to raise the peformance of RAG and Agent."
                 points={["Titles, formulas, stamps, headers/footers and handwriting recognition","Automatic cropping of multi-image single-page documents","Accurate structured information extraction with field-level precision","Flexible classification rule configuration and tuning","REST API-first for seamless ERP/CRM/RPA integration","Continuous learning — accuracy improves with every processed document"]}
               />
             </div>

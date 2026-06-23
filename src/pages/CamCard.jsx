@@ -4,13 +4,11 @@ import { useNavigate } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-const HERO_BG    = "https://framerusercontent.com/images/TglGme8G89i1DDRAZDRD0tqp90.jpg"
-const CARD_IMG   = "/1200x630wa.jpg.jpeg"
-
-const IMG_MOBILE_BANNER  = "/mobile_banner-removebg-preview.png"
-const IMG_APP_SCREENS    = "/app_screen_clean.jpeg"
-const VIDEO_DEMO         = "/14ge.76jde8k3d.d87da863ee3c6fb04fd67be2b68207d1.mp4"  // inline section
-const VIDEO_MODAL        = "/WhatsApp Video 2026-06-02 at 11.53.17 AM.mp4"              // Watch Demo button modal
+const HERO_BG        = "https://framerusercontent.com/images/TglGme8G89i1DDRAZDRD0tqp90.jpg"
+const CARD_IMG       = "/1200x630wa.jpg.jpeg"
+const IMG_APP_SCREENS = "/app_screen_clean.jpeg"
+const VIDEO_DEMO     = "/14ge.76jde8k3d.d87da863ee3c6fb04fd67be2b68207d1.mp4"
+const VIDEO_MODAL    = "/WhatsApp Video 2026-06-02 at 11.53.17 AM.mp4"
 
 const goToContact = (navigate) => {
   navigate("/")
@@ -31,7 +29,6 @@ const Chip = ({ children }) => (
   </div>
 )
 
-// ── Video Modal ───────────────────────────────────────────────────────────────
 function VideoModal({ src, onClose }) {
   useEffect(() => {
     const handler = (e) => { if (e.key === "Escape") onClose() }
@@ -41,64 +38,20 @@ function VideoModal({ src, onClose }) {
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
         onClick={onClose}
-        style={{
-          position: "fixed", inset: 0, zIndex: 9999,
-          background: "rgba(0,0,0,0.92)",
-          backdropFilter: "blur(12px)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          padding: 24,
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.92, y: 20 }}
-          transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+        style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.92)", backdropFilter: "blur(12px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <motion.div initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.92, y: 20 }} transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
           onClick={e => e.stopPropagation()}
-          style={{
-            position: "relative", width: "100%", maxWidth: 900,
-            borderRadius: 20, overflow: "hidden",
-            border: "1px solid rgba(245,184,0,0.25)",
-            boxShadow: "0 40px 100px rgba(0,0,0,0.8), 0 0 60px rgba(245,184,0,0.08)",
-            background: "#000",
-          }}
-        >
-          {/* Header bar */}
-          <div style={{
-            background: "#0a0a0a",
-            borderBottom: "1px solid rgba(245,184,0,0.15)",
-            padding: "12px 20px",
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-          }}>
+          style={{ position: "relative", width: "100%", maxWidth: 900, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(245,184,0,0.25)", boxShadow: "0 40px 100px rgba(0,0,0,0.8), 0 0 60px rgba(245,184,0,0.08)", background: "#000" }}>
+          <div style={{ background: "#0a0a0a", borderBottom: "1px solid rgba(245,184,0,0.15)", padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#f5b800" }} />
               <span style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em" }}>CAMCARD BUSINESS — DEMO</span>
             </div>
-            <button
-              onClick={onClose}
-              style={{
-                width: 30, height: 30, borderRadius: "50%",
-                background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)",
-                color: "#fff", fontSize: 16, cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-              aria-label="Close video"
-            >✕</button>
+            <button onClick={onClose} style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#fff", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }} aria-label="Close video">✕</button>
           </div>
-
-          <video
-            src={src}
-            controls
-            autoPlay
-            playsInline
-            style={{ width: "100%", display: "block", maxHeight: "80vh", background: "#000" }}
-          />
+          <video src={src} controls autoPlay playsInline style={{ width: "100%", display: "block", maxHeight: "80vh", background: "#000" }} />
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -135,7 +88,7 @@ const FEATURES = [
   "Export to Excel / CSV / vCard",
   "AI Notetaker for client meetings",
   "AI-powered follow-up email drafting",
-  "Digital business card creation",
+  "Enterprise REST API",
 ]
 
 const FEATURE_GRID = [
@@ -157,7 +110,7 @@ const AI_CAPS = [
   {
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
     title: "Capture Every Client Conversation",
-    desc: "CamCard AI Notetaker takes notes during Zoom and video calls, then attaches them to the correct lead along with any tags. A complete record of who you met, what mattered, and what to do next.",
+    desc: "CamCard Business AI Notetaker takes notes during Zoom and video calls, then attaches them to the correct lead along with any tags. A complete record of who you met, what mattered, and what to do next.",
     tag: "AI Notetaker",
   },
   {
@@ -172,7 +125,7 @@ const USE_CASES = [
   {
     role: "Sales Teams",
     title: "Scan. Sync. Close deals faster at every event and trade show.",
-    desc: "Sales reps scan hundreds of cards at conferences. CamCard AI extracts every detail and pushes contacts directly into Salesforce or HubSpot — no manual entry, no lost leads.",
+    desc: "Sales reps scan hundreds of cards at conferences. CamCard Business extracts every detail and pushes contacts directly into Salesforce or HubSpot — no manual entry, no lost leads.",
     tags: ["Trade Shows", "Salesforce Sync", "Zero Manual Entry"],
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
   },
@@ -186,14 +139,14 @@ const USE_CASES = [
   {
     role: "Field Sales",
     title: "On-the-go scanning. Works offline, syncs when connected.",
-    desc: "No internet? No problem. CamCard AI scans and stores locally — syncing everything to your CRM the moment you're back online.",
+    desc: "No internet? No problem. CamCard Business scans and stores locally — syncing everything to your CRM the moment you're back online.",
     tags: ["Offline Mode", "Auto Sync", "Mobile-First"],
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
   },
   {
     role: "HR & Recruitment",
     title: "Turn job fair contacts into qualified candidates instantly.",
-    desc: "Recruiters scan candidate cards at hiring events and CamCard AI syncs every detail directly into their ATS or CRM — so no promising candidate ever slips through the cracks.",
+    desc: "Recruiters scan candidate cards at hiring events and CamCard Business syncs every detail directly into their ATS or CRM — so no promising candidate ever slips through the cracks.",
     tags: ["ATS Integration", "Hiring Events", "Candidate Tracking"],
     icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
   },
@@ -206,21 +159,21 @@ const USE_CASES = [
   },
 ]
 
-const DIGITAL_CARD = [
+const ENTERPRISE_BENEFITS = [
   {
-    icon: "✏️",
-    title: "Quickly Create",
-    desc: "Scan or import your physical business card information to instantly create a personal electronic business card.",
+    icon: "🏢",
+    title: "Centralised Admin Console",
+    desc: "IT admins manage all users, permissions, and data policies from a single dashboard. Onboard new team members in minutes with bulk provisioning.",
   },
   {
-    icon: "🎨",
-    title: "Custom Made",
-    desc: "Create custom QR code designs for your business cards and design webinar backgrounds used during video conferences.",
+    icon: "🔐",
+    title: "Role-Based Access Control",
+    desc: "Define exactly who can view, edit, or export contacts. Keep sensitive client data private while enabling seamless cross-team collaboration.",
   },
   {
-    icon: "📤",
-    title: "Easy Share",
-    desc: "Use SMS, Email, Business Card URL, QR codes, and video conference backgrounds to share and receive cards effortlessly.",
+    icon: "📊",
+    title: "Team Analytics & Reporting",
+    desc: "Track scanning activity, CRM sync rates, and lead volume across your entire organization. Data-driven insights to optimize your team's networking ROI.",
   },
 ]
 
@@ -284,12 +237,13 @@ const PREMIUM_FEATURES = [
 ]
 
 const FAQS = [
-  { q: "What makes CamCard Business different from free scanning apps?", a: "CamCard Business is purpose-built for teams, not individuals. It adds role-based access, CRM auto-sync, AI Deep Intelligence to qualify leads, AI Notetaker for meetings, and enterprise-grade security certifications — none of which exist in consumer apps." },
+  { q: "What makes CamCard Business different from consumer scanning apps?", a: "CamCard Business is purpose-built for enterprise teams, not individuals. It adds centralised admin control, role-based access, CRM auto-sync, AI Deep Intelligence to qualify leads, AI Notetaker for meetings, and enterprise-grade security certifications — none of which exist in consumer apps." },
   { q: "Which CRM systems does CamCard Business integrate with?", a: "CamCard Business natively integrates with Salesforce, HubSpot, Zoho CRM, Microsoft Outlook, and Google Contacts. For custom CRMs or ATS platforms, an enterprise REST API is available." },
   { q: "How accurate is the AI card scanning?", a: "CamCard Business achieves 99.9% recognition accuracy across 40+ languages, including Arabic, English, Chinese, Japanese, Hindi, French, and Spanish. It handles rotated, low-quality, and handwritten cards reliably." },
   { q: "Does it work in the UAE and Middle East?", a: "Yes. The 40+ language OCR engine includes full Arabic support, making it ideal for UAE and GCC markets where bilingual (Arabic/English) business cards are common." },
   { q: "Can contacts be scanned without an internet connection?", a: "Yes. CamCard Business operates fully offline — cards are scanned and stored locally on the device, then synced to your CRM and team workspace automatically once connectivity is restored." },
   { q: "Is our contact data secure?", a: "CamCard Business holds 6 enterprise security certifications including ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 9001, ISO/IEC 20000, DJCP, and CMMI V2.0 Level 3. Data is protected with offline synchronization, on-device encryption, and privacy controls that block unauthorized connections." },
+  { q: "What is the minimum team size?", a: "CamCard Business requires a minimum of 10 users per plan. It is designed for enterprise teams — whether a 10-person sales department or a 500-strong global organization. Contact Techbee for volume pricing." },
   { q: "How do we get started?", a: "Contact Techbee — the authorized CamCard Business partner for the UAE and GCC. Our team handles onboarding, CRM integration setup, and training so your team is scanning and syncing on day one." },
 ]
 
@@ -316,7 +270,6 @@ export default function CamCard() {
   const [activeCase, setActiveCase] = useState(0)
   const [openFaq, setOpenFaq] = useState(null)
   const [videoPlaying, setVideoPlaying] = useState(false)
-  // ── NEW: modal state ──────────────────────────────────────────────────────
   const [videoModalOpen, setVideoModalOpen] = useState(false)
 
   return (
@@ -324,19 +277,17 @@ export default function CamCard() {
       <style>{gridResponsiveStyle}</style>
       <Navbar />
 
-      {/* ── Video Modal — opens when hero Watch Demo is clicked ── */}
       {videoModalOpen && (
         <VideoModal src={VIDEO_MODAL} onClose={() => setVideoModalOpen(false)} />
       )}
 
-      {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
+      {/* ══ HERO ══ */}
       <section style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0 }}>
           <img src={HERO_BG} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.9 }}/>
           <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.52)" }}/>
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 180, background: "linear-gradient(to top, #000 0%, transparent 100%)" }}/>
         </div>
-
         <div className="hero-inner" style={{ position: "relative", zIndex: 10, maxWidth: 1300, margin: "0 auto", padding: "140px 32px 80px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 48, flexWrap: "wrap", width: "100%", boxSizing: "border-box" }}>
           <div className="hero-text" style={{ flex: "0 0 52%", maxWidth: 640, minWidth: 280 }}>
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}
@@ -344,41 +295,32 @@ export default function CamCard() {
               <span style={{ color: "#ffffff" }}>CAMCARD</span>
               <span style={{ color: "#f5b800", marginLeft: 4 }}>BUSINESS</span>
             </motion.div>
-
             <motion.h1 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
               style={{ fontSize: "clamp(2rem, 5.5vw, 4.8rem)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 24px", textAlign: "left" }}>
               <span style={{ color: "#ffffff" }}>Your Team's AI<br />Assistant for Every </span>
               <span style={{ color: "#f5b800" }}>Trade Show</span>
               <span style={{ color: "#ffffff" }}><br />and Client Visit</span>
             </motion.h1>
-
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
               style={{ color: "#aaaaaa", fontSize: "clamp(0.88rem, 1.2vw, 1rem)", lineHeight: 1.75, maxWidth: 520, margin: "0 0 40px", textAlign: "left" }}>
-              Scan cards, collaborate with your team, sync to CRM, and let AI handle the details — from first scan to signed deal.
+              Enterprise contact management for sales teams — scan cards, collaborate across departments, sync to CRM, and let AI handle follow-ups from first scan to signed deal.
             </motion.p>
-
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
               style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
               <button onClick={() => goToContact(navigate)}
                 style={{ background: "#f5b800", color: "#000", fontSize: 15, fontWeight: 700, borderRadius: 50, padding: "14px 40px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.45)", transition: "background 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
-                Start Free Trial
+                Request a Demo
               </button>
-
-              {/* ── Watch Demo — now opens modal ── */}
-              <button
-                onClick={() => setVideoModalOpen(true)}
+              <button onClick={() => setVideoModalOpen(true)}
                 style={{ background: "transparent", color: "#f5b800", fontSize: 15, fontWeight: 600, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.5)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.5)" }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                 Watch Demo
               </button>
-
-              {/* ── Pricing CTA ── */}
-              <button
-                onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
+              <button onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
                 style={{ background: "transparent", color: "#aaa", fontSize: 14, fontWeight: 600, borderRadius: 50, padding: "13px 24px", border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)"; e.currentTarget.style.color = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "#aaa" }}>
@@ -387,17 +329,16 @@ export default function CamCard() {
               </button>
             </motion.div>
           </div>
-
           <motion.div className="hero-image" initial={{ opacity: 0, x: 48 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.25 }}
             style={{ flex: "0 0 40%", display: "flex", alignItems: "center", justifyContent: "center", minWidth: 260 }}>
             <div style={{ width: "clamp(220px, 34vw, 460px)", aspectRatio: "1 / 1", borderRadius: 32, overflow: "hidden", boxShadow: "0 0 80px rgba(0,180,255,0.4), 0 0 160px rgba(0,180,255,0.18), 0 40px 80px rgba(0,0,0,0.7)", border: "1px solid rgba(0,200,255,0.25)" }}>
-              <img src={CARD_IMG} alt="CamCard Business" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}/>
+              <img src={CARD_IMG} alt="CamCard Business Enterprise" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}/>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ══ VIDEO DEMO — inline section (unchanged) ═══════════════════════════ */}
+      {/* ══ VIDEO DEMO ══ */}
       <section id="demo-video" style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>WATCH IT IN ACTION</SLabel>
@@ -407,14 +348,11 @@ export default function CamCard() {
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 52px", lineHeight: 1.7 }}>
             Watch how your team can go from card scan to CRM entry in under 2 seconds — at any event, in any language.
           </p>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
             style={{ position: "relative", borderRadius: 24, overflow: "hidden", border: "1px solid rgba(245,184,0,0.25)", boxShadow: "0 0 80px rgba(245,184,0,0.08), 0 40px 80px rgba(0,0,0,0.6)", background: "#0d0d0d" }}>
-            <video
-              controls playsInline preload="auto"
+            <video controls playsInline preload="auto"
               style={{ width: "100%", display: "block", maxHeight: 600, objectFit: "contain", borderRadius: 24, background: "#000" }}
-              onPlay={() => setVideoPlaying(true)} onPause={() => setVideoPlaying(false)}
-            >
+              onPlay={() => setVideoPlaying(true)} onPause={() => setVideoPlaying(false)}>
               <source src={VIDEO_DEMO} type="video/mp4" />
             </video>
             <div style={{ position: "absolute", inset: 0, borderRadius: 24, pointerEvents: "none", background: "linear-gradient(135deg, rgba(245,184,0,0.06) 0%, transparent 50%, rgba(245,184,0,0.03) 100%)" }} />
@@ -429,7 +367,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ HOW IT WORKS ══════════════════════════════════════════════════════ */}
+      {/* ══ HOW IT WORKS ══ */}
       <section style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>HOW IT WORKS</SLabel>
@@ -457,12 +395,12 @@ export default function CamCard() {
             </div>
           </motion.div>
           <p style={{ textAlign: "center", color: "#555", fontSize: 12, marginTop: 16, letterSpacing: "0.05em" }}>
-            Card Holder · Contact Management · Bulk Actions — all in one app
+            Card Holder · Contact Management · Bulk Actions — all in one enterprise platform
           </p>
         </div>
       </section>
 
-      {/* ══ POWERFUL FEATURES ═════════════════════════════════════════════════ */}
+      {/* ══ POWERFUL FEATURES ══ */}
       <section style={{ padding: "100px 24px", background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>POWERFUL FEATURES</SLabel>
@@ -490,7 +428,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ STATS ═════════════════════════════════════════════════════════════ */}
+      {/* ══ STATS ══ */}
       <section style={{ padding: "80px 24px", background: "#000" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
@@ -510,7 +448,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ AI CAPABILITIES ═══════════════════════════════════════════════════ */}
+      {/* ══ AI CAPABILITIES ══ */}
       <section style={{ padding: "100px 24px", background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>AI CAPABILITIES</SLabel>
@@ -536,7 +474,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ USE CASES ═════════════════════════════════════════════════════════ */}
+      {/* ══ USE CASES ══ */}
       <section style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>USE CASES</SLabel>
@@ -579,7 +517,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ CRM INTEGRATIONS ══════════════════════════════════════════════════ */}
+      {/* ══ CRM INTEGRATIONS ══ */}
       <section style={{ padding: "100px 24px", background: "#0a0a0a" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>INTEGRATIONS</SLabel>
@@ -606,7 +544,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ COMPARISON TABLE ══════════════════════════════════════════════════ */}
+      {/* ══ COMPARISON TABLE ══ */}
       <section style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <SLabel>WHY CAMCARD BUSINESS</SLabel>
@@ -638,23 +576,19 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ DIGITAL BUSINESS CARD ═════════════════════════════════════════════ */}
+      {/* ══ ENTERPRISE DEPLOYMENT ══ */}
       <section style={{ padding: "100px 24px", background: "linear-gradient(135deg, #0a0a1a 0%, #0d0d0d 50%, #0a0a0a 100%)", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245,184,0,0.04) 0%, transparent 70%)", pointerEvents: "none" }}/>
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
-          <SLabel>DIGITAL BUSINESS CARD</SLabel>
+          <SLabel>ENTERPRISE DEPLOYMENT</SLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
-            Collect More Leads,<br /><span style={{ color: "#f5b800" }}>Go Green with CamCard Business</span>
+            Built for Teams,<br /><span style={{ color: "#f5b800" }}>Deployed at Enterprise Scale</span>
           </h2>
-          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 480, margin: "0 auto 56px", lineHeight: 1.7 }}>
-            Maximize your revenue while reducing paper waste.
+          <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 520, margin: "0 auto 56px", lineHeight: 1.7 }}>
+            Minimum 10 users. Full admin control, compliance reporting, and CRM sync across your entire organization — from a 10-person sales team to a 500-strong global workforce.
           </p>
-          <motion.div initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}
-            style={{ marginBottom: 56, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(245,184,0,0.18)", boxShadow: "0 0 60px rgba(245,184,0,0.07), 0 32px 64px rgba(0,0,0,0.5)" }}>
-            <img src={IMG_MOBILE_BANNER} alt="CamCard Business Digital Card" style={{ width: "100%", display: "block", objectFit: "cover" }} />
-          </motion.div>
           <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-            {DIGITAL_CARD.map((item, i) => (
+            {ENTERPRISE_BENEFITS.map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: i * 0.1 }}
                 style={{ background: "rgba(245,184,0,0.03)", border: "1px solid rgba(245,184,0,0.14)", borderRadius: 20, padding: "36px 32px", transition: "border-color 0.3s, background 0.3s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)"; e.currentTarget.style.background = "rgba(245,184,0,0.06)" }}
@@ -668,12 +602,12 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ PRICING ═══════════════════════════════════════════════════════════ */}
+      {/* ══ PRICING ══ */}
       <section id="pricing" style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <SLabel>PLANS & PRICING</SLabel>
           <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, color: "#ffffff", marginBottom: 16, letterSpacing: "-0.01em" }}>
-            A variety of solutions to meet<br /><span style={{ color: "#f5b800" }}>the needs of every enterprise</span>
+            Enterprise Plans for<br /><span style={{ color: "#f5b800" }}>Teams of 10 or More</span>
           </h2>
           <p style={{ textAlign: "center", color: "#888", fontSize: 15, maxWidth: 500, margin: "0 auto 16px", lineHeight: 1.7 }}>
             Both plans require a minimum of 10 users. Contact Techbee for UAE-specific pricing and volume discounts.
@@ -684,24 +618,18 @@ export default function CamCard() {
               Prices in USD · Minimum 10 users per plan
             </div>
           </div>
-
           <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24, maxWidth: 860, margin: "0 auto 40px" }}>
-
             {/* PROFESSIONAL */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-              style={{ background: "rgba(245,184,0,0.04)", border: "2px solid rgba(245,184,0,0.5)", borderRadius: 24, padding: "40px 36px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}
-            >
-              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 10, fontWeight: 800, padding: "4px 16px", borderRadius: 50, letterSpacing: "0.12em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
-                MOST FEATURES
-              </div>
+            <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              style={{ background: "rgba(245,184,0,0.04)", border: "2px solid rgba(245,184,0,0.5)", borderRadius: 24, padding: "40px 36px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}>
+              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 10, fontWeight: 800, padding: "4px 16px", borderRadius: 50, letterSpacing: "0.12em", textTransform: "uppercase", whiteSpace: "nowrap" }}>MOST FEATURES</div>
               <p style={{ color: "#f5b800", fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 20 }}>Professional</p>
               <div style={{ marginBottom: 6 }}>
                 <span style={{ color: "#888", fontSize: 14 }}>USD $</span>
                 <span style={{ color: "#f5b800", fontSize: "3.2rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.02em" }}>25</span>
                 <span style={{ color: "#888", fontSize: 14 }}> /user/month</span>
               </div>
-              <p style={{ color: "#555", fontSize: 13, marginBottom: 24 }}>At least 10 users</p>
+              <p style={{ color: "#555", fontSize: 13, marginBottom: 24 }}>Minimum 10 users</p>
               <button onClick={() => goToContact(navigate)}
                 style={{ background: "#f5b800", color: "#000", fontWeight: 800, fontSize: 15, padding: "13px", borderRadius: 50, border: "none", cursor: "pointer", marginBottom: 28, transition: "background 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
@@ -718,19 +646,16 @@ export default function CamCard() {
                 ))}
               </div>
             </motion.div>
-
             {/* PREMIUM */}
-            <motion.div
-              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-              style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: 24, padding: "40px 36px", display: "flex", flexDirection: "column" }}
-            >
+            <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              style={{ background: "#0d0d0d", border: "1px solid #1e1e1e", borderRadius: 24, padding: "40px 36px", display: "flex", flexDirection: "column" }}>
               <p style={{ color: "#888", fontSize: 12, fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 20 }}>Premium</p>
               <div style={{ marginBottom: 6 }}>
                 <span style={{ color: "#888", fontSize: 14 }}>USD $</span>
                 <span style={{ color: "#fff", fontSize: "3.2rem", fontWeight: 900, lineHeight: 1, letterSpacing: "-0.02em" }}>21</span>
                 <span style={{ color: "#888", fontSize: 14 }}> /user/month</span>
               </div>
-              <p style={{ color: "#555", fontSize: 13, marginBottom: 24 }}>At least 10 users</p>
+              <p style={{ color: "#555", fontSize: 13, marginBottom: 24 }}>Minimum 10 users</p>
               <button onClick={() => goToContact(navigate)}
                 style={{ background: "transparent", color: "#f5b800", fontWeight: 800, fontSize: 15, padding: "12px", borderRadius: 50, border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", marginBottom: 28, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.1)"; e.currentTarget.style.borderColor = "#f5b800" }}
@@ -747,19 +672,13 @@ export default function CamCard() {
                 ))}
               </div>
             </motion.div>
-
           </div>
-
-          <div style={{ maxWidth: 860, margin: "0 auto 0", background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 14, padding: "22px 28px", display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+          <div style={{ maxWidth: 860, margin: "0 auto", background: "#0a0a0a", border: "1px solid rgba(245,184,0,0.15)", borderRadius: 14, padding: "22px 28px", display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
             <p style={{ color: "#888", fontSize: 13, lineHeight: 1.7, flex: 1, minWidth: 240 }}>
               <span style={{ color: "#f5b800", fontWeight: 700 }}>Key difference:</span> Professional includes 50 proofreads/ID/month and 10,000 group emails. Premium includes 20 proofreads and 5,000 emails — at a lower per-user cost.
             </p>
-            <a
-              href="https://b.camcard.com/payment/price"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#f5b800", fontSize: 13, fontWeight: 700, textDecoration: "none", border: "1px solid rgba(245,184,0,0.35)", padding: "10px 20px", borderRadius: 50, flexShrink: 0, whiteSpace: "nowrap" }}
-            >
+            <a href="https://b.camcard.com/payment/price" target="_blank" rel="noopener noreferrer"
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#f5b800", fontSize: 13, fontWeight: 700, textDecoration: "none", border: "1px solid rgba(245,184,0,0.35)", padding: "10px 20px", borderRadius: 50, flexShrink: 0, whiteSpace: "nowrap" }}>
               Official pricing page
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -767,7 +686,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ SECURITY & COMPLIANCE ════════════════════════════════════════════ */}
+      {/* ══ SECURITY & COMPLIANCE ══ */}
       <section style={{ padding: "100px 24px", background: "#0a0a0a" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <SLabel>CAMCARD BUSINESS</SLabel>
@@ -801,7 +720,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ FAQ ═══════════════════════════════════════════════════════════════ */}
+      {/* ══ FAQ ══ */}
       <section style={{ padding: "100px 24px", background: "#000" }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
           <SLabel>FAQ</SLabel>
@@ -829,7 +748,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ CTA BANNER ════════════════════════════════════════════════════════ */}
+      {/* ══ CTA BANNER ══ */}
       <section style={{ padding: "96px 24px", background: "#000" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div className="cta-inner" style={{ background: "#0d0d0d", border: "1px solid rgba(245,184,0,0.22)", borderRadius: 28, padding: "64px 56px", textAlign: "center", position: "relative", overflow: "hidden", boxShadow: "0 0 80px rgba(245,184,0,0.06)" }}>
@@ -840,17 +759,16 @@ export default function CamCard() {
               <span style={{ color: "#f5b800" }}>a CRM Opportunity?</span>
             </h2>
             <p style={{ color: "#888", fontSize: 15, lineHeight: 1.7, maxWidth: 480, margin: "0 auto 40px" }}>
-              Join thousands of sales professionals, executives, and recruiters who never lose a contact again.
+              Join thousands of enterprise sales teams, executives, and recruiters who never lose a contact again. Contact Techbee — authorized CamCard Business partner for the UAE and GCC.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", alignItems: "center" }}>
               <button onClick={() => goToContact(navigate)}
                 style={{ background: "#f5b800", color: "#000", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "14px 40px", border: "none", cursor: "pointer", boxShadow: "0 0 28px rgba(245,184,0,0.35)", transition: "background 0.2s" }}
                 onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
                 onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
-                Start Free Trial →
+                Request a Demo →
               </button>
-              <button
-                onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
+              <button onClick={() => { const el = document.getElementById("pricing"); if (el) el.scrollIntoView({ behavior: "smooth" }) }}
                 style={{ background: "transparent", color: "#f5b800", fontSize: 14, fontWeight: 700, borderRadius: 50, padding: "13px 32px", border: "1px solid rgba(245,184,0,0.4)", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.background = "rgba(245,184,0,0.08)"; e.currentTarget.style.borderColor = "#f5b800" }}
                 onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(245,184,0,0.4)" }}>
@@ -868,7 +786,7 @@ export default function CamCard() {
         </div>
       </section>
 
-      {/* ══ AUTHORIZED PARTNER ════════════════════════════════════════════════ */}
+      {/* ══ AUTHORIZED PARTNER ══ */}
       <section style={{ padding: "60px 24px", background: "#0a0a0a", borderTop: "1px solid rgba(245,184,0,0.08)" }}>
         <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
           <p style={{ color: "#555", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 20 }}>AUTHORIZED PARTNER</p>
@@ -882,7 +800,8 @@ export default function CamCard() {
           </p>
         </div>
       </section>
-<Footer/>
+
+      <Footer />
     </div>
   )
 }
