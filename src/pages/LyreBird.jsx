@@ -455,7 +455,7 @@ export default function Lyrebird() {
               <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Pro Plan</p>
               <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 6 }}>Pro</h3>
               <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 18, minHeight: 44 }}>Unlock the most value. For clinics & GPs to automate care plans and assessments.</p>
-              <div style={{ marginBottom: 20 }}><span style={{ color: "#f5b800", fontSize: "2rem", fontWeight: 800 }}>$50</span><span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>per user / year (billed annually)</span></div>
+              <div style={{ marginBottom: 20 }}><span style={{ color: "#f5b800", fontSize: "2rem", fontWeight: 800 }}>$55</span><span style={{ color: "#555", fontSize: 13, marginLeft: 6 }}>per user / year (billed annually)</span></div>
               <a href="https://lyrebirdhealth.com" target="_blank" rel="noopener noreferrer" style={{ display: "block", textAlign: "center", background: "#f5b800", color: "#000", fontWeight: 800, fontSize: 14, padding: "12px", borderRadius: 8, textDecoration: "none", marginBottom: 20 }}>Try it for 14 days</a>
               <PricingDivider />
               <PricingFeatGroupTitle>All features in Starter, and:</PricingFeatGroupTitle>
