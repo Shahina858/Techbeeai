@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+
 import ProductPage, { PLabel, Chip, StepCard, UseCaseCard, StatPill } from "../components/ProductPage"
 import Footer from "../components/Footer"
 
@@ -171,6 +172,13 @@ const DOCFLOW_BASE_FEATURES = [
 
 export default function IDP() {
   const navigate = useNavigate()
+   const goToContact = () => {
+  navigate("/")
+  setTimeout(() => {
+    const el = document.getElementById("contact")
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }, 300)
+}
   const [deployTab, setDeployTab] = useState("onprem")
 
   return (
@@ -524,59 +532,86 @@ export default function IDP() {
             {deployTab === "saas" && (
               <>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24, maxWidth: 720, margin: "0 auto 32px" }}>
-                  <div style={{ background: "#0f0f0f", border: "2px solid #f5b800", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}>
-                    <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>RECOMMENDED FOR UAE</div>
-                    <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>SaaS · Singapore DC</p>
-                    <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 8 }}>textin.ai/docflow</h3>
-                    <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>Pay-per-page SaaS deployment hosted in Singapore. Closest data center for UAE & GCC customers.</p>
-                    <div style={{ marginBottom: 6 }}>
-                      <span style={{ color: "#f5b800", fontSize: "2.6rem", fontWeight: 900, lineHeight: 1 }}>$0.18</span>
-                      <span style={{ color: "#555", fontSize: 14, marginLeft: 8 }}>per page</span>
-                    </div>
-                    <p style={{ color: "#555", fontSize: 12, marginBottom: 24 }}>No minimum commitment · Pay as you go</p>
-                    <a href="https://www.textin.ai/docflow" target="_blank" rel="noopener noreferrer"
-                      style={{ display: "block", textAlign: "center", background: "#f5b800", color: "#000", fontWeight: 800, fontSize: 14, padding: "13px", borderRadius: 8, textDecoration: "none", marginBottom: 24, transition: "background 0.18s" }}
-                      onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
-                      onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
-                      Start on textin.ai →
-                    </a>
-                    <hr style={{ border: "none", borderTop: "1px solid #2a2a2a", marginBottom: 18 }} />
-                    {["DocFlow Essentials — full feature set","Pay per page processed","No upfront license fee","Cloud-hosted, no infrastructure needed","Singapore data center (closest to UAE)","Instant access via web portal"].map(f => (
-                      <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 9 }}>
-                        <PCheck />
-                        <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
-                      </div>
-                    ))}
-                  </div>
 
-                  <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column" }}>
-                    <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>SaaS · China Mainland DC</p>
-                    <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 8 }}>textin.com/docflow</h3>
-                    <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>Pay-per-page SaaS deployment hosted in China Mainland. Lower per-page cost for high-volume processing.</p>
-                    <div style={{ marginBottom: 6 }}>
-                      <span style={{ color: "#fff", fontSize: "2.6rem", fontWeight: 900, lineHeight: 1 }}>$0.06</span>
-                      <span style={{ color: "#555", fontSize: 14, marginLeft: 8 }}>per page</span>
-                    </div>
-                    <p style={{ color: "#555", fontSize: 12, marginBottom: 24 }}>No minimum commitment · Pay as you go</p>
-                    <a href="https://www.textin.com/product/textin_docflow" target="_blank" rel="noopener noreferrer"
-                      style={{ display: "block", textAlign: "center", background: "transparent", color: "#ccc", border: "1px solid #2a2a2a", fontWeight: 700, fontSize: 14, padding: "12px", borderRadius: 8, textDecoration: "none", marginBottom: 24, transition: "all 0.18s" }}
-                      onMouseEnter={e => { e.currentTarget.style.borderColor = "#555"; e.currentTarget.style.color = "#fff" }}
-                      onMouseLeave={e => { e.currentTarget.style.borderColor = "#2a2a2a"; e.currentTarget.style.color = "#ccc" }}>
-                      Start on textin.com →
-                    </a>
-                    <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 18 }} />
-                    {["DocFlow Essentials — full feature set","Pay per page processed","No upfront license fee","Cloud-hosted, no infrastructure needed","China Mainland data center","Lower per-page cost for bulk processing"].map(f => (
-                      <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 9 }}>
-                        <PCheck />
-                        <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+  {/* ── CARD 1 — Singapore DC ── */}
+  <div style={{ background: "#0f0f0f", border: "2px solid #f5b800", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 60px rgba(245,184,0,0.07)" }}>
+    <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#f5b800", color: "#000", fontSize: 11, fontWeight: 800, padding: "4px 14px", borderRadius: 20, whiteSpace: "nowrap", letterSpacing: "0.04em" }}>RECOMMENDED FOR UAE</div>
+    <p style={{ color: "#f5b800", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>SaaS · Singapore DC</p>
+    <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 8 }}>textin.ai/docflow</h3>
+    <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>Pay-per-page SaaS deployment hosted in Singapore. Closest data center for UAE & GCC customers.</p>
+    <div style={{ marginBottom: 6 }}>
+      <span style={{ color: "#f5b800", fontSize: "2.6rem", fontWeight: 900, lineHeight: 1 }}>$0.18</span>
+      <span style={{ color: "#555", fontSize: 14, marginLeft: 8 }}>per page</span>
+    </div>
+    <p style={{ color: "#555", fontSize: 12, marginBottom: 24 }}>No minimum commitment · Pay as you go</p>
+
+    {/* ── Button → TechBee AI Contact ── */}
+    <button
+      onClick={goToContact}
+      style={{ display: "block", textAlign: "center", background: "#f5b800", color: "#000", fontWeight: 800, fontSize: 14, padding: "13px", borderRadius: 8, border: "none", cursor: "pointer", marginBottom: 24, transition: "background 0.18s", width: "100%" }}
+      onMouseEnter={e => e.currentTarget.style.background = "#ffc929"}
+      onMouseLeave={e => e.currentTarget.style.background = "#f5b800"}>
+      Get in Touch →
+    </button>
+
+    <hr style={{ border: "none", borderTop: "1px solid #2a2a2a", marginBottom: 18 }} />
+    {[
+      "DocFlow Essentials — full feature set",
+      "Pay per page processed",
+      "No upfront license fee",
+      "Cloud-hosted, no infrastructure needed",
+      "Singapore data center (closest to UAE)",
+      "Instant access via web portal",
+    ].map(f => (
+      <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 9 }}>
+        <PCheck />
+        <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+      </div>
+    ))}
+  </div>
+
+  {/* ── CARD 2 — China Mainland DC ── */}
+  <div style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", borderRadius: 16, padding: "36px 30px", display: "flex", flexDirection: "column" }}>
+    <p style={{ color: "#888", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>SaaS · China Mainland DC</p>
+    <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 700, marginBottom: 8 }}>textin.com/docflow</h3>
+    <p style={{ color: "#555", fontSize: 13, lineHeight: 1.6, marginBottom: 24 }}>Pay-per-page SaaS deployment hosted in China Mainland. Lower per-page cost for high-volume processing.</p>
+    <div style={{ marginBottom: 6 }}>
+      <span style={{ color: "#fff", fontSize: "2.6rem", fontWeight: 900, lineHeight: 1 }}>$0.06</span>
+      <span style={{ color: "#555", fontSize: 14, marginLeft: 8 }}>per page</span>
+    </div>
+    <p style={{ color: "#555", fontSize: 12, marginBottom: 24 }}>No minimum commitment · Pay as you go</p>
+
+    {/* ── Button → TechBee AI Contact ── */}
+    <button
+      onClick={goToContact}
+      style={{ display: "block", textAlign: "center", background: "transparent", color: "#ccc", border: "1px solid #2a2a2a", fontWeight: 700, fontSize: 14, padding: "12px", borderRadius: 8, cursor: "pointer", marginBottom: 24, transition: "all 0.18s", width: "100%" }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = "#555"; e.currentTarget.style.color = "#fff" }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "#2a2a2a"; e.currentTarget.style.color = "#ccc" }}>
+      Get in Touch →
+    </button>
+
+    <hr style={{ border: "none", borderTop: "1px solid #1c1c1c", marginBottom: 18 }} />
+    {[
+      "DocFlow Essentials — full feature set",
+      "Pay per page processed",
+      "No upfront license fee",
+      "Cloud-hosted, no infrastructure needed",
+      "China Mainland data center",
+      "Lower per-page cost for bulk processing",
+    ].map(f => (
+      <div key={f} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 9 }}>
+        <PCheck />
+        <span style={{ color: "#999", fontSize: 13, lineHeight: 1.5 }}>{f}</span>
+      </div>
+    ))}
+  </div>
+
+</div>
+
 
                 <div style={{ maxWidth: 720, margin: "0 auto", background: "#0a0a0a", border: "1px solid #1e1e1e", borderRadius: 12, padding: "18px 24px", display: "flex", gap: 14, alignItems: "flex-start" }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5b800" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                  <p style={{ color: "#777", fontSize: 13, lineHeight: 1.7, margin: 0 }}>SaaS pricing is consumption-based — you only pay for pages processed. For UAE & GCC customers with data residency requirements, the <span style={{ color: "#ddd" }}>Singapore DC ($0.18/page)</span> is recommended. Contact Techbee for volume discount pricing on high-page-count deployments.</p>
+                  <p style={{ color: "#777", fontSize: 13, lineHeight: 1.7, margin: 0 }}>SaaS pricing is consumption-based — you only pay for pages processed. A platform usage fee and implementation fee will be charges based on the deployment requirements. For UAE & GCC customers with data residency requirements, the<span style={{ color: "#ddd" }}> Singapore DC ($0.18/page)</span>   is recommended. Contact Techbee for volume discount pricing on high-page-count deployments.</p>
                 </div>
               </>
             )}
@@ -630,13 +665,12 @@ export default function IDP() {
             <h2 style={{ textAlign: "center", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "#ffffff", marginBottom: 52 }}>
               Common <span style={{ color: "#f5b800" }}>Questions</span>
             </h2>
-            <FAQItem q="How long does implementation take?" a="Most enterprises go live within 2–4 weeks. Pre-built integrations for SAP, Oracle, and major ERPs reduce setup time significantly. Our Techbee team handles end-to-end deployment, configuration, and training in the UAE and GCC region." />
+            <FAQItem q="How long does implementation take?" a="Most enterprises go live within 2–4 weeks. Techbee handles end-to-end deployment, configuration, and training in the UAE and GCC region — reducing setup time significantly." />            
             <FAQItem q="What document formats does IDP support?" a="IDP supports PDF, JPEG, JPG, PNG, TIFF, DOC, DOCX, XLS, XLSX, OFD, TXT, and email attachments including multi-page scans. It handles printed text, handwriting, stamps, checkboxes, tables, and poor-quality scans." />
             <FAQItem q="Can IDP handle Arabic and other RTL languages?" a="Yes. INTSIG's OCR engine supports 50+ languages including Arabic, with the same 99%+ accuracy as Latin-script languages — critical for UAE and GCC government and enterprise use cases." />
             <FAQItem q="Is my data secure? Who can see my documents?" a="Documents are processed in isolated environments and are never used for model training. INTSIG holds 13 security certifications including GDPR and SOC2. On-premise and private cloud deployments are also available for sensitive industries." />
             <FAQItem q="What happens when the AI is uncertain about an extraction?" a="IDP assigns a confidence score to each extracted field. Low-confidence fields are automatically routed to a human-in-the-loop review queue where an operator can verify or correct the data — ensuring accuracy even in edge cases." />
-            <FAQItem q="Does it integrate with our existing ERP / CRM?" a="Yes. IDP ships with pre-built connectors for SAP, Oracle, NetSuite, Dynamics 365, QuickBooks, Xero, Salesforce, and SharePoint. A REST API is also available for custom integrations with any enterprise system." />
-            <FAQItem q="Which deployment option is right for UAE enterprises?" a="For most UAE and GCC enterprises with data residency requirements, the Private Cloud / On-Premise model gives maximum control. For fast onboarding or lower volumes, the SaaS Singapore DC option ($0.18/page) is the closest and most compliant cloud option. Contact Techbee for a recommendation based on your use case." />
+            <FAQItem q="Does it integrate with our existing ERP / CRM?" a="Yes. IDP provides a REST API that allows integration with any enterprise system including SAP, Oracle, NetSuite, Dynamics 365, Salesforce, and SharePoint. Techbee handles the integration setup as part of the deployment process for UAE and GCC customers." />            <FAQItem q="Which deployment option is right for UAE enterprises?" a="For most UAE and GCC enterprises with data residency requirements, the Private Cloud / On-Premise model gives maximum control. For fast onboarding or lower volumes, the SaaS Singapore DC option ($0.18/page) is the closest and most compliant cloud option. Contact Techbee for a recommendation based on your use case." />
           </div>
         </section>
 

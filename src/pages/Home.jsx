@@ -7,6 +7,7 @@ import MouseGlow from "../components/MouseGlow"
 import emailjs from "@emailjs/browser"
 import Footer from "../components/Footer"
 import { TestimonialsCarousel } from "../components/TestimonialsCarousel"
+import ReCAPTCHA from "react-google-recaptcha"
 
 // ── SEO Head Component ────────────────────────────────────────────────────────
 function SEOHead() {
@@ -32,6 +33,7 @@ function SEOHead() {
     setMeta('meta[name="robots"]', "content", "index, follow")
     setMeta('meta[name="author"]', "content", "TechBee IT & Designs LLC")
     setMeta('meta[name="viewport"]', "content", "width=device-width, initial-scale=1.0")
+    
 
     // Open Graph
     setMeta('meta[property="og:title"]', "content", "TechBee AI | AI-Powered Business Solutions in Dubai, UAE")
@@ -103,6 +105,7 @@ function SEOHead() {
       })
       document.head.appendChild(script)
     }
+  
 
     return () => {
       // cleanup not needed for meta tags
@@ -347,11 +350,11 @@ desc: "Your AI sales team, available 24/7. Webishopi transforms your product cat
 ]
 
 const FAQS = [
-  { q: "What AI products does TechBee offer?", a: "TechBee AI offers seven core products: On-Premise LLM Deployment, Intelligent Document Processing (IDP), AI-Powered Medical Intelligence, AI Contact Center Solutions, AI Security, AI Powered Contact Management, and AI-Powered Quote Generation." },
+  { q: "What AI products does TechBee offer?", a: "TechBee AI offers seven core products: Intelligent Document Processing (IDP), AI-Powered Medical Intelligence, AI Contact Center Solutions, AI Security, AI Powered Contact Management, and AI-Powered Quote Generation." },
   { q: "Is there a free trial available?", a: "Yes! Our Professional plan includes a 14-day free trial with full access to all features. No credit card required to get started." },
   { q: "How does Lyrebird AI handle patient data privacy?", a: "Lyrebird AI is fully HIPAA compliant. All medical data is encrypted with AES-256, stored in region-specific servers, and never used for model training without explicit consent." },
-  { q: "Can I integrate TechBee AI Products with my existing CRM?", a: "Absolutely. TechBee AI integrates with Salesforce, HubSpot, SAP, Zendesk, and 100+ other platforms via our REST API and pre-built connectors." },
-  { q: "What kind of support is included?", a: "All plans include email support. Professional plans include a dedicated Customer Success Manager. Enterprise plans include 24/7 SLA-backed support." },
+  { q: "Can I integrate TechBee AI Products with my existing CRM?", a: "Absolutely. TechBee AI integrates with Salesforce, HubSpot, SAP, Zendesk, and 100+ other platforms." },
+  { q: "What kind of support is included?", a: "All plans include email support. Professional plans include a dedicated Customer Success Manager. Enterprise plans include 8/5 SLA-backed support." },
   { q: "How long does onboarding take?", a: "Most customers are fully onboarded within 5-7 business days. Enterprise customers typically take 2-4 weeks including custom integration training." },
 ]
 
@@ -382,10 +385,12 @@ const handleForm = (e) => { const { name, value, type, checked } = e.target; set
 
 const [submitting, setSubmitting] = useState(false)
 const [submitted, setSubmitted] = useState(false)
-
+const [captchaVerified, setCaptchaVerified] = useState(false)
+const recaptchaRef = useRef(null)
 const handleSubmit = async () => {
   if (!form.privacy) { alert("Please agree to the privacy policy."); return }
   if (!form.name || !form.email) { alert("Name and email are required."); return }
+  if (!captchaVerified) { alert("Please complete the reCAPTCHA."); return }
   setSubmitting(true)
   try {
     await emailjs.send(
@@ -685,20 +690,44 @@ const handleSubmit = async () => {
                 </div>
                 <span className="text-[#999999] text-[13px]">Agree to privacy policy</span>
               </label>
-             <motion.button
-  onClick={handleSubmit}
-  disabled={submitting || submitted}
-  whileHover={{ scale: 1.015, boxShadow: "0 0 44px rgba(245,184,0,0.5)" }}
-  whileTap={{ scale: 0.985 }}
-  className="mt-8 w-full bg-[#f5b800] text-black py-4 rounded-[12px] font-bold text-[15px] hover:bg-[#ffc929] transition-colors duration-200"
-  style={{ boxShadow: "0 0 24px rgba(245,184,0,0.22)", opacity: submitting ? 0.7 : 1 }}
->
-  {submitted ? "✓ Message Sent!" : submitting ? "Sending..." : "Submit"}
-</motion.button>
+
+              {/* ── reCAPTCHA ── */}
+              <div style={{ marginTop: 24, display: "flex", justifyContent: "flex-start" }}>
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey="6LeKtDUtAAAAADNLCKxSmwLzxgZ25bYbCg269OxK"
+                  theme="dark"
+                  onChange={(token) => setCaptchaVerified(!!token)}
+                  onExpired={() => setCaptchaVerified(false)}
+                />
+              </div>
+
+              <motion.button
+                onClick={handleSubmit}
+                disabled={submitting || submitted || !captchaVerified}
+                whileHover={captchaVerified ? { scale: 1.015, boxShadow: "0 0 44px rgba(245,184,0,0.5)" } : {}}
+                whileTap={captchaVerified ? { scale: 0.985 } : {}}
+                className="mt-8 w-full bg-[#f5b800] text-black py-4 rounded-[12px] font-bold text-[15px] transition-colors duration-200"
+                style={{
+                  boxShadow: captchaVerified ? "0 0 24px rgba(245,184,0,0.22)" : "none",
+                  opacity: (submitting || !captchaVerified) ? 0.5 : 1,
+                  cursor: captchaVerified ? "pointer" : "not-allowed",
+                  hover: captchaVerified ? { background: "#ffc929" } : {}
+                }}
+              >
+                {submitted ? "✓ Message Sent!" : submitting ? "Sending..." : "Submit"}
+              </motion.button>
+
+              {!captchaVerified && !submitted && (
+                <p style={{ color: "#666", fontSize: 12, textAlign: "center", marginTop: 8 }}>
+                  Please complete the reCAPTCHA above to submit.
+                </p>
+              )}
             </div>
           </div>
         </div>
       </section>
+
 
       {/* ══ FOOTER ══ */}
       {/* <footer className="w-full px-6 py-16 overflow-hidden" style={{ background: "#000" }} aria-label="Footer">

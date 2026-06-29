@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
+import GoogleTranslate from "./GoogleTranslate"
 
 const LOGO_IMG = "/TechBee_AI_Logo_Modified.png"
 
@@ -13,7 +14,6 @@ export default function Navbar({ logoSrc }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    // Static route active states
     if (PRODUCT_ROUTES.includes(location.pathname)) {
       setActive("products")
       setScrolled(true)
@@ -35,7 +35,6 @@ export default function Navbar({ logoSrc }) {
       return
     }
 
-    // Home page — use scroll to detect active section
     const sections = document.querySelectorAll("section[id]")
     const onScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -51,7 +50,6 @@ export default function Navbar({ logoSrc }) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [location.pathname])
 
-  // If page loads with a hash (e.g. /#products from another page), scroll to it
   useEffect(() => {
     if (isHome && location.hash) {
       const id = location.hash.replace("#", "")
@@ -65,36 +63,24 @@ export default function Navbar({ logoSrc }) {
   const handleNavClick = (e, section, href) => {
     e.preventDefault()
     setMenuOpen(false)
-
-    // External routes — just navigate
-    if (!section) {
-      window.location.href = href
-      return
-    }
-
-    // Scroll section links
-    if (!isHome) {
-      // On a different page — go to home with hash, useEffect above will scroll
-      window.location.href = "/#" + section
-      return
-    }
-
-    // Already on home — scroll directly, don't change URL hash
+    if (!section) { window.location.href = href; return }
+    if (!isHome)  { window.location.href = "/#" + section; return }
     const el = document.getElementById(section)
     if (el) el.scrollIntoView({ behavior: "smooth" })
   }
 
   const NAV_LINKS = [
-    { id: "home",        label: "Home",        href: "/",              section: "home"      },
-    { id: "about",       label: "About Us",    href: "/about",         section: null        },
-    { id: "products",    label: "Products",    href: "/#products",     section: "products"  },
-    { id: "solutions",   label: "Solutions",   href: "/#solutions",    section: "solutions" },
-    { id: "partnership", label: "Partnership", href: "/partnership",   section: null        },
+    { id: "home",        label: "Home",        href: "/",            section: "home"      },
+    { id: "about",       label: "About Us",    href: "/about",       section: null        },
+    { id: "products",    label: "Products",    href: "/#products",   section: "products"  },
+    { id: "solutions",   label: "Solutions",   href: "/#solutions",  section: "solutions" },
+    { id: "partnership", label: "Partnership", href: "/partnership", section: null        },
   ]
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50"
+      dir="ltr"
       style={{
         background:           scrolled ? "rgba(0,0,0,0.90)" : "rgba(0,0,0,0.10)",
         backdropFilter:       "blur(20px)",
@@ -154,7 +140,10 @@ export default function Navbar({ logoSrc }) {
             )
           })}
 
-          {/* Contact Us button */}
+          {/* ── Language Toggle ── */}
+          <GoogleTranslate />
+
+          {/* Contact Us */}
           <a
             href="/#contact"
             onClick={(e) => handleNavClick(e, "contact", "/#contact")}
@@ -184,27 +173,30 @@ export default function Navbar({ logoSrc }) {
           </a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9"
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle menu"
-        >
-          {[0, 1, 2].map(i => (
-            <span key={i} style={{
-              display:      "block",
-              width:        22,
-              height:       1.5,
-              background:   "#ffffff",
-              borderRadius: 2,
-              transition:   "transform 0.25s, opacity 0.25s",
-              transform:
-                menuOpen && i === 0 ? "translateY(6.5px) rotate(45deg)"   :
-                menuOpen && i === 2 ? "translateY(-6.5px) rotate(-45deg)" : "none",
-              opacity: menuOpen && i === 1 ? 0 : 1,
-            }} />
-          ))}
-        </button>
+        {/* Mobile: language toggle + hamburger */}
+        <div className="md:hidden flex items-center" style={{ gap: 12 }}>
+          <GoogleTranslate />
+          <button
+            className="flex flex-col justify-center items-center gap-[5px] w-9 h-9"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle menu"
+          >
+            {[0, 1, 2].map(i => (
+              <span key={i} style={{
+                display:      "block",
+                width:        22,
+                height:       1.5,
+                background:   "#ffffff",
+                borderRadius: 2,
+                transition:   "transform 0.25s, opacity 0.25s",
+                transform:
+                  menuOpen && i === 0 ? "translateY(6.5px) rotate(45deg)"   :
+                  menuOpen && i === 2 ? "translateY(-6.5px) rotate(-45deg)" : "none",
+                opacity: menuOpen && i === 1 ? 0 : 1,
+              }} />
+            ))}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown */}
